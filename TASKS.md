@@ -70,7 +70,8 @@ All 4 forms (Founder Application, Investor Enquiry, Contact, Newsletter) are pre
 
 | Task | Platform / Tool | Cost | Status |
 |---|---|---|---|
-| Website Hosting | Cloudflare Pages | Free | Ready for Git Push |
-| Custom Business Email | Cloudflare Email Routing | Free | Action Required (Step 1) |
-| Form Delivery to Email | Web3Forms API | Free | Action Required (Step 2) |
-| Domain DNS / SSL | Cloudflare | Free | Action Required (Step 4) |
+| Website Hosting | Cloudflare Pages | Free | ✅ Completed |
+| Custom Business Email | Cloudflare Email Routing | Free | ✅ Completed (`hello`, `press`, `careers`, `privacy`) |
+| Form Delivery to Email | Web3Forms API | Free | ✅ Completed |
+| Domain DNS / SSL | Cloudflare | Free | ✅ Completed (`synergehealth.com`) |
+

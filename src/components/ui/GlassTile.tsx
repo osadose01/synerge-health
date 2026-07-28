@@ -60,7 +60,7 @@ export function GlassTile({ value, label, sub, index = 0 }: GlassTileProps) {
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-2xl border border-[rgba(43,224,176,0.12)] bg-[#0D1815] p-8 scanline-sweep"
+      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0D1815] p-8 scanline-sweep"
     >
       {/* Teal corner accent */}
       <div className="absolute top-0 left-0 w-16 h-0.5 bg-gradient-to-r from-[#2BE0B0] to-transparent" />
@@ -72,12 +72,12 @@ export function GlassTile({ value, label, sub, index = 0 }: GlassTileProps) {
       </div>
 
       {/* Label */}
-      <div className="font-display font-semibold text-base text-[#F2F6F4] mb-1">
+      <div className="font-display font-semibold text-base text-[#F8FAFC] mb-1">
         {label}
       </div>
 
       {/* Sub */}
-      <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-[#8FA39A]">
+      <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-[#A5B8B0]">
         {sub}
       </div>
     </motion.div>

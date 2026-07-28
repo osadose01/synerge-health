@@ -10,10 +10,10 @@
   --color-blue:        #3FA9E0;
   --color-gold:        #E3A83B;
   --color-gold-dim:    #A87522;
-  --color-ink-100:     #F2F6F4;
-  --color-ink-200:     #C8D8D2;
-  --color-ink-500:     #8FA39A;
-  --color-ink-700:     #4A6358;
+  --color-ink-100:     #F8FAFC;
+  --color-ink-200:     #E2E8F0;
+  --color-ink-500:     #A5B8B0;
+  --color-ink-700:     #647A70;
   --color-border:      rgba(43, 224, 176, 0.08);
   --color-border-mid:  rgba(43, 224, 176, 0.15);
   --color-border-hi:   rgba(43, 224, 176, 0.35);
@@ -24,17 +24,17 @@
   --color-emerald-500: #2BE0B0;
   --color-emerald-100: #0D1815;
   --color-emerald-50:  #111F1A;
-  --color-slate-900:   #F2F6F4;
-  --color-slate-800:   #C8D8D2;
-  --color-slate-700:   #8FA39A;
-  --color-slate-600:   #4A6358;
-  --color-slate-500:   #4A6358;
-  --color-slate-400:   #2A3F38;
+  --color-slate-900:   #F8FAFC;
+  --color-slate-800:   #E2E8F0;
+  --color-slate-700:   #A5B8B0;
+  --color-slate-600:   #647A70;
+  --color-slate-500:   #647A70;
+  --color-slate-400:   #344A42;
   --color-slate-300:   #1E2F28;
   --color-slate-200:   rgba(43,224,176,0.10);
   --color-slate-100:   rgba(43,224,176,0.06);
   --color-slate-50:    #0D1815;
-  --color-white:       #F2F6F4;
+  --color-white:       #F8FAFC;
 
   /* ── Typography ─────────────────────────────────────────────────── */
   --font-display:  var(--font-space-grotesk), "Space Grotesk", sans-serif;
@@ -55,17 +55,17 @@
 /* ── CSS custom properties ───────────────────────────────────────────── */
 :root {
   --background:    #060B09;
-  --foreground:    #F2F6F4;
+  --foreground:    #F8FAFC;
   --surface:       #0D1815;
   --surface-alt:   #111F1A;
-  --border:        rgba(43, 224, 176, 0.08);
-  --muted:         #8FA39A;
+  --border:        rgba(43, 224, 176, 0.12);
+  --muted:         #A5B8B0;
   --accent:        #2BE0B0;
   --accent-gold:   #E3A83B;
 
   /* Grid overlay */
-  --grid-color:    rgba(43, 224, 176, 0.04);
-  --grid-size:     40px;
+  --grid-color:    rgba(43, 224, 176, 0.03);
+  --grid-size:     48px;
 }
 
 /* ── Base ────────────────────────────────────────────────────────────── */
@@ -88,13 +88,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  cursor: none; /* replaced by CustomCursor */
 }
 
-/* Restore cursor on touch/mobile — CustomCursor only shows on pointer:fine */
-@media (hover: none) {
-  body { cursor: auto; }
+/* Ensure native pointer cursor across all elements (overriding legacy cursor-none) */
+a, button, [role="button"], input[type="submit"], input[type="button"], label, select, .cursor-none, .btn-primary, .btn-ghost {
+  cursor: pointer !important;
 }
+
 
 /* ── Monitoring-console grid overlay ─────────────────────────────────── */
 .grid-overlay {
@@ -230,7 +230,7 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-family: var(--font-mono);
-  cursor: none;
+  cursor: pointer;
   transition: box-shadow var(--duration-base) ease,
               transform var(--duration-fast) ease;
 }
@@ -250,7 +250,7 @@ body {
   font-size: 0.8125rem;
   letter-spacing: 0.04em;
   font-family: var(--font-mono);
-  cursor: none;
+  cursor: pointer;
   transition: border-color var(--duration-base) ease,
               color var(--duration-base) ease;
 }

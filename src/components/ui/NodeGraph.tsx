@@ -246,33 +246,33 @@ export function NodeGraph() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.96 }}
               transition={{ duration: 0.2 }}
-              className="mt-8 max-w-md w-full mx-auto rounded-2xl border border-[rgba(43,224,176,0.25)] bg-[#0D1815] p-6 text-left shadow-[0_10px_30px_rgba(6,11,9,0.5)]"
+              className="mt-8 max-w-md w-full mx-auto rounded-2xl border border-white/[0.15] bg-[#0D1815] p-6 text-left shadow-[0_10px_30px_rgba(6,11,9,0.5)]"
             >
               <div className="flex items-center justify-between gap-3 mb-2">
                 <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#2BE0B0] font-bold">
                   {activeNode.label}
                 </span>
-                <span className="font-mono text-[9px] tracking-widest uppercase px-2 py-0.5 rounded bg-[rgba(43,224,176,0.1)] text-[#2BE0B0]">
+                <span className="font-mono text-[9px] tracking-widest uppercase px-2 py-0.5 rounded bg-white/[0.06] text-[#2BE0B0]">
                   Active Node
                 </span>
               </div>
-              <p className="text-sm text-[#F2F6F4] leading-relaxed mb-4">
+              <p className="text-sm text-[#F8FAFC] leading-relaxed mb-4">
                 {activeNode.desc}
               </p>
 
               {/* Cross-sector synergy box */}
-              <div className="pt-4 border-t border-[rgba(43,224,176,0.12)] space-y-2">
+              <div className="pt-4 border-t border-white/[0.1] space-y-2">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B]" />
                   <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
                     {activeNode.synergyLabel}
                   </span>
                 </div>
-                <p className="text-xs text-[#8FA39A] leading-[1.7]">
+                <p className="text-xs text-[#C2D1CB] leading-[1.7]">
                   {activeNode.synergyDesc}
                 </p>
                 <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  <span className="text-[10px] text-[#4A6358] font-mono mr-1">Synergy Partners:</span>
+                  <span className="text-[10px] text-[#647A70] font-mono mr-1">Synergy Partners:</span>
                   {activeNode.partners.map((pId) => {
                     const pNode = FOCUS_AREAS.find((n) => n.id === pId);
                     return (

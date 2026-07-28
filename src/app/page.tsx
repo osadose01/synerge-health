@@ -12,13 +12,9 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SynergyComparison } from "@/components/ui/SynergyComparison";
 import dynamic from "next/dynamic";
 
-const ParticleHero = dynamic(() => import("@/components/ui/ParticleHero").then((mod) => mod.ParticleHero), {
-  ssr: false,
-});
 const NodeGraph = dynamic(() => import("@/components/ui/NodeGraph").then((mod) => mod.NodeGraph), {
   ssr: false,
 });
-import { TextScramble } from "@/components/ui/TextScramble";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -229,8 +225,8 @@ export default function Home() {
         <section
           className="relative min-h-screen flex flex-col justify-end pb-24 md:pb-32 pt-32 overflow-hidden"
         >
-          {/* R3F particles (lazy, desktop-only) */}
-          <ParticleHero />
+          {/* Subtle institutional ambient gradient lighting */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-[#1A9972]/15 via-[#2BE0B0]/5 to-transparent blur-[120px] pointer-events-none" />
 
           {/* Radial vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#060B09_100%)] pointer-events-none" />
@@ -247,7 +243,7 @@ export default function Home() {
             </motion.p>
 
             {/* H1 with word stagger */}
-            <h1 className="font-display font-bold text-[clamp(2.3rem,8vw,7.5rem)] leading-[1.02] tracking-tight text-[#F2F6F4] max-w-5xl">
+            <h1 className="font-display font-bold text-[clamp(2.3rem,8vw,7.5rem)] leading-[1.02] tracking-tight text-[#F8FAFC] max-w-5xl">
               <WordReveal text="Building Africa's" delay={0.2} />
               <br />
               <WordReveal
@@ -265,12 +261,12 @@ export default function Home() {
             </div>
 
             {/* Sub + CTAs */}
-            <div className="mt-12 pt-10 border-t border-[rgba(43,224,176,0.08)] flex flex-col md:flex-row md:items-end gap-10 md:gap-24">
+            <div className="mt-12 pt-10 border-t border-white/[0.12] flex flex-col md:flex-row md:items-end gap-10 md:gap-24">
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
-                className="max-w-md text-base text-[#8FA39A] leading-[1.7]"
+                className="max-w-md text-base text-[#C2D1CB] leading-[1.7]"
               >
                 We co-found, fund, and operate healthtech startups from first insight to market
                 scale — pairing African clinical expertise with global venture-building discipline.
@@ -289,9 +285,9 @@ export default function Home() {
                   <MagneticButton>
                     <Link
                       href="/founders#apply"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_30px_rgba(227,168,59,0.5)] transition-all duration-300"
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase hover:shadow-[0_0_30px_rgba(227,168,59,0.5)] transition-all duration-300"
                     >
-                      <TextScramble text="APPLY AS A FOUNDER" />
+                      <span>APPLY AS A FOUNDER</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </Link>
                   </MagneticButton>
@@ -304,7 +300,7 @@ export default function Home() {
                   <MagneticButton>
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[rgba(43,224,176,0.25)] text-[#8FA39A] font-mono text-xs tracking-[0.1em] uppercase cursor-none hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/[0.18] text-[#C2D1CB] font-mono text-xs tracking-[0.1em] uppercase hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
                     >
                       Partner With Us
                     </Link>
@@ -435,9 +431,9 @@ export default function Home() {
                 <MagneticButton>
                   <Link
                     href="/founders#apply"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_40px_rgba(227,168,59,0.5)] transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase hover:shadow-[0_0_40px_rgba(227,168,59,0.5)] transition-all duration-300"
                   >
-                    <TextScramble text="APPLY AS A FOUNDER" />
+                    <span>APPLY AS A FOUNDER</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
                 </MagneticButton>

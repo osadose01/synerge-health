@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -82,12 +81,12 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="min-h-full flex flex-col bg-[#060B09] text-[#F2F6F4] antialiased">
-        {/* Monitoring console grid overlay */}
+      <body className="min-h-full flex flex-col bg-[#060B09] text-[#F8FAFC] antialiased">
+        {/* Subtle grid overlay */}
         <div className="grid-overlay" aria-hidden="true" />
-        <CustomCursor />
         {children}
       </body>
     </html>
   );
 }
+

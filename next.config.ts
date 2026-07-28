@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  env: {
+    WEB3FORMS_ACCESS_KEY: process.env.WEB3FORMS_ACCESS_KEY || "",
+    NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_ACCESS_KEY || "",
+  },
 };
 
 export default nextConfig;
+

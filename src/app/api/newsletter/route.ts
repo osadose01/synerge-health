@@ -9,10 +9,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+    const accessKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
     if (accessKey) {
-      await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -22,6 +22,10 @@ export async function POST(req: Request) {
           email,
         }),
       });
+      const data = await res.json();
+      console.log("[WEB3FORMS_RESPONSE]", data);
+    } else {
+      console.warn("[WEB3FORMS_MISSING_KEY] WEB3FORMS_ACCESS_KEY is not defined.");
     }
 
     console.log("[NEWSLETTER_SUBSCRIBE]", { email });
@@ -31,3 +35,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Failed to subscribe" }, { status: 500 });
   }
 }
+

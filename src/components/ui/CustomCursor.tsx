@@ -61,7 +61,7 @@ export function CustomCursor() {
       <div
         ref={dotRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
+        className="fixed top-0 left-0 z-[9999] pointer-events-none hidden lg:block"
         style={{ width: 8, height: 8 }}
       >
         <motion.div
@@ -78,7 +78,7 @@ export function CustomCursor() {
       <div
         ref={ringRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 z-[9998] pointer-events-none"
+        className="fixed top-0 left-0 z-[9998] pointer-events-none hidden lg:block"
         style={{ width: 40, height: 40 }}
       >
         <motion.div

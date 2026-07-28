@@ -25,7 +25,7 @@ export function Footer() {
 
   return (
     <footer className="bg-[#060B09] border-t border-[rgba(43,224,176,0.08)] pt-20 pb-10">
-      <div className="container mx-auto px-8 md:px-16">
+      <div className="container mx-auto px-6 sm:px-8 md:px-16">
 
         {/* Top row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-[rgba(43,224,176,0.06)]">
@@ -178,7 +178,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <p className="font-mono text-[10px] tracking-[0.12em] text-[#4A6358]">
             © {new Date().getFullYear()} SYNERGE HEALTH INC. ALL RIGHTS RESERVED.
           </p>

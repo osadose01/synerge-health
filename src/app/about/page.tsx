@@ -144,7 +144,13 @@ function CoreValues() {
   const inView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
-    if (prefersReduced || !sectionRef.current || !trackRef.current) return;
+    if (
+      prefersReduced ||
+      !sectionRef.current ||
+      !trackRef.current ||
+      (typeof window !== "undefined" && window.innerWidth < 1024)
+    )
+      return;
 
     const track = trackRef.current;
     const totalWidth = track.scrollWidth - track.offsetWidth;
@@ -170,8 +176,8 @@ function CoreValues() {
   if (prefersReduced) {
     // Static 2×2 grid fallback
     return (
-      <section className="py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
-        <div className="container mx-auto px-8 md:px-16">
+      <section className="py-20 md:py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
+        <div className="container mx-auto px-6 sm:px-8 md:px-16">
           <p className="label-mono mb-16">Core Values</p>
           <div className="grid sm:grid-cols-2 gap-6">
             {VALUES.map((v, i) => (
@@ -184,41 +190,66 @@ function CoreValues() {
   }
 
   return (
-    <div
-      ref={sectionRef}
-      className="relative overflow-hidden bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]"
-      style={{ height: "100vh" }}
-    >
-      <div className="h-full flex flex-col justify-center">
-        <div className="container mx-auto px-8 md:px-16 mb-12">
-          <p className="label-mono">Core Values</p>
+    <>
+      {/* Mobile & Tablet vertical card grid (< lg) */}
+      <section className="lg:hidden py-20 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
+        <div className="container mx-auto px-6 sm:px-8">
+          <p className="label-mono mb-12">Core Values</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {VALUES.map((value) => (
+              <div
+                key={value.title}
+                className="relative rounded-2xl border border-[rgba(43,224,176,0.1)] bg-[#111F1A] p-6 space-y-4"
+              >
+                <div className="absolute top-0 left-0 w-10 h-0.5 bg-gradient-to-r from-[#2BE0B0] to-transparent" />
+                <span className="font-mono text-[11px] tracking-widest text-[#2BE0B0]">
+                  {value.num}
+                </span>
+                <h3 className="font-display font-bold text-xl text-[#F2F6F4]">{value.title}</h3>
+                <p className="text-sm text-[#8FA39A] leading-[1.8]">{value.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div
-          ref={trackRef}
-          className="flex gap-6 px-8 md:px-16"
-          style={{ width: "max-content" }}
-        >
-          {VALUES.map((value, i) => (
-            <motion.div
-              key={value.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.12 }}
-              className="relative w-80 shrink-0 rounded-2xl border border-[rgba(43,224,176,0.1)] bg-[#111F1A] p-8 space-y-4"
-            >
-              <div className="absolute top-0 left-0 w-10 h-0.5 bg-gradient-to-r from-[#2BE0B0] to-transparent" />
-              <span className="font-mono text-[11px] tracking-widest text-[#2BE0B0]">
-                {value.num}
-              </span>
-              <h3 className="font-display font-bold text-xl text-[#F2F6F4]">{value.title}</h3>
-              <p className="text-sm text-[#8FA39A] leading-[1.8]">{value.desc}</p>
-            </motion.div>
-          ))}
-          {/* Spacer */}
-          <div className="w-16 shrink-0" />
+      </section>
+
+      {/* Desktop horizontal GSAP slider (>= lg) */}
+      <div
+        ref={sectionRef}
+        className="hidden lg:block relative overflow-hidden bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]"
+        style={{ height: "100vh" }}
+      >
+        <div className="h-full flex flex-col justify-center">
+          <div className="container mx-auto px-8 md:px-16 mb-12">
+            <p className="label-mono">Core Values</p>
+          </div>
+          <div
+            ref={trackRef}
+            className="flex gap-6 px-8 md:px-16"
+            style={{ width: "max-content" }}
+          >
+            {VALUES.map((value, i) => (
+              <motion.div
+                key={value.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: i * 0.12 }}
+                className="relative w-80 shrink-0 rounded-2xl border border-[rgba(43,224,176,0.1)] bg-[#111F1A] p-8 space-y-4"
+              >
+                <div className="absolute top-0 left-0 w-10 h-0.5 bg-gradient-to-r from-[#2BE0B0] to-transparent" />
+                <span className="font-mono text-[11px] tracking-widest text-[#2BE0B0]">
+                  {value.num}
+                </span>
+                <h3 className="font-display font-bold text-xl text-[#F2F6F4]">{value.title}</h3>
+                <p className="text-sm text-[#8FA39A] leading-[1.8]">{value.desc}</p>
+              </motion.div>
+            ))}
+            {/* Spacer */}
+            <div className="w-16 shrink-0" />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

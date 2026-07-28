@@ -78,7 +78,6 @@ export function SynergyLogo({
             transform="rotate(15)"
             stroke="url(#synerge-r1)"
             strokeWidth={strokeWidth}
-            filter="url(#synerge-soft)"
           />
           <ellipse
             rx="72"
@@ -86,7 +85,6 @@ export function SynergyLogo({
             transform="rotate(60)"
             stroke="url(#synerge-r2)"
             strokeWidth={strokeWidth}
-            filter="url(#synerge-soft)"
           />
           <ellipse
             rx="72"
@@ -94,7 +92,6 @@ export function SynergyLogo({
             transform="rotate(105)"
             stroke="url(#synerge-r3)"
             strokeWidth={strokeWidth}
-            filter="url(#synerge-soft)"
           />
           <ellipse
             rx="72"
@@ -102,7 +99,6 @@ export function SynergyLogo({
             transform="rotate(150)"
             stroke="url(#synerge-r4)"
             strokeWidth={strokeWidth}
-            filter="url(#synerge-soft)"
           />
           {/* Glowing Patient Outcome Core */}
           <circle r={coreRadius} fill="url(#synerge-core)" />

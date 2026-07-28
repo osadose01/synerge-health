@@ -22,9 +22,13 @@ export function SynergyOrbital3D() {
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
     camera.position.set(0, 0.4, 6.2);
 
-    // 3. Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // 3. Renderer with high performance settings
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
 
@@ -54,18 +58,20 @@ export function SynergyOrbital3D() {
       { color: 0x79c6e8, rot: [-0.6, -0.7, 0.2], speed: -0.007, label: "Market" },
     ];
 
+    // Optimized geometry segments (10, 40 vs 16, 100) -> 75% polygon reduction
+    const ringGeo = new THREE.TorusGeometry(1.55, 0.04, 10, 40);
+
     const rings = ringDefs.map((def, i) => {
-      const geo = new THREE.TorusGeometry(1.55, 0.048, 16, 100);
       const mat = new THREE.MeshStandardMaterial({
         color: def.color,
         emissive: def.color,
         emissiveIntensity: 0.35,
-        metalness: 0.75,
-        roughness: 0.25,
+        metalness: 0.6,
+        roughness: 0.3,
       });
-      const mesh = new THREE.Mesh(geo, mat);
+      const mesh = new THREE.Mesh(ringGeo, mat);
       mesh.rotation.set(def.rot[0], def.rot[1], def.rot[2]);
-      mesh.scale.set(1, 1, 0.001); // starts collapsed flat for smooth reveal
+      mesh.scale.set(1, 1, 0.001);
       mesh.userData = { spin: def.speed, targetScaleZ: 0.55, delay: i * 220 };
       group.add(mesh);
       return mesh;
@@ -79,7 +85,7 @@ export function SynergyOrbital3D() {
       metalness: 0.3,
       roughness: 0.2,
     });
-    const core = new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 32), coreMat);
+    const core = new THREE.Mesh(new THREE.SphereGeometry(0.22, 20, 20), coreMat);
     group.add(core);
 
     const haloMat = new THREE.MeshBasicMaterial({
@@ -89,7 +95,7 @@ export function SynergyOrbital3D() {
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
-    const halo = new THREE.Mesh(new THREE.SphereGeometry(0.52, 32, 32), haloMat);
+    const halo = new THREE.Mesh(new THREE.SphereGeometry(0.52, 20, 20), haloMat);
     group.add(halo);
 
     group.rotation.x = 0.15;
@@ -126,12 +132,27 @@ export function SynergyOrbital3D() {
     window.addEventListener("pointerup", onPointerUp);
     window.addEventListener("pointermove", onPointerMove);
 
-    // 8. Animation loop
+    // 8. Animation loop with IntersectionObserver visibility check
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
+
     const startTime = performance.now();
     let animFrameId: number;
 
     const animate = (now: number) => {
       animFrameId = requestAnimationFrame(animate);
+
+      // Skip heavy renders when off-screen
+      if (!isVisible) return;
+
       const elapsed = now - startTime;
 
       rings.forEach((r) => {
@@ -168,10 +189,15 @@ export function SynergyOrbital3D() {
     // Clean up WebGL resources on unmount
     return () => {
       cancelAnimationFrame(animFrameId);
+      observer.disconnect();
       container.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("resize", onResize);
+
+      ringGeo.dispose();
+      core.geometry.dispose();
+      halo.geometry.dispose();
 
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);

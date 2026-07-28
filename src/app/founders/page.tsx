@@ -41,18 +41,18 @@ export default function FoundersPage() {
         />
 
         {/* Programme Journey */}
-        <section className="py-40 bg-white border-t border-slate-100">
+        <section className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
           <div className="container mx-auto px-8 md:px-16">
             <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
               <p className="label-mono">Programme Journey</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-slate-900 leading-[1.1] mb-16">
+                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-16">
                   What the first
                   <br />
                   6 months look like.
                 </h2>
 
-                <div className="space-y-0 border border-slate-200 rounded-2xl overflow-hidden">
+                <div className="space-y-0 border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden bg-[#0D1815]">
                   {[
                     { step: "01", phase: "Intake", desc: "Problem deep-dive & founder alignment. We spend time understanding your insight, market, and motivation before anything else." },
                     { step: "02", phase: "Validation", desc: "Unit economics & customer discovery. Six weeks of structured experimentation to stress-test assumptions." },
@@ -63,14 +63,14 @@ export default function FoundersPage() {
                   ].map((item, i) => (
                     <div
                       key={item.step}
-                      className={`flex gap-8 p-8 ${i < 5 ? "border-b border-slate-100" : ""}`}
+                      className={`flex gap-8 p-8 ${i < 5 ? "border-b border-[rgba(43,224,176,0.08)]" : ""}`}
                     >
-                      <span className="font-mono text-[11px] tracking-widest text-slate-300 pt-0.5 shrink-0">
+                      <span className="font-mono text-[11px] tracking-widest text-[#2BE0B0] pt-0.5 shrink-0">
                         {item.step}
                       </span>
                       <div className="space-y-2">
-                        <h3 className="font-heading font-semibold text-base text-slate-900">{item.phase}</h3>
-                        <p className="text-sm text-slate-500 leading-[1.75]">{item.desc}</p>
+                        <h3 className="font-display font-semibold text-base text-[#F2F6F4]">{item.phase}</h3>
+                        <p className="text-sm text-[#8FA39A] leading-[1.75]">{item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -81,17 +81,17 @@ export default function FoundersPage() {
         </section>
 
         {/* FAQs */}
-        <section className="py-40 bg-slate-50 border-t border-slate-100">
+        <section className="py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
           <div className="container mx-auto px-8 md:px-16">
             <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
               <p className="label-mono">FAQs</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-slate-900 leading-[1.1] mb-16">
+                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-16">
                   Frequently asked
                   <br />
                   questions.
                 </h2>
-                <div className="border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100 bg-white">
+                <div className="border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden bg-[#060B09]">
                   {FAQS.map((faq, idx) => (
                     <AccordionItem key={faq.q} question={faq.q} answer={faq.a} defaultOpen={idx === 0} />
                   ))}
@@ -102,17 +102,17 @@ export default function FoundersPage() {
         </section>
 
         {/* Application Form */}
-        <section id="apply" className="py-40 bg-white border-t border-slate-100 scroll-mt-24">
+        <section id="apply" className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)] scroll-mt-24">
           <div className="container mx-auto px-8 md:px-16">
             <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
               <p className="label-mono">Apply</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-slate-900 leading-[1.1] mb-4">
+                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-4">
                   Apply to the
                   <br />
                   Founder Programme.
                 </h2>
-                <p className="text-slate-500 text-base leading-[1.75] mb-12 max-w-lg">
+                <p className="text-[#8FA39A] text-base leading-[1.75] mb-12 max-w-lg">
                   Tell us about the healthcare problem you are passionate about solving. Every application is reviewed by our leadership team.
                 </p>
                 <ApplyForm />

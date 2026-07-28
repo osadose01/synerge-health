@@ -11,7 +11,6 @@ import { VitalLine } from "@/components/ui/VitalLine";
 import { NodeGraph } from "@/components/ui/NodeGraph";
 import { GlassTile } from "@/components/ui/GlassTile";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import { TextScramble } from "@/components/ui/TextScramble";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import gsap from "gsap";
@@ -224,7 +223,6 @@ export default function Home() {
 
   return (
     <>
-      <CustomCursor />
       <Header />
 
       <main className="flex-1">

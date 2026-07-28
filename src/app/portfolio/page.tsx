@@ -1,6 +1,8 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/layout/PageHero";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { TextScramble } from "@/components/ui/TextScramble";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -22,18 +24,18 @@ export default function PortfolioPage() {
         />
 
         {/* Cohort Status */}
-        <section className="py-40 bg-white border-t border-slate-100">
+        <section className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
           <div className="container mx-auto px-8 md:px-16">
             <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
               <p className="label-mono">Current Status</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-slate-900 leading-[1.1] mb-16">
+                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-16">
                   Cohort One —
                   <br />
-                  <span className="text-emerald-600">Applications Open.</span>
+                  <span className="text-[#2BE0B0]">Applications Open.</span>
                 </h2>
 
-                <div className="grid sm:grid-cols-3 gap-0 border border-slate-200 rounded-2xl overflow-hidden">
+                <div className="grid sm:grid-cols-3 gap-0 border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden bg-[#0D1815]">
                   {[
                     {
                       label: "Cohort 01 — Open",
@@ -59,14 +61,14 @@ export default function PortfolioPage() {
                   ].map((card, i) => (
                     <div
                       key={card.title}
-                      className={`p-8 space-y-4 ${i < 2 ? "border-r border-slate-200" : ""}`}
+                      className={`p-8 space-y-4 ${i < 2 ? "border-r border-[rgba(43,224,176,0.12)]" : ""}`}
                     >
                       <p className="label-mono text-[10px]">{card.label}</p>
-                      <h3 className="font-heading font-semibold text-base text-slate-900">{card.title}</h3>
-                      <p className="text-sm text-slate-500 leading-[1.75]">{card.body}</p>
+                      <h3 className="font-display font-semibold text-base text-[#F2F6F4]">{card.title}</h3>
+                      <p className="text-sm text-[#8FA39A] leading-[1.75]">{card.body}</p>
                       <Link
                         href={card.href}
-                        className="inline-flex items-center gap-1.5 text-sm text-emerald-600 font-medium hover:text-emerald-700 transition-colors"
+                        className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-[#2BE0B0] hover:text-[#F2F6F4] transition-colors cursor-none"
                       >
                         {card.cta}
                         <ArrowUpRight className="w-3.5 h-3.5" />
@@ -80,19 +82,21 @@ export default function PortfolioPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-40 bg-slate-50 border-t border-slate-100">
+        <section className="py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
           <div className="container mx-auto px-8 md:px-16 text-center">
             <p className="label-mono mb-8">Apply now</p>
-            <h2 className="font-display font-bold text-4xl md:text-5xl text-slate-900 leading-[1.08] max-w-2xl mx-auto mb-12">
+            <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.08] max-w-2xl mx-auto mb-12">
               Ready to build the next African healthtech company?
             </h2>
-            <Link
-              href="/founders#apply"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors"
-            >
-              Apply to Cohort One
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            <MagneticButton className="inline-block">
+              <Link
+                href="/founders#apply"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_30px_rgba(227,168,59,0.5)] transition-all duration-300"
+              >
+                <TextScramble text="APPLY TO COHORT ONE" />
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </MagneticButton>
           </div>
         </section>
       </main>
@@ -101,3 +105,4 @@ export default function PortfolioPage() {
     </>
   );
 }
+

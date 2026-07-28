@@ -1,7 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/layout/PageHero";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -56,7 +55,6 @@ const SERVICES = [
 export default function ServicesPage() {
   return (
     <>
-      <CustomCursor />
       <Header />
 
       <main className="flex-1">

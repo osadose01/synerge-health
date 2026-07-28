@@ -37,19 +37,19 @@ export default function EventsPage() {
           description="Join our founder office hours, investor roundtables, and healthtech webinars."
         />
 
-        <section className="py-24 bg-forest-950">
+        <section className="py-24 bg-[#060B09]">
           <div className="container mx-auto px-6 md:px-12 max-w-4xl space-y-8">
             {EVENTS.map((evt) => (
-              <div key={evt.title} className="glass-card rounded-3xl p-8 border border-forest-600/50 flex flex-col md:flex-row justify-between gap-6 items-start md:items-center">
+              <div key={evt.title} className="rounded-3xl p-8 bg-[#0D1815] border border-[rgba(43,224,176,0.15)] flex flex-col md:flex-row justify-between gap-6 items-start md:items-center">
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-xs font-mono text-gold-400">
-                    <span className="px-2.5 py-1 rounded-full bg-forest-800 border border-forest-600">{evt.type}</span>
+                  <div className="flex items-center gap-3 text-xs font-mono text-[#2BE0B0]">
+                    <span className="px-2.5 py-1 rounded-full bg-[rgba(43,224,176,0.1)] border border-[rgba(43,224,176,0.3)]">{evt.type}</span>
                     <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {evt.date}</span>
                   </div>
-                  <h3 className="font-heading font-bold text-xl text-cream-50">{evt.title}</h3>
-                  <p className="text-xs text-muted max-w-xl">{evt.desc}</p>
-                  <div className="flex items-center gap-1.5 text-xs text-muted">
-                    <MapPin className="w-3.5 h-3.5 text-gold-400" />
+                  <h3 className="font-display font-bold text-xl text-[#F2F6F4]">{evt.title}</h3>
+                  <p className="text-xs text-[#8FA39A] max-w-xl">{evt.desc}</p>
+                  <div className="flex items-center gap-1.5 text-xs text-[#8FA39A]">
+                    <MapPin className="w-3.5 h-3.5 text-[#2BE0B0]" />
                     <span>{evt.location}</span>
                   </div>
                 </div>

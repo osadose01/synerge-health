@@ -6,7 +6,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { TextScramble } from "@/components/ui/TextScramble";
 import { useReducedMotion } from "@/lib/useReducedMotion";
@@ -311,7 +310,6 @@ function LeaderCard({ member, index }: { member: (typeof TEAM)[number]; index: n
 export default function AboutPage() {
   return (
     <>
-      <CustomCursor />
       <Header />
 
       <main className="flex-1">

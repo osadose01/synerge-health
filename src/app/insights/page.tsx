@@ -21,7 +21,7 @@ const ARTICLES = [
   {
     title: "Unit Economics in Digital Pharmacy: Lessons from 100+ Distribution Pilots",
     date: "June 14, 2026",
-    author: "Ezi Ud",
+    author: "Sama Edi",
     category: "Operations",
     readTime: "7 min read",
     snippet:
@@ -50,35 +50,35 @@ export default function InsightsPage() {
           description="Analysis, operational blueprints, and market insights curated by the Synerge Health studio team."
         />
 
-        <section className="py-40 bg-white border-t border-slate-100">
+        <section className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
           <div className="container mx-auto px-8 md:px-16">
             <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
               <p className="label-mono">Latest Articles</p>
-              <div className="space-y-0 border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100">
+              <div className="space-y-0 border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden divide-y divide-[rgba(43,224,176,0.08)] bg-[#0D1815]">
                 {ARTICLES.map((article) => (
                   <article
                     key={article.title}
-                    className="group p-8 flex flex-col sm:flex-row gap-6 items-start hover:bg-slate-50 transition-colors"
+                    className="group p-8 flex flex-col sm:flex-row gap-6 items-start hover:bg-[rgba(43,224,176,0.03)] transition-colors cursor-none"
                   >
                     <div className="flex-1 space-y-3">
                       <div className="flex items-center gap-3">
-                        <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-600">
+                        <span className="text-[11px] font-mono uppercase tracking-widest text-[#2BE0B0]">
                           {article.category}
                         </span>
-                        <span className="text-slate-300">·</span>
-                        <span className="text-[11px] font-mono text-slate-400">{article.readTime}</span>
+                        <span className="text-[#8FA39A]">·</span>
+                        <span className="text-[11px] font-mono text-[#8FA39A]">{article.readTime}</span>
                       </div>
-                      <h3 className="font-heading font-semibold text-lg text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                      <h3 className="font-display font-semibold text-lg text-[#F2F6F4] leading-snug group-hover:text-[#2BE0B0] transition-colors">
                         {article.title}
                       </h3>
-                      <p className="text-sm text-slate-500 leading-[1.75]">{article.snippet}</p>
+                      <p className="text-sm text-[#8FA39A] leading-[1.75]">{article.snippet}</p>
                       <div className="flex items-center gap-4 pt-1">
-                        <span className="text-xs text-slate-400">{article.author}</span>
-                        <span className="text-slate-300">·</span>
-                        <span className="text-xs text-slate-400">{article.date}</span>
+                        <span className="text-xs text-[#8FA39A]">{article.author}</span>
+                        <span className="text-[#8FA39A]">·</span>
+                        <span className="text-xs text-[#8FA39A]">{article.date}</span>
                       </div>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-emerald-500 transition-colors shrink-0 mt-1" />
+                    <ArrowUpRight className="w-5 h-5 text-[#8FA39A] group-hover:text-[#2BE0B0] transition-colors shrink-0 mt-1" />
                   </article>
                 ))}
               </div>
@@ -91,3 +91,4 @@ export default function InsightsPage() {
     </>
   );
 }
+

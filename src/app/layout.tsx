@@ -78,6 +78,10 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} ${playfair.variable} h-full`}
     >
+      <head>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col bg-[#060B09] text-[#F2F6F4] antialiased">
         {/* Monitoring console grid overlay */}
         <div className="grid-overlay" aria-hidden="true" />

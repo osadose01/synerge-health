@@ -6,11 +6,17 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ParticleHero } from "@/components/ui/ParticleHero";
 import { VitalLine } from "@/components/ui/VitalLine";
-import { NodeGraph } from "@/components/ui/NodeGraph";
 import { GlassTile } from "@/components/ui/GlassTile";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import dynamic from "next/dynamic";
+
+const ParticleHero = dynamic(() => import("@/components/ui/ParticleHero").then((mod) => mod.ParticleHero), {
+  ssr: false,
+});
+const NodeGraph = dynamic(() => import("@/components/ui/NodeGraph").then((mod) => mod.NodeGraph), {
+  ssr: false,
+});
 import { TextScramble } from "@/components/ui/TextScramble";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import gsap from "gsap";

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { TextScramble } from "@/components/ui/TextScramble";
 
 const NAV_LINKS = [
   { name: "About", href: "/about" },
@@ -21,8 +22,8 @@ export function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -30,33 +31,32 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-500",
-        isScrolled
-          ? "bg-white/90 backdrop-blur-xl border-b border-slate-100 py-4"
-          : "bg-transparent py-6"
+        isScrolled ? "nav-glass py-4" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-8 md:px-16 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-7 h-7 rounded-full bg-slate-900 flex items-center justify-center">
-            <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 32 32" fill="none">
+        <Link href="/" className="flex items-center gap-3 group cursor-none">
+          {/* ECG logo mark */}
+          <div className="w-8 h-8 rounded-lg border border-[rgba(43,224,176,0.3)] bg-[#0D1815] flex items-center justify-center">
+            <svg className="w-4 h-4" viewBox="0 0 32 32" fill="none" aria-hidden="true">
               <path
-                d="M4 17h5l2.5-7L15 24l3-14 2 7h8"
-                stroke="currentColor"
-                strokeWidth="2.5"
+                d="M2 16h5l2.5-7L14 25l3.5-15 2 7H30"
+                stroke="#2BE0B0"
+                strokeWidth="2"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
           </div>
-          <span className="font-display font-semibold text-base tracking-tight text-slate-900">
+          <span className="font-display font-semibold text-base tracking-tight text-[#F2F6F4]">
             Synerge Health
           </span>
         </Link>
 
-        {/* Desktop Nav — minimal, centred */}
-        <nav className="hidden lg:flex items-center gap-8">
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -64,10 +64,10 @@ export function Header() {
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "text-sm transition-colors duration-200",
+                  "font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-200 cursor-none",
                   isActive
-                    ? "text-slate-900 font-medium"
-                    : "text-slate-500 hover:text-slate-900"
+                    ? "text-[#2BE0B0]"
+                    : "text-[#8FA39A] hover:text-[#F2F6F4]"
                 )}
               >
                 {link.name}
@@ -76,18 +76,20 @@ export function Header() {
           })}
         </nav>
 
-        {/* Single CTA */}
+        {/* CTA + Hamburger */}
         <div className="flex items-center gap-4">
           <Link
             href="/founders#apply"
-            className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-emerald-600 text-white text-xs font-semibold tracking-wide hover:bg-emerald-700 transition-colors"
+            className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full border border-[#E3A83B] text-[#E3A83B] font-mono text-[11px] tracking-[0.15em] uppercase cursor-none hover:bg-[#E3A83B] hover:text-[#060B09] transition-all duration-300"
           >
-            Apply Now
+            <TextScramble text="APPLY NOW" />
           </Link>
+
           <button
-            className="lg:hidden text-slate-700 p-1"
+            className="lg:hidden text-[#8FA39A] p-1 hover:text-[#2BE0B0] transition-colors cursor-none"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Navigation"
+            aria-label="Toggle navigation"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -101,26 +103,39 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-slate-100 overflow-hidden"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden bg-[#060B09] border-t border-[rgba(43,224,176,0.08)] overflow-hidden"
           >
-            <div className="container mx-auto px-8 py-8 flex flex-col gap-6">
-              {NAV_LINKS.map((link) => (
-                <Link
+            <div className="container mx-auto px-8 py-10 flex flex-col gap-6">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-medium text-slate-900 hover:text-emerald-600 transition-colors"
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.06 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block font-mono text-[13px] tracking-[0.2em] uppercase text-[#F2F6F4] hover:text-[#2BE0B0] transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
-              <Link
-                href="/founders#apply"
-                onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 w-full text-center py-3.5 rounded-full bg-emerald-600 text-white text-sm font-semibold"
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: NAV_LINKS.length * 0.06 }}
               >
-                Apply Now
-              </Link>
+                <Link
+                  href="/founders#apply"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="inline-flex items-center px-6 py-3 rounded-full border border-[#E3A83B] text-[#E3A83B] font-mono text-[11px] tracking-[0.18em] uppercase hover:bg-[#E3A83B] hover:text-[#060B09] transition-all duration-300"
+                >
+                  APPLY NOW
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}

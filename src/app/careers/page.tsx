@@ -1,8 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/layout/PageHero";
-import Link from "next/link";
-import { Briefcase, Heart, Rocket } from "lucide-react";
+import { Rocket } from "lucide-react";
 
 export const metadata = {
   title: "Careers — Build With Us",

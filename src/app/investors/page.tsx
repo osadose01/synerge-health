@@ -2,7 +2,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/layout/PageHero";
 import { InvestorForm } from "@/components/forms/InvestorForm";
-import { ArrowUpRight } from "lucide-react";
 
 export const metadata = {
   title: "Investors & Partners — Synerge Health",

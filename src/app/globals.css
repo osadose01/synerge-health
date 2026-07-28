@@ -1,56 +1,84 @@
 @import "tailwindcss";
 
 @theme {
-  /* Core palette */
-  --color-emerald-700: #047857;
-  --color-emerald-600: #059669;
-  --color-emerald-500: #10B981;
-  --color-emerald-100: #D1FAE5;
-  --color-emerald-50:  #ECFDF5;
+  /* ── Cyber-Clinical Palette ──────────────────────────────────────── */
+  --color-void:        #060B09;
+  --color-panel:       #0D1815;
+  --color-panel-alt:   #111F1A;
+  --color-teal:        #2BE0B0;
+  --color-teal-dim:    #1A9972;
+  --color-blue:        #3FA9E0;
+  --color-gold:        #E3A83B;
+  --color-gold-dim:    #A87522;
+  --color-ink-100:     #F2F6F4;
+  --color-ink-200:     #C8D8D2;
+  --color-ink-500:     #8FA39A;
+  --color-ink-700:     #4A6358;
+  --color-border:      rgba(43, 224, 176, 0.08);
+  --color-border-mid:  rgba(43, 224, 176, 0.15);
+  --color-border-hi:   rgba(43, 224, 176, 0.35);
 
-  /* Slate system */
-  --color-slate-900: #0F172A;
-  --color-slate-800: #1E293B;
-  --color-slate-700: #334155;
-  --color-slate-600: #475569;
-  --color-slate-500: #64748B;
-  --color-slate-400: #94A3B8;
-  --color-slate-300: #CBD5E1;
-  --color-slate-200: #E2E8F0;
-  --color-slate-100: #F1F5F9;
-  --color-slate-50:  #F8FAFC;
+  /* ── Legacy aliases so existing components don't break ───────────── */
+  --color-emerald-700: #1A9972;
+  --color-emerald-600: #2BE0B0;
+  --color-emerald-500: #2BE0B0;
+  --color-emerald-100: #0D1815;
+  --color-emerald-50:  #111F1A;
+  --color-slate-900:   #F2F6F4;
+  --color-slate-800:   #C8D8D2;
+  --color-slate-700:   #8FA39A;
+  --color-slate-600:   #4A6358;
+  --color-slate-500:   #4A6358;
+  --color-slate-400:   #2A3F38;
+  --color-slate-300:   #1E2F28;
+  --color-slate-200:   rgba(43,224,176,0.10);
+  --color-slate-100:   rgba(43,224,176,0.06);
+  --color-slate-50:    #0D1815;
+  --color-white:       #F2F6F4;
 
-  /* Legacy aliases — keep so existing classes still work */
-  --color-forest-950: #F8FAFC;
-  --color-forest-900: #F1F5F9;
-  --color-forest-800: #E2E8F0;
-  --color-forest-700: #CBD5E1;
-  --color-forest-600: #94A3B8;
-  --color-forest-500: #10B981;
-  --color-forest-400: #34D399;
+  /* ── Typography ─────────────────────────────────────────────────── */
+  --font-display:  var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-heading:  var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-sans:     var(--font-inter), Inter, sans-serif;
+  --font-mono:     var(--font-jetbrains), "JetBrains Mono", monospace;
+  --font-serif:    var(--font-playfair), Georgia, serif;
 
-  --color-gold-500: #059669;
-  --color-gold-400: #10B981;
-  --color-gold-300: #34D399;
-
-  --color-cream-50: #0F172A;
-
-  /* Typography */
-  --font-display: var(--font-bricolage), sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
-  --font-heading: var(--font-jakarta), sans-serif;
-  --font-sans: var(--font-inter), sans-serif;
-  --font-mono: var(--font-jetbrains), monospace;
+  /* ── Motion durations ────────────────────────────────────────────── */
+  --duration-fast:    150ms;
+  --duration-base:    300ms;
+  --duration-slow:    600ms;
+  --duration-xslow:   1200ms;
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
+/* ── CSS custom properties ───────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #0F172A;
-  --surface: #ffffff;
-  --surface-alt: #F8FAFC;
-  --border: #E2E8F0;
-  --muted: #64748B;
-  --accent: #059669;
+  --background:    #060B09;
+  --foreground:    #F2F6F4;
+  --surface:       #0D1815;
+  --surface-alt:   #111F1A;
+  --border:        rgba(43, 224, 176, 0.08);
+  --muted:         #8FA39A;
+  --accent:        #2BE0B0;
+  --accent-gold:   #E3A83B;
+
+  /* Grid overlay */
+  --grid-color:    rgba(43, 224, 176, 0.04);
+  --grid-size:     40px;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -60,62 +88,200 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  cursor: none; /* replaced by CustomCursor */
 }
 
-/* ── Shared layout helpers ─────────────────────────────── */
+/* Restore cursor on touch/mobile — CustomCursor only shows on pointer:fine */
+@media (hover: none) {
+  body { cursor: auto; }
+}
 
-/* Editorial label — used above section headlines */
+/* ── Monitoring-console grid overlay ─────────────────────────────────── */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* ── Shared typography utilities ─────────────────────────────────────── */
 .label-mono {
   font-family: var(--font-mono);
   font-size: 0.6875rem;     /* 11px */
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #94A3B8;
+  color: var(--accent);
 }
 
-/* Glass nav — only used by Header on scroll */
+.stat-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+/* ── Glass components ────────────────────────────────────────────────── */
 .glass {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(13, 24, 21, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
 }
 
-/* Card — light, minimal */
 .glass-card {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color var(--duration-base) ease,
+              box-shadow var(--duration-base) ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(5, 150, 105, 0.25);
-  box-shadow: 0 6px 24px -4px rgba(5, 150, 105, 0.08);
+  border-color: var(--color-border-mid);
+  box-shadow: 0 0 24px rgba(43, 224, 176, 0.06),
+              0 4px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Forms */
+/* Teal glow ring */
+.teal-glow {
+  box-shadow: 0 0 20px rgba(43, 224, 176, 0.25),
+              0 0 60px rgba(43, 224, 176, 0.08);
+}
+
+/* Gold glow */
+.gold-glow {
+  box-shadow: 0 0 20px rgba(227, 168, 59, 0.35),
+              0 0 60px rgba(227, 168, 59, 0.10);
+}
+
+/* ── Scan-line sweep animation ───────────────────────────────────────── */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); opacity: 0.6; }
+  100% { transform: translateY(200%);  opacity: 0; }
+}
+
+.scanline-sweep::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(43, 224, 176, 0.07),
+    transparent
+  );
+  animation: scanline 1.6s var(--ease-out-expo) forwards;
+  pointer-events: none;
+}
+
+/* ── ECG pulse keyframe ──────────────────────────────────────────────── */
+@keyframes ecgPulse {
+  0%   { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* ── Form inputs ─────────────────────────────────────────────────────── */
 .input-field {
   width: 100%;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
+  background: var(--surface);
+  border: 1px solid rgba(43, 224, 176, 0.15);
   border-radius: 0.75rem;
   padding: 0.875rem 1.125rem;
   font-size: 0.875rem;
-  color: #0F172A;
-  transition: border-color 0.2s ease;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: border-color var(--duration-base) ease,
+              box-shadow var(--duration-base) ease;
 }
 
 .input-field:focus {
   outline: none;
-  border-color: #059669;
-  background: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(43, 224, 176, 0.12);
 }
 
 .input-field::placeholder {
-  color: #94A3B8;
+  color: var(--color-ink-700);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F8FAFC; }
-::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #059669; }
+/* ── Nav glass ───────────────────────────────────────────────────────── */
+.nav-glass {
+  background: rgba(6, 11, 9, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(43, 224, 176, 0.10);
+}
+
+/* ── Button base ─────────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  background: var(--accent-gold);
+  color: #060B09;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  cursor: none;
+  transition: box-shadow var(--duration-base) ease,
+              transform var(--duration-fast) ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(227, 168, 59, 0.4);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border-mid);
+  color: var(--color-ink-200);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+  cursor: none;
+  transition: border-color var(--duration-base) ease,
+              color var(--duration-base) ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Custom scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--color-border-mid); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Selection ───────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(43, 224, 176, 0.25);
+  color: var(--foreground);
+}
+
+/* ── Reduced motion safety net ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .grid-overlay { display: none; }
+  body { cursor: auto !important; }
+}

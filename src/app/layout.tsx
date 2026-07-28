@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Plus_Jakarta_Sans, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const inter = Inter({
@@ -24,10 +19,11 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "700"],
 });
 
 const playfair = Playfair_Display({
-  variable: "--font-serif",
+  variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
   style: ["normal", "italic"],
@@ -79,9 +75,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${jakarta.variable} ${inter.variable} ${jetbrains.variable} ${playfair.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} ${playfair.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-white text-slate-900 selection:bg-emerald-100 selection:text-emerald-900">
+      <body className="min-h-full flex flex-col bg-[#060B09] text-[#F2F6F4] antialiased">
+        {/* Monitoring console grid overlay */}
+        <div className="grid-overlay" aria-hidden="true" />
         {children}
       </body>
     </html>

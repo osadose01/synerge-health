@@ -12,6 +12,13 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import dynamic from "next/dynamic";
+
+const SynergyOrbital3D = dynamic(
+  () => import("@/components/ui/SynergyOrbital3D").then((mod) => mod.SynergyOrbital3D),
+  { ssr: false }
+);
+
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -23,40 +30,54 @@ function AboutHero() {
   return (
     <section
       ref={ref}
-      className="relative pt-40 pb-24 border-b border-[rgba(43,224,176,0.06)] overflow-hidden"
+      className="relative pt-40 pb-24 border-b border-white/[0.08] overflow-hidden"
     >
-      {/* Subtle teal glow */}
-      <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-[#2BE0B0] opacity-[0.03] blur-[120px] pointer-events-none" />
+      {/* Subtle ambient lighting */}
+      <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-[#2BE0B0] opacity-[0.04] blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 container mx-auto px-8 md:px-16">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="label-mono mb-8"
-        >
-          About Synerge Health
-        </motion.p>
+      <div className="relative z-10 container mx-auto px-6 sm:px-8 md:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div className="lg:col-span-6 space-y-6">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="label-mono"
+            >
+              About Synerge Health
+            </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-bold text-[clamp(2.5rem,6vw,6rem)] leading-[1.05] tracking-tight text-[#F2F6F4] max-w-4xl"
-        >
-          We build the companies that will{" "}
-          <span className="text-[#2BE0B0]">define African healthcare.</span>
-        </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display font-bold text-[clamp(2.3rem,5vw,5.5rem)] leading-[1.05] tracking-tight text-[#F8FAFC]"
+            >
+              We build the companies that will{" "}
+              <span className="text-[#2BE0B0]">define African healthcare.</span>
+            </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-8 max-w-xl text-base text-[#8FA39A] leading-[1.75]"
-        >
-          A venture studio catalysing innovation in healthcare — giving founders the resources,
-          expertise, and capital they need to succeed from first insight to continental scale.
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="max-w-xl text-base text-[#C2D1CB] leading-[1.75]"
+            >
+              A venture studio catalysing innovation in healthcare — giving founders the resources,
+              operational build support, and capital they need to scale from first insight to continental impact.
+            </motion.p>
+          </div>
+
+          {/* Interactive 3D Armillary Sphere Mark */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="lg:col-span-6"
+          >
+            <SynergyOrbital3D />
+          </motion.div>
+        </div>
       </div>
     </section>
   );

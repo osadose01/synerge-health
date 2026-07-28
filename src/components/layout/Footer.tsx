@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { SynergyLogo } from "@/components/ui/SynergyLogo";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -32,22 +33,8 @@ export function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-2 space-y-6">
-            <Link href="/" className="flex items-center gap-3 group cursor-none">
-              <div className="w-8 h-8 rounded-lg border border-[rgba(43,224,176,0.3)] bg-[#0D1815] flex items-center justify-center">
-                <svg className="w-4 h-4" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                  <path
-                    d="M2 16h5l2.5-7L14 25l3.5-15 2 7H30"
-                    stroke="#2BE0B0"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <span className="font-display font-semibold text-base text-[#F2F6F4]">
-                Synerge Health
-              </span>
+            <Link href="/" className="flex items-center gap-3 group">
+              <SynergyLogo size="md" showWordmark={true} />
             </Link>
 
             <p className="text-sm text-[#8FA39A] leading-[1.75] max-w-sm">

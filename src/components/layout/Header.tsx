@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { TextScramble } from "@/components/ui/TextScramble";
+import { SynergyLogo } from "@/components/ui/SynergyLogo";
 
 const NAV_LINKS = [
   { name: "About", href: "/about" },
@@ -36,23 +36,8 @@ export function Header() {
     >
       <div className="container mx-auto px-6 sm:px-8 md:px-16 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-3 group cursor-none">
-          {/* ECG logo mark */}
-          <div className="w-8 h-8 rounded-lg border border-[rgba(43,224,176,0.3)] bg-[#0D1815] flex items-center justify-center">
-            <svg className="w-4 h-4" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path
-                d="M2 16h5l2.5-7L14 25l3.5-15 2 7H30"
-                stroke="#2BE0B0"
-                strokeWidth="2"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <span className="font-display font-semibold text-base tracking-tight text-[#F2F6F4]">
-            Synerge Health
-          </span>
+        <Link href="/" className="flex items-center gap-3 group">
+          <SynergyLogo size="md" showWordmark={true} />
         </Link>
 
         {/* Desktop Nav */}
@@ -64,10 +49,10 @@ export function Header() {
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-200 cursor-none",
+                  "font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-200",
                   isActive
                     ? "text-[#2BE0B0]"
-                    : "text-[#8FA39A] hover:text-[#F2F6F4]"
+                    : "text-[#C2D1CB] hover:text-[#F8FAFC]"
                 )}
               >
                 {link.name}
@@ -80,9 +65,9 @@ export function Header() {
         <div className="flex items-center gap-4">
           <Link
             href="/founders#apply"
-            className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full border border-[#E3A83B] text-[#E3A83B] font-mono text-[11px] tracking-[0.15em] uppercase cursor-none hover:bg-[#E3A83B] hover:text-[#060B09] transition-all duration-300"
+            className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full border border-[#E3A83B] text-[#E3A83B] font-mono text-[11px] tracking-[0.15em] uppercase hover:bg-[#E3A83B] hover:text-[#060B09] transition-all duration-300"
           >
-            <TextScramble text="APPLY NOW" />
+            <span>APPLY NOW</span>
           </Link>
 
           <button

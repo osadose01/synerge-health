@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, XCircle, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 
 const STUDIO_PILLARS = [
   {
@@ -58,18 +58,12 @@ export function SynergyComparison() {
       <div className="container mx-auto px-8 sm:px-12 md:px-16 relative z-10">
         {/* ── SECTION HEADER ────────────────────────────────────────────── */}
         <div className="max-w-3xl mb-20 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(227,168,59,0.3)] bg-[rgba(227,168,59,0.08)]">
-            <Zap className="w-3.5 h-3.5 text-[#E3A83B]" />
-            <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-[#E3A83B] font-bold">
-              1 + 1 = 3 · The Synergy Effect
-            </span>
-          </div>
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#F8FAFC] leading-[1.08]">
             Why an interlocking studio model <br className="hidden sm:inline" />
             <span className="text-[#2BE0B0]">outperforms solo founding.</span>
           </h2>
           <p className="text-base text-[#C2D1CB] leading-[1.8] max-w-2xl">
-            In African healthcare, isolated startups struggle against structural friction. By interlocking strategy, operational execution, and capital, Synerge Health creates an exponential velocity multiplier.
+            In African healthcare, isolated startups struggle against structural friction. By interlocking strategy, operational execution, and capital, Synerge Health creates an institutional velocity multiplier.
           </p>
         </div>
 
@@ -77,11 +71,8 @@ export function SynergyComparison() {
         <div className="mb-28">
           <div className="flex items-center justify-between mb-8">
             <h3 className="font-mono text-xs tracking-[0.2em] uppercase text-[#F8FAFC]">
-              The Co-Founding Pipeline (Interlocking Synergies)
+              The Studio Co-Founding Model
             </h3>
-            <span className="hidden sm:inline-block font-mono text-[11px] tracking-widest uppercase text-[#A5B8B0]">
-              Hover to trigger conduit flow
-            </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-0 relative">
@@ -153,7 +144,7 @@ export function SynergyComparison() {
           </div>
         </div>
 
-        {/* ── 2. "1 + 1 = 3" COMPARISON MATRIX (SOLO vs STUDIO) ─────────── */}
+        {/* ── 2. COMPARISON MATRIX (SOLO vs STUDIO) ─────────── */}
         <div className="rounded-3xl border border-white/[0.12] bg-[#060B09] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
           {/* Header bar */}
           <div className="grid grid-cols-1 md:grid-cols-12 border-b border-white/[0.12] bg-[#0D1613]">
@@ -162,20 +153,14 @@ export function SynergyComparison() {
                 Strategic Evaluation
               </span>
             </div>
-            <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] flex items-center justify-between">
+            <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] flex items-center">
               <span className="font-mono text-xs tracking-wider uppercase text-[#A5B8B0]">
                 Solo HealthTech Founder
               </span>
-              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[rgba(255,100,100,0.1)] text-[#FF6E6E]">
-                High Friction
-              </span>
             </div>
-            <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] bg-white/[0.03] flex items-center justify-between">
+            <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] bg-white/[0.03] flex items-center">
               <span className="font-mono text-xs tracking-wider uppercase text-[#2BE0B0] font-bold">
                 Synerge Studio Co-Building
-              </span>
-              <span className="font-mono text-[10px] px-2.5 py-0.5 rounded bg-[#E3A83B] text-[#060B09] font-bold">
-                3× Velocity
               </span>
             </div>
           </div>
@@ -211,19 +196,6 @@ export function SynergyComparison() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Synergy Multiplier summary banner */}
-          <div className="p-6 md:p-8 bg-[#0D1613] border-t border-white/[0.12] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#E3A83B]" />
-              <span className="font-mono text-xs sm:text-sm tracking-wide text-[#F8FAFC]">
-                The Compound Result: <span className="text-[#E3A83B] font-bold">65% Lower Pre-Seed Mortality Rate</span> for African healthcare ventures.
-              </span>
-            </div>
-            <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-[#2BE0B0] font-bold shrink-0">
-              $1 + 1 = 3 · CONTINENTAL SCALE
-            </div>
           </div>
         </div>
       </div>

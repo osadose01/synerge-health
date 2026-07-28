@@ -346,7 +346,7 @@ export default function Home() {
         {/* ── STUDIO MODEL ─────────────────────────────────────────────── */}
         <StudioModel />
 
-        {/* ── SYNERGY EFFECT & COMPARISON (1 + 1 = 3) ───────────────────── */}
+        {/* ── SYNERGY COMPARISON MATRIX ─────────────────────────────────── */}
         <SynergyComparison />
 
         {/* ── FOCUS AREAS (node graph) ──────────────────────────────────── */}

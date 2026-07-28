@@ -108,12 +108,9 @@ export function SynergyLogo({
       </svg>
 
       {showWordmark && (
-        <div className={`flex flex-col justify-center ${wordmarkClassName}`}>
+        <div className={`flex items-center ${wordmarkClassName}`}>
           <span className="font-display font-bold tracking-tight text-[#F8FAFC] leading-none text-base sm:text-lg">
             SYNERGE <span className="text-[#2BE0B0]">HEALTH</span>
-          </span>
-          <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.22em] uppercase text-[#A5B8B0] font-medium mt-0.5">
-            Digital Health Venture Studio
           </span>
         </div>
       )}

@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     if (resendApiKey) {
       try {
         const resend = new Resend(resendApiKey);
-        await resend.emails.send({
+        const { data, error } = await resend.emails.send({
           from: "Synerge Health <hello@synergehealth.com>",
           to: [email],
           subject: `We've received your note, ${name}`,
@@ -68,9 +68,13 @@ export async function POST(req: Request) {
             </div>
           `,
         });
+        if (error) console.error("[RESEND_CONTACT_ERROR]", error);
+        else console.log("[RESEND_CONTACT_SUCCESS]", data);
       } catch (resendErr) {
-        console.error("[RESEND_CONTACT_ERROR]", resendErr);
+        console.error("[RESEND_CONTACT_EXCEPT]", resendErr);
       }
+    } else {
+      console.warn("[RESEND_MISSING_KEY] RESEND_API_KEY is missing in process.env");
     }
 
     console.log("[CONTACT_FORM_SUBMISSION]", { name, email, subject, message });

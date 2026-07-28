@@ -63,9 +63,9 @@ function StatBar() {
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <div ref={ref} className="mt-12 flex items-center gap-4">
+    <div ref={ref} className="mt-12 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-4">
       {/* 22% bar */}
-      <div className="flex-1 space-y-2">
+      <div className="flex-1 space-y-2 w-full">
         <div className="font-mono text-[11px] tracking-[0.15em] text-[#8FA39A] uppercase">
           Disease Burden
         </div>
@@ -89,10 +89,10 @@ function StatBar() {
       </div>
 
       {/* VS divider */}
-      <div className="font-mono text-[10px] text-[#4A6358] tracking-widest shrink-0">VS</div>
+      <div className="font-mono text-[10px] text-[#4A6358] tracking-widest shrink-0 self-center">VS</div>
 
       {/* 2% bar */}
-      <div className="flex-1 space-y-2">
+      <div className="flex-1 space-y-2 w-full">
         <div className="font-mono text-[11px] tracking-[0.15em] text-[#8FA39A] uppercase">
           Infrastructure
         </div>
@@ -237,7 +237,7 @@ export default function Home() {
           {/* Radial vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#060B09_100%)] pointer-events-none" />
 
-          <div className="relative z-10 container mx-auto px-8 md:px-16">
+          <div className="relative z-10 container mx-auto px-6 sm:px-8 md:px-16">
             {/* Eyebrow */}
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -249,7 +249,7 @@ export default function Home() {
             </motion.p>
 
             {/* H1 with word stagger */}
-            <h1 className="font-display font-bold text-[clamp(3rem,8vw,7.5rem)] leading-[1.02] tracking-tight text-[#F2F6F4] max-w-5xl">
+            <h1 className="font-display font-bold text-[clamp(2.3rem,8vw,7.5rem)] leading-[1.02] tracking-tight text-[#F2F6F4] max-w-5xl">
               <WordReveal text="Building Africa's" delay={0.2} />
               <br />
               <WordReveal

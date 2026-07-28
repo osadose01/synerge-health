@@ -34,7 +34,7 @@ export function Header() {
         isScrolled ? "nav-glass py-4" : "bg-transparent py-6"
       )}
     >
-      <div className="container mx-auto px-8 md:px-16 flex items-center justify-between">
+      <div className="container mx-auto px-6 sm:px-8 md:px-16 flex items-center justify-between">
         {/* Brand */}
         <Link href="/" className="flex items-center gap-3 group cursor-none">
           {/* ECG logo mark */}
@@ -106,7 +106,7 @@ export function Header() {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="lg:hidden bg-[#060B09] border-t border-[rgba(43,224,176,0.08)] overflow-hidden"
           >
-            <div className="container mx-auto px-8 py-10 flex flex-col gap-6">
+            <div className="container mx-auto px-6 sm:px-8 py-8 flex flex-col gap-6">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.name}

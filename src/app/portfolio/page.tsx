@@ -24,9 +24,9 @@ export default function PortfolioPage() {
         />
 
         {/* Cohort Status */}
-        <section className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
-          <div className="container mx-auto px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
+        <section className="py-20 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
+          <div className="container mx-auto px-6 sm:px-8 md:px-16">
+            <div className="grid md:grid-cols-[1fr_1.6fr] gap-10 md:gap-24 items-start">
               <p className="label-mono">Current Status</p>
               <div>
                 <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-16">
@@ -61,7 +61,7 @@ export default function PortfolioPage() {
                   ].map((card, i) => (
                     <div
                       key={card.title}
-                      className={`p-8 space-y-4 ${i < 2 ? "border-r border-[rgba(43,224,176,0.12)]" : ""}`}
+                      className={`p-6 sm:p-8 space-y-4 ${i < 2 ? "border-b sm:border-b-0 sm:border-r border-[rgba(43,224,176,0.12)]" : ""}`}
                     >
                       <p className="label-mono text-[10px]">{card.label}</p>
                       <h3 className="font-display font-semibold text-base text-[#F2F6F4]">{card.title}</h3>
@@ -82,8 +82,8 @@ export default function PortfolioPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
-          <div className="container mx-auto px-8 md:px-16 text-center">
+        <section className="py-20 md:py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
+          <div className="container mx-auto px-6 sm:px-8 md:px-16 text-center">
             <p className="label-mono mb-8">Apply now</p>
             <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.08] max-w-2xl mx-auto mb-12">
               Ready to build the next African healthtech company?

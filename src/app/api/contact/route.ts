@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       });
     }
 
-    // Send automated confirmation email via Resend
+    // Send automated personalized confirmation email via Resend
     const resendApiKey = process.env.RESEND_API_KEY;
     if (resendApiKey) {
       try {
@@ -35,23 +35,34 @@ export async function POST(req: Request) {
         await resend.emails.send({
           from: "Synerge Health <hello@synergehealth.com>",
           to: [email],
-          subject: "We've received your message — Synerge Health",
+          subject: `We've received your note, ${name}`,
           html: `
-            <div style="background-color: #060B09; color: #F2F6F4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px 20px; text-align: left;">
-              <div style="max-width: 560px; margin: 0 auto; background: #0D1815; border: 1px solid rgba(43,224,176,0.15); border-radius: 16px; padding: 36px;">
-                <div style="margin-bottom: 24px;">
-                  <span style="font-size: 20px; font-weight: 700; color: #F2F6F4; letter-spacing: -0.02em;">Synerge Health</span>
+            <div style="background-color: #060B09; color: #F2F6F4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 48px 20px; text-align: left;">
+              <div style="max-width: 580px; margin: 0 auto; background: #0D1815; border: 1px solid rgba(43,224,176,0.18); border-radius: 16px; padding: 40px;">
+                <div style="margin-bottom: 28px;">
+                  <span style="font-size: 22px; font-weight: 700; color: #F2F6F4; letter-spacing: -0.02em;">Synerge Health</span>
                 </div>
-                <h1 style="font-size: 22px; font-weight: 600; color: #F2F6F4; margin-bottom: 16px;">We've received your message, ${name}</h1>
-                <p style="font-size: 14px; line-height: 1.7; color: #8FA39A; margin-bottom: 24px;">
-                  Thank you for reaching out to Synerge Health. Our venture team has received your enquiry regarding <strong>"${subject || 'General Enquiry'}"</strong> and will follow up with you shortly.
+                <p style="font-size: 15px; color: #F2F6F4; margin-bottom: 16px; font-weight: 500;">Hi ${name},</p>
+                <p style="font-size: 14px; line-height: 1.75; color: #C2D1CB; margin-bottom: 16px;">
+                  Thank you for reaching out to Synerge Health! I wanted to personally confirm that we&rsquo;ve received your message regarding <strong style="color: #2BE0B0;">"${subject || 'General Enquiry'}"</strong>.
                 </p>
-                <div style="background: rgba(43,224,176,0.04); border-left: 3px solid #2BE0B0; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
-                  <p style="font-size: 13px; color: #8FA39A; margin: 0; font-style: italic;">"${message.slice(0, 140)}${message.length > 140 ? '...' : ''}"</p>
+                <p style="font-size: 14px; line-height: 1.75; color: #C2D1CB; margin-bottom: 20px;">
+                  Here is a copy of what you submitted:
+                </p>
+                <div style="background: rgba(43,224,176,0.05); border-left: 3px solid #2BE0B0; padding: 18px; border-radius: 8px; margin-bottom: 28px;">
+                  <p style="font-size: 13.5px; color: #A5B8B0; margin: 0; line-height: 1.6; font-style: italic;">&ldquo;${message}&rdquo;</p>
                 </div>
-                <div style="border-top: 1px solid rgba(43,224,176,0.1); padding-top: 20px; margin-top: 24px; font-size: 12px; color: #4A6358;">
-                  © ${new Date().getFullYear()} Synerge Health Inc. All rights reserved.<br/>
-                  Africa’s Digital Health Venture Studio • <a href="https://synergehealth.com" style="color: #2BE0B0; text-decoration: none;">synergehealth.com</a>
+                <p style="font-size: 14px; line-height: 1.75; color: #C2D1CB; margin-bottom: 32px;">
+                  Our team reviews every inbound inquiry carefully and will follow up with you within 24 to 48 business hours. If you have any urgent details to add, feel free to reply directly to this thread.
+                </p>
+                <div style="border-top: 1px solid rgba(43,224,176,0.12); padding-top: 24px; margin-top: 24px;">
+                  <p style="font-size: 14px; color: #F2F6F4; font-weight: 600; margin: 0 0 4px 0;">Warm regards,</p>
+                  <p style="font-size: 14px; color: #2BE0B0; font-weight: 500; margin: 0 0 2px 0;">The Synerge Health Team</p>
+                  <p style="font-size: 12px; color: #8FA39A; margin: 0 0 16px 0;">Africa&rsquo;s Digital Health Venture Studio</p>
+                  <p style="font-size: 11px; color: #4A6358; margin: 0; line-height: 1.5;">
+                    &copy; ${new Date().getFullYear()} Synerge Health Inc. All rights reserved.<br/>
+                    <a href="https://synergehealth.com" style="color: #2BE0B0; text-decoration: none;">synergehealth.com</a> &bull; Lagos &bull; Nairobi &bull; London
+                  </p>
                 </div>
               </div>
             </div>
@@ -69,4 +80,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Failed to process request" }, { status: 500 });
   }
 }
+
 

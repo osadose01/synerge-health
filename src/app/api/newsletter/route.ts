@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       });
     }
 
-    // Send automated welcome email via Resend
+    // Send automated personalized welcome email via Resend
     const resendApiKey = process.env.RESEND_API_KEY;
     if (resendApiKey) {
       try {
@@ -35,18 +35,33 @@ export async function POST(req: Request) {
           to: [email],
           subject: "Welcome to Synerge Health Insights",
           html: `
-            <div style="background-color: #060B09; color: #F2F6F4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px 20px; text-align: left;">
-              <div style="max-width: 560px; margin: 0 auto; background: #0D1815; border: 1px solid rgba(43,224,176,0.15); border-radius: 16px; padding: 36px;">
-                <div style="margin-bottom: 24px;">
-                  <span style="font-size: 20px; font-weight: 700; color: #F2F6F4; letter-spacing: -0.02em;">Synerge Health</span>
+            <div style="background-color: #060B09; color: #F2F6F4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 48px 20px; text-align: left;">
+              <div style="max-width: 580px; margin: 0 auto; background: #0D1815; border: 1px solid rgba(43,224,176,0.18); border-radius: 16px; padding: 40px;">
+                <div style="margin-bottom: 28px; display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 22px; font-weight: 700; color: #F2F6F4; letter-spacing: -0.02em;">Synerge Health</span>
                 </div>
-                <h1 style="font-size: 22px; font-weight: 600; color: #F2F6F4; margin-bottom: 16px;">Welcome to Synerge Health Insights</h1>
-                <p style="font-size: 14px; line-height: 1.7; color: #8FA39A; margin-bottom: 24px;">
-                  Thank you for subscribing! You are now connected to Africa’s digital health venture studio. We will deliver curated healthtech analysis, venture insights, and studio updates straight to your inbox.
+                <p style="font-size: 15px; color: #F2F6F4; margin-bottom: 16px; font-weight: 500;">Hi there,</p>
+                <p style="font-size: 14px; line-height: 1.75; color: #C2D1CB; margin-bottom: 16px;">
+                  Thanks for subscribing to Synerge Health Insights! I&rsquo;m thrilled to have you join our community of healthcare innovators, investors, and founders.
                 </p>
-                <div style="border-top: 1px solid rgba(43,224,176,0.1); pt: 20px; margin-top: 24px; font-size: 12px; color: #4A6358;">
-                  © ${new Date().getFullYear()} Synerge Health Inc. All rights reserved.<br/>
-                  Africa’s Digital Health Venture Studio • <a href="https://synergehealth.com" style="color: #2BE0B0; text-decoration: none;">synergehealth.com</a>
+                <p style="font-size: 14px; line-height: 1.75; color: #C2D1CB; margin-bottom: 20px;">
+                  We built Synerge Health to solve Africa&rsquo;s toughest healthcare challenges through venture creation. As a subscriber, you&rsquo;ll get exclusive access to:
+                </p>
+                <ul style="font-size: 14px; line-height: 1.8; color: #C2D1CB; margin-bottom: 28px; padding-left: 20px;">
+                  <li style="margin-bottom: 8px;"><strong style="color: #2BE0B0;">Deep-Dive Research:</strong> Analysis on unit economics, healthtech logistics, and clinical AI across emerging markets.</li>
+                  <li style="margin-bottom: 8px;"><strong style="color: #2BE0B0;">Studio Dispatch:</strong> First-look updates on new digital health companies co-founded in our studio.</li>
+                  <li style="margin-bottom: 8px;"><strong style="color: #2BE0B0;">Ecosystem Intelligence:</strong> Curated interviews with healthcare leaders and venture capital partners.</li>
+                </ul>
+                <p style="font-size: 14px; line-height: 1.75; color: #C2D1CB; margin-bottom: 32px;">
+                  Have a specific topic or research thesis you&rsquo;d like us to explore? Just reply directly to this email &mdash; I personally read every message!
+                </p>
+                <div style="border-top: 1px solid rgba(43,224,176,0.12); padding-top: 24px; margin-top: 24px;">
+                  <p style="font-size: 14px; color: #F2F6F4; font-weight: 600; margin: 0 0 4px 0;">The Synerge Health Team</p>
+                  <p style="font-size: 12px; color: #8FA39A; margin: 0 0 16px 0;">Africa&rsquo;s Digital Health Venture Studio</p>
+                  <p style="font-size: 11px; color: #4A6358; margin: 0; line-height: 1.5;">
+                    &copy; ${new Date().getFullYear()} Synerge Health Inc. All rights reserved.<br/>
+                    <a href="https://synergehealth.com" style="color: #2BE0B0; text-decoration: none;">synergehealth.com</a> &bull; Lagos &bull; Nairobi &bull; London
+                  </p>
                 </div>
               </div>
             </div>
@@ -63,6 +78,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Failed to subscribe" }, { status: 500 });
   }
 }
+
 
 
 

@@ -282,7 +282,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.4 }}
-                className="flex flex-col sm:flex-row items-start gap-4 md:ml-auto shrink-0"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 md:ml-auto shrink-0"
               >
                 <MagneticButton>
                   <Link
@@ -359,12 +359,8 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col items-center">
-                {/* Node graph — hidden on mobile (card row shown inside NodeGraph) */}
-                <div className="hidden md:flex w-full justify-center">
-                  <NodeGraph />
-                </div>
-                {/* Mobile card row is rendered inside NodeGraph */}
-                <div className="md:hidden w-full">
+                {/* Node graph (handles desktop SVG vs mobile grid internally) */}
+                <div className="w-full flex justify-center">
                   <NodeGraph />
                 </div>
 

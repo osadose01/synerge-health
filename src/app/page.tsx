@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { VitalLine } from "@/components/ui/VitalLine";
 import { GlassTile } from "@/components/ui/GlassTile";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { SynergyComparison } from "@/components/ui/SynergyComparison";
 import dynamic from "next/dynamic";
 
 const ParticleHero = dynamic(() => import("@/components/ui/ParticleHero").then((mod) => mod.ParticleHero), {
@@ -63,39 +64,28 @@ function WordReveal({
   );
 }
 
-// ── Stat bar (22% vs 2%) ────────────────────────────────────────────────
+// ── Animated statistic bar (22% vs 2%) ─────────────────────────────────
 function StatBar() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <div ref={ref} className="mt-12 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-4">
+    <div ref={ref} className="space-y-4 my-8">
       {/* 22% bar */}
-      <div className="flex-1 space-y-2 w-full">
-        <div className="font-mono text-[11px] tracking-[0.15em] text-[#8FA39A] uppercase">
-          Disease Burden
+      <div className="space-y-2">
+        <div className="flex justify-between font-mono text-[11px] tracking-[0.15em] text-[#8FA39A] uppercase">
+          <span>Africa&rsquo;s Global Disease Burden</span>
+          <span className="text-[#2BE0B0] font-bold">22%</span>
         </div>
         <div className="h-2 bg-[#0D1815] rounded-full overflow-hidden border border-[rgba(43,224,176,0.1)]">
           <motion.div
-            className="h-full bg-[#2BE0B0] rounded-full"
+            className="h-full bg-gradient-to-r from-[#1A9972] to-[#2BE0B0] rounded-full"
             initial={{ width: 0 }}
             animate={inView ? { width: "22%" } : {}}
             transition={{ duration: 1.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           />
         </div>
-        <div className="font-mono font-bold text-4xl text-[#2BE0B0]">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-          >
-            22%
-          </motion.span>
-        </div>
       </div>
-
-      {/* VS divider */}
-      <div className="font-mono text-[10px] text-[#4A6358] tracking-widest shrink-0 self-center">VS</div>
 
       {/* 2% bar */}
       <div className="flex-1 space-y-2 w-full">
@@ -226,6 +216,8 @@ function StudioModel() {
 
 // ── Main page ───────────────────────────────────────────────────────────
 export default function Home() {
+  const [heroResonance, setHeroResonance] = useState(false);
+  const [closingResonance, setClosingResonance] = useState(false);
 
   return (
     <>
@@ -267,9 +259,9 @@ export default function Home() {
               <WordReveal text="of digital health." delay={0.8} />
             </h1>
 
-            {/* ECG vital line — hero mode */}
+            {/* ECG vital line — hero mode with co-active resonance */}
             <div className="mt-10 max-w-2xl">
-              <VitalLine mode="ecg" delay={1.2} />
+              <VitalLine mode="ecg" delay={1.2} activeResonance={heroResonance} />
             </div>
 
             {/* Sub + CTAs */}
@@ -290,24 +282,34 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 1.4 }}
                 className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 md:ml-auto shrink-0"
               >
-                <MagneticButton>
-                  <Link
-                    href="/founders#apply"
-                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_30px_rgba(227,168,59,0.5)] transition-all duration-300"
-                  >
-                    <TextScramble text="APPLY AS A FOUNDER" />
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </MagneticButton>
+                <div
+                  onMouseEnter={() => setHeroResonance(true)}
+                  onMouseLeave={() => setHeroResonance(false)}
+                >
+                  <MagneticButton>
+                    <Link
+                      href="/founders#apply"
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_30px_rgba(227,168,59,0.5)] transition-all duration-300"
+                    >
+                      <TextScramble text="APPLY AS A FOUNDER" />
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </MagneticButton>
+                </div>
 
-                <MagneticButton>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[rgba(43,224,176,0.25)] text-[#8FA39A] font-mono text-xs tracking-[0.1em] uppercase cursor-none hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
-                  >
-                    Partner With Us
-                  </Link>
-                </MagneticButton>
+                <div
+                  onMouseEnter={() => setHeroResonance(true)}
+                  onMouseLeave={() => setHeroResonance(false)}
+                >
+                  <MagneticButton>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[rgba(43,224,176,0.25)] text-[#8FA39A] font-mono text-xs tracking-[0.1em] uppercase cursor-none hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
+                    >
+                      Partner With Us
+                    </Link>
+                  </MagneticButton>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -347,6 +349,9 @@ export default function Home() {
 
         {/* ── STUDIO MODEL ─────────────────────────────────────────────── */}
         <StudioModel />
+
+        {/* ── SYNERGY EFFECT & COMPARISON (1 + 1 = 3) ───────────────────── */}
+        <SynergyComparison />
 
         {/* ── FOCUS AREAS (node graph) ──────────────────────────────────── */}
         <section className="py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
@@ -400,9 +405,9 @@ export default function Home() {
           <div className="container mx-auto px-8 md:px-16">
             <p className="label-mono mb-8">Start a conversation</p>
 
-            {/* Closing ECG → "You" node */}
+            {/* Closing ECG → "You" node with co-active resonance */}
             <div className="mb-12 max-w-lg mx-auto relative">
-              <VitalLine mode="ecg" delay={0.2} />
+              <VitalLine mode="ecg" delay={0.2} activeResonance={closingResonance} />
               {/* The "You" terminal node */}
               <div className="flex justify-end mt-2">
                 <motion.div
@@ -423,24 +428,34 @@ export default function Home() {
             </h2>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <MagneticButton>
-                <Link
-                  href="/founders#apply"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_40px_rgba(227,168,59,0.5)] transition-all duration-300"
-                >
-                  <TextScramble text="APPLY AS A FOUNDER" />
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </MagneticButton>
+              <div
+                onMouseEnter={() => setClosingResonance(true)}
+                onMouseLeave={() => setClosingResonance(false)}
+              >
+                <MagneticButton>
+                  <Link
+                    href="/founders#apply"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_40px_rgba(227,168,59,0.5)] transition-all duration-300"
+                  >
+                    <TextScramble text="APPLY AS A FOUNDER" />
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </MagneticButton>
+              </div>
 
-              <MagneticButton>
-                <Link
-                  href="/investors"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(43,224,176,0.25)] text-[#8FA39A] font-mono text-xs tracking-[0.1em] uppercase cursor-none hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
-                >
-                  Investor Information
-                </Link>
-              </MagneticButton>
+              <div
+                onMouseEnter={() => setClosingResonance(true)}
+                onMouseLeave={() => setClosingResonance(false)}
+              >
+                <MagneticButton>
+                  <Link
+                    href="/investors"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(43,224,176,0.25)] text-[#8FA39A] font-mono text-xs tracking-[0.1em] uppercase cursor-none hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
+                  >
+                    Investor Information
+                  </Link>
+                </MagneticButton>
+              </div>
             </div>
           </div>
         </section>

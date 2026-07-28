@@ -9,6 +9,8 @@ interface VitalLineProps {
   className?: string;
   delay?: number;
   color?: string;
+  /** When true, increases glow resonance and shifts accent color to gold on hover */
+  activeResonance?: boolean;
 }
 
 // Pre-computed ECG path (normalised to 1000×80 viewBox)
@@ -38,9 +40,12 @@ export function VitalLine({
   className = "",
   delay = 0,
   color = "#2BE0B0",
+  activeResonance = false,
 }: VitalLineProps) {
   const ref = useRef<SVGSVGElement>(null);
   const inView = useInView(ref, { once: true, margin: "-5%" });
+
+  const activeColor = activeResonance ? "#E3A83B" : color;
 
   if (mode === "ecg") {
     return (
@@ -48,14 +53,14 @@ export function VitalLine({
         ref={ref}
         viewBox="0 0 1000 80"
         preserveAspectRatio="none"
-        className={`w-full overflow-visible ${className}`}
+        className={`w-full overflow-visible transition-all duration-500 ${className}`}
         aria-hidden="true"
       >
         <motion.path
           d={ECG_PATH}
           fill="none"
-          stroke={color}
-          strokeWidth="1.5"
+          stroke={activeColor}
+          strokeWidth={activeResonance ? "2.2" : "1.5"}
           strokeLinecap="round"
           strokeLinejoin="round"
           initial={{ pathLength: 0, opacity: 0 }}
@@ -69,11 +74,11 @@ export function VitalLine({
         <motion.path
           d={ECG_PATH}
           fill="none"
-          stroke={color}
-          strokeWidth="4"
+          stroke={activeColor}
+          strokeWidth={activeResonance ? "8" : "4"}
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity={0.18}
+          opacity={activeResonance ? 0.55 : 0.18}
           initial={{ pathLength: 0 }}
           animate={inView ? { pathLength: 1 } : {}}
           transition={{
@@ -98,7 +103,7 @@ export function VitalLine({
           key={`edge-${i}`}
           x1={NODES[a].x} y1={NODES[a].y}
           x2={NODES[b].x} y2={NODES[b].y}
-          stroke={color}
+          stroke={activeColor}
           strokeWidth="0.8"
           strokeOpacity={0.3}
           initial={{ pathLength: 0, opacity: 0 }}
@@ -117,9 +122,9 @@ export function VitalLine({
           style={{ transformOrigin: `${node.x}px ${node.y}px` }}
         >
           {/* Outer glow ring */}
-          <circle cx={node.x} cy={node.y} r={18} fill={color} fillOpacity={0.06} />
+          <circle cx={node.x} cy={node.y} r={18} fill={activeColor} fillOpacity={0.06} />
           {/* Node dot */}
-          <circle cx={node.x} cy={node.y} r={5} fill={color} />
+          <circle cx={node.x} cy={node.y} r={5} fill={activeColor} />
           {/* Label */}
           <text
             x={node.x}

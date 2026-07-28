@@ -1,0 +1,235 @@
+"use client";
+
+import { useState } from "react";
+import { ArrowRight, CheckCircle2, XCircle, Zap } from "lucide-react";
+
+const STUDIO_PILLARS = [
+  {
+    num: "01",
+    title: "Strategic Guidance",
+    subtitle: "Clinical-to-Market Blueprint",
+    body: "Business models, go-to-market plans, pricing strategy, and regulatory pathways custom-built for African healthcare markets.",
+    synergyOutput: "Feeds validated clinical strategy into execution engine ->",
+  },
+  {
+    num: "02",
+    title: "Operational Support",
+    subtitle: "Embedded Venture Builders",
+    body: "Hands-on execution — hiring top talent, legal setup, and finance infrastructure — so founders focus on product and patient impact.",
+    synergyOutput: "Deploys operational rails to unlock institutional capital ->",
+  },
+  {
+    num: "03",
+    title: "Capital & Networks",
+    subtitle: "Seed Funding & Distribution",
+    body: "Seed funding paired with warm introductions across our venture capital, hospital, and philanthropic partner network.",
+    synergyOutput: "Completes the growth loop with continental distribution.",
+  },
+];
+
+const COMPARISON_ROWS = [
+  {
+    metric: "Time to Market Validation",
+    solo: "14–18 Months of trial and error",
+    studio: "3–6 Months with pre-built clinical rails",
+  },
+  {
+    metric: "Regulatory & Compliance",
+    solo: "Isolated legal navigation across fragmented markets",
+    studio: "Shared regulatory compliance & African health policy access",
+  },
+  {
+    metric: "Team & Execution",
+    solo: "High burn rate hiring GTM & admin infrastructure from scratch",
+    studio: "Embedded engineering, GTM, and operational co-founders",
+  },
+  {
+    metric: "Hospital & Payer Access",
+    solo: "Cold outreach to hospitals, insurers, and clinical trial sites",
+    studio: "Warm introductions across our hospital & philanthropic network",
+  },
+];
+
+export function SynergyComparison() {
+  const [activePillar, setActivePillar] = useState<number | null>(null);
+
+  return (
+    <section className="py-36 bg-[#0D1815] border-t border-[rgba(43,224,176,0.08)] relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(43,224,176,0.05),transparent_70%)] pointer-events-none" />
+
+      <div className="container mx-auto px-8 sm:px-12 md:px-16 relative z-10">
+        {/* ── SECTION HEADER ────────────────────────────────────────────── */}
+        <div className="max-w-3xl mb-20 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(227,168,59,0.3)] bg-[rgba(227,168,59,0.08)]">
+            <Zap className="w-3.5 h-3.5 text-[#E3A83B]" />
+            <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-[#E3A83B] font-bold">
+              1 + 1 = 3 · The Synergy Effect
+            </span>
+          </div>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#F2F6F4] leading-[1.08]">
+            Why an interlocking studio model <br className="hidden sm:inline" />
+            <span className="text-[#2BE0B0]">outperforms solo founding.</span>
+          </h2>
+          <p className="text-base text-[#8FA39A] leading-[1.8] max-w-2xl">
+            In African healthcare, isolated startups struggle against structural friction. By interlocking strategy, operational execution, and capital, Synerge Health creates an exponential velocity multiplier.
+          </p>
+        </div>
+
+        {/* ── 1. INTERLOCKING STUDIO PIPELINE (01 → 02 → 03) ────────────── */}
+        <div className="mb-28">
+          <div className="flex items-center justify-between mb-8">
+            <h3 className="font-mono text-xs tracking-[0.2em] uppercase text-[#F2F6F4]">
+              The Co-Founding Pipeline (Interlocking Synergies)
+            </h3>
+            <span className="hidden sm:inline-block font-mono text-[11px] tracking-widest uppercase text-[#8FA39A]">
+              Hover to trigger conduit flow
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-0 relative">
+            {STUDIO_PILLARS.map((pillar, i) => {
+              const isHovered = activePillar === i;
+              const isConnected = activePillar !== null && i >= activePillar;
+
+              return (
+                <div key={pillar.num} className="relative flex flex-col">
+                  {/* Card box */}
+                  <div
+                    onMouseEnter={() => setActivePillar(i)}
+                    onMouseLeave={() => setActivePillar(null)}
+                    className={`h-full rounded-2xl border p-8 transition-all duration-500 relative overflow-hidden bg-[#060B09] flex flex-col justify-between ${
+                      isHovered
+                        ? "border-[#2BE0B0] shadow-[0_0_30px_rgba(43,224,176,0.15)]"
+                        : isConnected
+                        ? "border-[rgba(43,224,176,0.35)]"
+                        : "border-[rgba(43,224,176,0.1)] hover:border-[rgba(43,224,176,0.25)]"
+                    }`}
+                  >
+                    {/* Top indicator bar */}
+                    <div className="flex items-center justify-between mb-6">
+                      <span
+                        className={`font-mono text-xs font-bold px-2.5 py-1 rounded ${
+                          isHovered
+                            ? "bg-[#2BE0B0] text-[#060B09]"
+                            : "bg-[rgba(43,224,176,0.1)] text-[#2BE0B0]"
+                        }`}
+                      >
+                        {pillar.num}
+                      </span>
+                      <span className="font-mono text-[10px] tracking-wider uppercase text-[#8FA39A]">
+                        {pillar.subtitle}
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 mb-6">
+                      <h4 className="font-display font-semibold text-xl text-[#F2F6F4]">
+                        {pillar.title}
+                      </h4>
+                      <p className="text-sm text-[#8FA39A] leading-[1.8]">{pillar.body}</p>
+                    </div>
+
+                    {/* Synergy conduit output footer */}
+                    <div className="pt-4 border-t border-[rgba(43,224,176,0.08)] flex items-center justify-between">
+                      <span className="font-mono text-[10px] tracking-wider text-[#E3A83B]">
+                        {pillar.synergyOutput}
+                      </span>
+                    </div>
+
+                    {/* Hover pulse beam */}
+                    <div
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#2BE0B0] via-[#E3A83B] to-[#2BE0B0] transition-opacity duration-500 ${
+                        isHovered ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  </div>
+
+                  {/* Interlocking Arrow Conduit between cards on Desktop */}
+                  {i < 2 && (
+                    <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-6 h-6 rounded-full bg-[#0D1815] border border-[rgba(43,224,176,0.3)] text-[#2BE0B0] shadow-md">
+                      <ArrowRight className="w-3.5 h-3.5 animate-pulse" />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── 2. "1 + 1 = 3" COMPARISON MATRIX (SOLO vs STUDIO) ─────────── */}
+        <div className="rounded-3xl border border-[rgba(43,224,176,0.15)] bg-[#060B09] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+          {/* Header bar */}
+          <div className="grid grid-cols-1 md:grid-cols-12 border-b border-[rgba(43,224,176,0.15)] bg-[#111F1A]">
+            <div className="md:col-span-4 p-6 md:p-8 flex items-center">
+              <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#F2F6F4] font-bold">
+                Strategic Evaluation
+              </span>
+            </div>
+            <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-[rgba(43,224,176,0.12)] flex items-center justify-between">
+              <span className="font-mono text-xs tracking-wider uppercase text-[#8FA39A]">
+                Solo HealthTech Founder
+              </span>
+              <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[rgba(255,100,100,0.1)] text-[#FF6E6E]">
+                High Friction
+              </span>
+            </div>
+            <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-[rgba(43,224,176,0.12)] bg-[rgba(43,224,176,0.06)] flex items-center justify-between">
+              <span className="font-mono text-xs tracking-wider uppercase text-[#2BE0B0] font-bold">
+                Synerge Studio Co-Building
+              </span>
+              <span className="font-mono text-[10px] px-2.5 py-0.5 rounded bg-[#E3A83B] text-[#060B09] font-bold">
+                3× Velocity
+              </span>
+            </div>
+          </div>
+
+          {/* Comparison rows */}
+          <div className="divide-y divide-[rgba(43,224,176,0.08)]">
+            {COMPARISON_ROWS.map((row) => (
+              <div
+                key={row.metric}
+                className="grid grid-cols-1 md:grid-cols-12 hover:bg-[rgba(43,224,176,0.02)] transition-colors"
+              >
+                {/* Metric name */}
+                <div className="md:col-span-4 p-6 md:p-8 flex items-center">
+                  <span className="font-display font-semibold text-sm sm:text-base text-[#F2F6F4]">
+                    {row.metric}
+                  </span>
+                </div>
+
+                {/* Solo Founder column */}
+                <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-[rgba(43,224,176,0.08)] flex items-start gap-3">
+                  <XCircle className="w-4 h-4 text-[#8FA39A] shrink-0 mt-0.5 opacity-60" />
+                  <span className="text-sm text-[#8FA39A] leading-relaxed">
+                    {row.solo}
+                  </span>
+                </div>
+
+                {/* Synerge Studio column */}
+                <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-[rgba(43,224,176,0.08)] bg-[rgba(43,224,176,0.03)] flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#2BE0B0] shrink-0 mt-0.5" />
+                  <span className="text-sm text-[#F2F6F4] font-medium leading-relaxed">
+                    {row.studio}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Synergy Multiplier summary banner */}
+          <div className="p-6 md:p-8 bg-gradient-to-r from-[#0D1815] via-[#111F1A] to-[#0D1815] border-t border-[rgba(43,224,176,0.15)] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#E3A83B] animate-ping" />
+              <span className="font-mono text-xs sm:text-sm tracking-wide text-[#F2F6F4]">
+                The Compound Result: <span className="text-[#E3A83B] font-bold">65% Lower Pre-Seed Mortality Rate</span> for African healthcare ventures.
+              </span>
+            </div>
+            <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-[#2BE0B0] font-bold shrink-0">
+              $1 + 1 = 3 · CONTINENTAL SCALE
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

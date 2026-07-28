@@ -32,7 +32,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://synergehealth.com"),
   title: {
-    default: "Synerge Health — Africa's Digital Health Venture Studio",
+    default: "Synerge Health",
     template: "%s | Synerge Health",
   },
   description:
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Synerge Health" }],
   openGraph: {
-    title: "Synerge Health — Africa's Digital Health Venture Studio",
+    title: "Synerge Health",
     description:
       "We co-found, fund, and operate healthtech startups from first insight to market scale.",
     url: "https://synergehealth.com",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Synerge Health — Africa's Digital Health Venture Studio",
+    title: "Synerge Health",
     description:
       "We co-found, fund, and operate healthtech startups from first insight to market scale.",
   },

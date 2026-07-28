@@ -10,6 +10,7 @@ import { VitalLine } from "@/components/ui/VitalLine";
 import { GlassTile } from "@/components/ui/GlassTile";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SynergyComparison } from "@/components/ui/SynergyComparison";
+import { TextScramble } from "@/components/ui/TextScramble";
 import dynamic from "next/dynamic";
 
 const NodeGraph = dynamic(() => import("@/components/ui/NodeGraph").then((mod) => mod.NodeGraph), {
@@ -287,7 +288,7 @@ export default function Home() {
                       href="/founders#apply"
                       className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase hover:shadow-[0_0_30px_rgba(227,168,59,0.5)] transition-all duration-300"
                     >
-                      <span>APPLY AS A FOUNDER</span>
+                      <TextScramble text="APPLY AS A FOUNDER" />
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </Link>
                   </MagneticButton>
@@ -433,7 +434,7 @@ export default function Home() {
                     href="/founders#apply"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase hover:shadow-[0_0_40px_rgba(227,168,59,0.5)] transition-all duration-300"
                   >
-                    <span>APPLY AS A FOUNDER</span>
+                    <TextScramble text="APPLY AS A FOUNDER" />
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
                 </MagneticButton>

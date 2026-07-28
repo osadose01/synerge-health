@@ -32,14 +32,16 @@ export function SynergyLogo({
   const coreRadius = pxSize <= 28 ? 14 : pxSize <= 44 ? 11 : 10;
 
   return (
-    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
+    <div
+      className={`inline-flex items-center gap-3 select-none transition-opacity duration-300 hover:opacity-75 group-hover:opacity-75 ${className}`}
+    >
       <svg
         width={pxSize}
         height={pxSize}
         viewBox="0 0 200 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 transition-transform duration-300 hover:scale-105"
+        className="shrink-0"
         aria-label="Synerge Health Orbital Logo"
       >
         <defs>
@@ -109,7 +111,7 @@ export function SynergyLogo({
 
       {showWordmark && (
         <div className={`flex items-center ${wordmarkClassName}`}>
-          <span className="font-display font-bold tracking-tight text-[#F8FAFC] leading-none text-base sm:text-lg">
+          <span className="font-display font-bold tracking-wider text-[#F8FAFC] leading-none text-lg sm:text-xl md:text-2xl">
             SYNERGE <span className="text-[#2BE0B0]">HEALTH</span>
           </span>
         </div>

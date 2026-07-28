@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+@theme {
+  /* Core palette */
+  --color-emerald-700: #047857;
+  --color-emerald-600: #059669;
+  --color-emerald-500: #10B981;
+  --color-emerald-100: #D1FAE5;
+  --color-emerald-50:  #ECFDF5;
+
+  /* Slate system */
+  --color-slate-900: #0F172A;
+  --color-slate-800: #1E293B;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748B;
+  --color-slate-400: #94A3B8;
+  --color-slate-300: #CBD5E1;
+  --color-slate-200: #E2E8F0;
+  --color-slate-100: #F1F5F9;
+  --color-slate-50:  #F8FAFC;
+
+  /* Legacy aliases — keep so existing classes still work */
+  --color-forest-950: #F8FAFC;
+  --color-forest-900: #F1F5F9;
+  --color-forest-800: #E2E8F0;
+  --color-forest-700: #CBD5E1;
+  --color-forest-600: #94A3B8;
+  --color-forest-500: #10B981;
+  --color-forest-400: #34D399;
+
+  --color-gold-500: #059669;
+  --color-gold-400: #10B981;
+  --color-gold-300: #34D399;
+
+  --color-cream-50: #0F172A;
+
+  /* Typography */
+  --font-display: var(--font-bricolage), sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-heading: var(--font-jakarta), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #0F172A;
+  --surface: #ffffff;
+  --surface-alt: #F8FAFC;
+  --border: #E2E8F0;
+  --muted: #64748B;
+  --accent: #059669;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
+
+/* ── Shared layout helpers ─────────────────────────────── */
+
+/* Editorial label — used above section headlines */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;     /* 11px */
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+/* Glass nav — only used by Header on scroll */
+.glass {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Card — light, minimal */
+.glass-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(5, 150, 105, 0.25);
+  box-shadow: 0 6px 24px -4px rgba(5, 150, 105, 0.08);
+}
+
+/* Forms */
+.input-field {
+  width: 100%;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.875rem;
+  color: #0F172A;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #059669;
+  background: #ffffff;
+}
+
+.input-field::placeholder {
+  color: #94A3B8;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F8FAFC; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #059669; }

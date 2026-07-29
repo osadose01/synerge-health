@@ -291,34 +291,48 @@ export function NodeGraph() {
         </AnimatePresence>
       </div>
 
-      {/* ── Mobile card grid (shown < md) ──────────────────────────────── */}
-      <div className="mt-8 md:hidden w-full grid grid-cols-1 gap-4">
-        {FOCUS_AREAS.map((node) => (
-          <div
-            key={node.id}
-            className="rounded-xl border border-[rgba(43,224,176,0.15)] bg-[#0D1815] p-5 space-y-3 hover:border-[rgba(43,224,176,0.3)] transition-colors"
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#2BE0B0] font-bold">
-                {node.label}
-              </span>
-            </div>
-            <p className="text-xs text-[#F2F6F4] leading-[1.7]">{node.desc}</p>
-            
-            {/* Mobile Synergy Loop badge */}
-            <div className="pt-3 border-t border-[rgba(43,224,176,0.1)] space-y-1.5">
-              <div className="flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B]" />
-                <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
-                  {node.synergyLabel}
-                </span>
+      {/* ── Mobile Horizontal Snap Carousel (shown < md) ───────────────── */}
+      <div className="mt-6 md:hidden w-full space-y-4">
+        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-2 px-1 -mx-1">
+          {FOCUS_AREAS.map((node) => (
+            <div
+              key={node.id}
+              className="snap-center shrink-0 w-[86vw] max-w-[340px] rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-6 space-y-4 shadow-lg flex flex-col justify-between"
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#2BE0B0] font-bold">
+                    {node.label}
+                  </span>
+                  <span className="font-mono text-[9px] uppercase px-2 py-0.5 rounded bg-[#2BE0B0]/10 text-[#2BE0B0]">
+                    Focus Area
+                  </span>
+                </div>
+                <p className="text-xs text-[#F2F6F4] leading-[1.7]">{node.desc}</p>
               </div>
-              <p className="text-[11px] text-[#8FA39A] leading-[1.6]">
-                {node.synergyDesc}
-              </p>
+
+              {/* Mobile Synergy Loop badge */}
+              <div className="pt-4 border-t border-[rgba(43,224,176,0.12)] space-y-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B]" />
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
+                    {node.synergyLabel}
+                  </span>
+                </div>
+                <p className="text-[11px] text-[#8FA39A] leading-[1.6]">
+                  {node.synergyDesc}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {/* Swipe hint */}
+        <div className="flex items-center justify-center gap-2 pt-1">
+          <span className="font-mono text-[10px] tracking-widest text-[#8FA39A] uppercase">
+            ← Swipe to explore sectors →
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -75,13 +75,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} ${playfair.variable} h-full`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} ${playfair.variable} h-full overflow-x-hidden max-w-full`}
     >
       <head>
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="min-h-full flex flex-col bg-[#060B09] text-[#F8FAFC] antialiased">
+      <body className="min-h-full flex flex-col bg-[#060B09] text-[#F8FAFC] antialiased overflow-x-hidden max-w-full">
         {/* Subtle grid overlay */}
         <div className="grid-overlay" aria-hidden="true" />
         {children}

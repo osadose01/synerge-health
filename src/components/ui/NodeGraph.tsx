@@ -292,12 +292,12 @@ export function NodeGraph() {
       </div>
 
       {/* ── Mobile Horizontal Snap Carousel (shown < md) ───────────────── */}
-      <div className="mt-6 md:hidden w-full space-y-4">
-        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-2 px-1 -mx-1">
+      <div className="mt-6 md:hidden w-full max-w-full overflow-hidden space-y-4">
+        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-2 px-1 max-w-full">
           {FOCUS_AREAS.map((node) => (
             <div
               key={node.id}
-              className="snap-center shrink-0 w-[86vw] max-w-[340px] rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-6 space-y-4 shadow-lg flex flex-col justify-between"
+              className="snap-center shrink-0 w-[78vw] max-w-[280px] rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-5 space-y-3 shadow-lg flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">

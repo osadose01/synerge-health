@@ -7,6 +7,8 @@ interface GlassTileProps {
   value: string;
   label: string;
   sub: string;
+  badge?: string;
+  color?: string;
   index?: number;
 }
 
@@ -50,7 +52,14 @@ function CountUp({ target }: { target: string }) {
   );
 }
 
-export function GlassTile({ value, label, sub, index = 0 }: GlassTileProps) {
+export function GlassTile({
+  value,
+  label,
+  sub,
+  badge,
+  color = "#2BE0B0",
+  index = 0,
+}: GlassTileProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -60,14 +69,43 @@ export function GlassTile({ value, label, sub, index = 0 }: GlassTileProps) {
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0D1815] p-8 scanline-sweep"
+      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0D1815] p-8 scanline-sweep group hover:border-white/[0.2] transition-all duration-300"
     >
-      {/* Teal corner accent */}
-      <div className="absolute top-0 left-0 w-16 h-0.5 bg-gradient-to-r from-[#2BE0B0] to-transparent" />
-      <div className="absolute top-0 left-0 w-0.5 h-16 bg-gradient-to-b from-[#2BE0B0] to-transparent" />
+      {/* Dynamic corner accent */}
+      <div
+        className="absolute top-0 left-0 w-16 h-0.5"
+        style={{
+          background: `linear-gradient(to right, ${color}, transparent)`,
+        }}
+      />
+      <div
+        className="absolute top-0 left-0 w-0.5 h-16"
+        style={{
+          background: `linear-gradient(to bottom, ${color}, transparent)`,
+        }}
+      />
+
+      {/* Top Badge */}
+      {badge && (
+        <div className="flex justify-end mb-4">
+          <span
+            className="font-mono text-[9px] tracking-widest uppercase px-2 py-0.5 rounded border"
+            style={{
+              color: color,
+              borderColor: `${color}40`,
+              backgroundColor: `${color}10`,
+            }}
+          >
+            {badge}
+          </span>
+        </div>
+      )}
 
       {/* Value */}
-      <div className="font-mono font-bold text-5xl md:text-6xl text-[#2BE0B0] mb-4 tracking-tight">
+      <div
+        className="font-mono font-bold text-5xl md:text-6xl mb-4 tracking-tight"
+        style={{ color: color }}
+      >
         <CountUp target={value} />
       </div>
 

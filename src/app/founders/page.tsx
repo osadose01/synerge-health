@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/layout/PageHero";
 import { ApplyForm } from "@/components/forms/ApplyForm";
 import { AccordionItem } from "@/components/ui/AccordionItem";
-import { SynergyComparison } from "@/components/ui/SynergyComparison";
+import { FounderComparisonMatrix } from "@/components/ui/FounderComparisonMatrix";
 
 export const metadata = {
   title: "Founder Studio Programme — Synerge Health",
@@ -82,7 +82,7 @@ export default function FoundersPage() {
         </section>
 
         {/* Strategic Evaluation Matrix (Solo vs Studio) */}
-        <SynergyComparison />
+        <FounderComparisonMatrix />
 
         {/* FAQs */}
         <section className="py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">

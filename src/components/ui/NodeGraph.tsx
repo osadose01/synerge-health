@@ -191,31 +191,37 @@ export function NodeGraph() {
             return (
               <button
                 key={node.id}
-                className="absolute flex flex-col items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2BE0B0] rounded-full"
+                className="absolute flex items-center justify-center focus:outline-none transition-transform duration-300 hover:scale-105"
                 style={{
-                  left: `calc(50% + ${x}px - 20px)`,
-                  top: `calc(50% + ${y}px - 20px)`,
-                  cursor: "none",
+                  left: `calc(50% + ${x}px - 50px)`,
+                  top: `calc(50% + ${y}px - 14px)`,
+                  width: 100,
+                  height: 28,
                 }}
                 onClick={() => setActive(isActive ? null : node.id)}
                 onMouseEnter={() => setActive(node.id)}
                 onMouseLeave={() => setActive(null)}
                 aria-label={node.label}
               >
-                {/* Node dot */}
+                {/* Full-text Pill Badge */}
                 <motion.div
-                  className="w-10 h-10 rounded-full border flex items-center justify-center text-[8px] font-mono text-center leading-tight transition-all duration-300"
+                  className="px-3 py-1 rounded-full border text-[10px] font-mono font-semibold tracking-wider whitespace-nowrap shadow-sm transition-all duration-300"
                   style={{
                     borderColor: isActive
                       ? "#2BE0B0"
                       : isPartner
                       ? "#E3A83B"
-                      : "rgba(43,224,176,0.2)",
+                      : "rgba(255,255,255,0.15)",
                     backgroundColor: isActive
-                      ? "rgba(43,224,176,0.15)"
+                      ? "rgba(43,224,176,0.2)"
                       : isPartner
-                      ? "rgba(227,168,59,0.12)"
-                      : "#0D1815",
+                      ? "rgba(227,168,59,0.18)"
+                      : "#0A120F",
+                    color: isActive
+                      ? "#2BE0B0"
+                      : isPartner
+                      ? "#E3A83B"
+                      : "#F8FAFC",
                     boxShadow: isActive
                       ? "0 0 16px rgba(43,224,176,0.4)"
                       : isPartner
@@ -223,14 +229,7 @@ export function NodeGraph() {
                       : "none",
                   }}
                 >
-                  <span
-                    className={`leading-none px-0.5 font-bold ${
-                      isActive ? "text-[#2BE0B0]" : isPartner ? "text-[#E3A83B]" : "text-[#8FA39A]"
-                    }`}
-                    style={{ fontSize: 8 }}
-                  >
-                    {node.label.split(" ").map((w) => w[0]).join("")}
-                  </span>
+                  {node.label}
                 </motion.div>
               </button>
             );

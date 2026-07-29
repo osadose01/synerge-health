@@ -12,13 +12,6 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import dynamic from "next/dynamic";
-
-const SynergyOrbital3D = dynamic(
-  () => import("@/components/ui/SynergyOrbital3D").then((mod) => mod.SynergyOrbital3D),
-  { ssr: false }
-);
-
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -68,14 +61,67 @@ function AboutHero() {
             </motion.p>
           </div>
 
-          {/* Interactive 3D Armillary Sphere Mark */}
+          {/* Clean 100% Lightweight Vector Orbital Diagram (Zero WebGL GPU Overhead) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="lg:col-span-6"
+            className="lg:col-span-6 flex flex-col items-center justify-center p-8 sm:p-12 rounded-3xl border border-white/[0.1] bg-[#0A120F] shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
           >
-            <SynergyOrbital3D />
+            <div className="w-full max-w-[280px] sm:max-w-[320px] aspect-square flex items-center justify-center relative">
+              <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
+                <defs>
+                  <linearGradient id="orb-r1" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#5FF5CC" />
+                    <stop offset="100%" stopColor="#12664D" />
+                  </linearGradient>
+                  <linearGradient id="orb-r2" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#7FCBF2" />
+                    <stop offset="100%" stopColor="#1B5C7A" />
+                  </linearGradient>
+                  <linearGradient id="orb-r3" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#F2C877" />
+                    <stop offset="100%" stopColor="#8A5A16" />
+                  </linearGradient>
+                  <linearGradient id="orb-r4" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#A9E4F5" />
+                    <stop offset="100%" stopColor="#2E6E86" />
+                  </linearGradient>
+                  <radialGradient id="orb-core">
+                    <stop offset="0%" stopColor="#FFFFFF" />
+                    <stop offset="60%" stopColor="#2BE0B0" />
+                    <stop offset="100%" stopColor="#0E4B43" />
+                  </radialGradient>
+                </defs>
+                <g transform="translate(100,100)" strokeLinecap="round">
+                  <ellipse rx="72" ry="40" transform="rotate(15)" stroke="url(#orb-r1)" strokeWidth="6" />
+                  <ellipse rx="72" ry="40" transform="rotate(60)" stroke="url(#orb-r2)" strokeWidth="6" />
+                  <ellipse rx="72" ry="40" transform="rotate(105)" stroke="url(#orb-r3)" strokeWidth="6" />
+                  <ellipse rx="72" ry="40" transform="rotate(150)" stroke="url(#orb-r4)" strokeWidth="6" />
+                  <circle r="12" fill="url(#orb-core)" />
+                </g>
+              </svg>
+            </div>
+
+            {/* Clean Legend */}
+            <div className="flex flex-wrap justify-center items-center gap-4 mt-6 pt-6 border-t border-white/[0.08] w-full">
+              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
+                <span className="w-2 h-2 rounded-full bg-[#2BE0B0]" />
+                <span>Founder</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
+                <span className="w-2 h-2 rounded-full bg-[#3FA9E0]" />
+                <span>Studio</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
+                <span className="w-2 h-2 rounded-full bg-[#E3A83B]" />
+                <span>Capital</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
+                <span className="w-2 h-2 rounded-full bg-[#79C6E8]" />
+                <span>Market</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

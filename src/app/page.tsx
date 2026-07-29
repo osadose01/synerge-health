@@ -123,18 +123,18 @@ function NetworkEcosystemGraphic({ isHovered }: { isHovered: boolean }) {
   );
 }
 
-// ── Studio Model (pinned scroll) ────────────────────────────────────────
+// ── Pillars Data ────────────────────────────────────────────────────────
 const PILLARS = [
   {
     num: "01",
     title: "Strategic Guidance",
-    body: "Business models, go-to-market plans, pricing strategy, and regulatory pathways custom-built for African healthcare markets.",
+    body: "Pre-clearing regulatory rails, clinical protocol validation, and go-to-market architecture before seed capital is deployed.",
     icon: ClipboardStrategyGraphic,
   },
   {
     num: "02",
     title: "Operational Support",
-    body: "Hands-on execution — hiring top talent, legal setup, and finance infrastructure — so founders focus on product and patient impact.",
+    body: "Embedded studio engineers, healthcare legal experts, and growth strategists building inside alongside your team.",
     icon: OperationalEngineGraphic,
   },
   {
@@ -239,26 +239,31 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#060B09_100%)] pointer-events-none" />
 
           <div className="relative z-10 container mx-auto px-6 sm:px-8 md:px-16">
-            {/* H1 with word stagger */}
-            <h1 className="font-display font-bold text-[clamp(2.3rem,8vw,7.5rem)] leading-[1.02] tracking-tight text-[#F8FAFC] max-w-5xl">
-              <WordReveal text="Building Africa's" delay={0.2} />
-              <br />
-              <WordReveal
-                text="next generation"
-                delay={0.5}
-                className="text-[#2BE0B0]"
-              />
-              <br />
-              <WordReveal text="of digital health." delay={0.8} />
-            </h1>
+            {/* Asymmetric 2-Column Grid: Left Vital Line + Right Refined H1 Headline */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
+              {/* Left Column: Full-Length Vital ECG Line extending almost to touch the writeup */}
+              <div className="lg:col-span-5 w-full flex items-center pr-2">
+                <VitalLine mode="ecg" delay={1.2} activeResonance={heroResonance} />
+              </div>
 
-            {/* ECG vital line — hero mode with co-active resonance */}
-            <div className="mt-10 max-w-2xl">
-              <VitalLine mode="ecg" delay={1.2} activeResonance={heroResonance} />
+              {/* Right Column: Refined Font Size H1 Headline pushed right */}
+              <div className="lg:col-span-7">
+                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.08] tracking-tight text-[#F8FAFC]">
+                  <WordReveal text="Building Africa's" delay={0.2} />
+                  <br />
+                  <WordReveal
+                    text="next generation"
+                    delay={0.5}
+                    className="text-[#2BE0B0]"
+                  />
+                  <br />
+                  <WordReveal text="of digital health." delay={0.8} />
+                </h1>
+              </div>
             </div>
 
             {/* Sub + CTAs */}
-            <div className="mt-12 pt-10 border-t border-white/[0.12] flex flex-col md:flex-row md:items-end gap-10 md:gap-24">
+            <div className="pt-10 border-t border-white/[0.12] flex flex-col md:flex-row md:items-end gap-10 md:gap-24">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -380,6 +385,55 @@ export default function Home() {
                 },
               ].map((stat, i) => (
                 <GlassTile key={stat.label} {...stat} index={i} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SYNERGE INSIGHTS ─────────────────────────────────────────── */}
+        <section className="py-28 md:py-40 bg-[#060B09] border-t border-white/[0.08]">
+          <div className="container mx-auto px-6 sm:px-8 md:px-16">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
+              <p className="label-mono">Synerge Insights</p>
+              <Link
+                href="/insights"
+                className="inline-flex items-center gap-1.5 font-mono text-xs text-[#2BE0B0] hover:text-[#5FF5CC] transition-colors uppercase tracking-wider"
+              >
+                View All Research <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/[0.08]">
+              {ARTICLES.map((article) => (
+                <Link
+                  key={article.slug}
+                  href="/insights"
+                  className="group flex flex-col justify-between p-8 border-r border-b border-white/[0.08] hover:bg-white/[0.02] transition-colors relative min-h-[360px]"
+                >
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-[#2BE0B0] font-semibold">
+                        {article.category}
+                      </span>
+                      <span className="font-mono text-[11px] text-[#8FA39A]">{article.readTime}</span>
+                    </div>
+
+                    <h3 className="font-display font-semibold text-lg text-[#F2F6F4] group-hover:text-[#2BE0B0] transition-colors leading-[1.35]">
+                      {article.title}
+                    </h3>
+                  </div>
+
+                  <div className="pt-8 border-t border-white/[0.06] flex items-center justify-between mt-auto">
+                    <div className="space-y-0.5">
+                      <p className="text-xs font-medium text-[#F2F6F4]">{article.author}</p>
+                      <p className="text-[11px] text-[#8FA39A]">{article.role}</p>
+                    </div>
+
+                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#2BE0B0] group-hover:bg-[#2BE0B0]/10 transition-all duration-300">
+                      <ArrowUpRight className="w-4 h-4 text-[#8FA39A] group-hover:text-[#2BE0B0] transition-colors" />
+                    </div>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

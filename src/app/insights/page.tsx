@@ -22,7 +22,7 @@ interface Article {
   takeaways: string[];
 }
 
-const ARTICLES: Article[] = [
+export const ARTICLES: Article[] = [
   {
     slug: "leapfrogging-legacy-infrastructure",
     title: "Leapfrogging Legacy Infrastructure: Why African Healthtech is Built Different",

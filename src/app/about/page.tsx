@@ -183,24 +183,24 @@ function GlassPanel({
 // ── Horizontal scroll-pinned Core Values ───────────────────────────────
 const VALUES = [
   {
-    title: "Patient First",
+    title: "We Build Inside",
     num: "01",
-    desc: "Every company we build is judged by whether it measurably improves patient care and access.",
+    desc: "We do not write passive checks from the sidelines. We embed engineering, clinical, and regulatory operators into the trenches alongside founders.",
   },
   {
-    title: "Founder Led",
+    title: "Interrelated Systems",
     num: "02",
-    desc: "We build alongside founders as operating partners, not passive capital sitting on the sidelines.",
+    desc: "Standalone products die without distribution. We build ventures that plug directly into cross-sector synergy loops across hospital and pharma networks.",
   },
   {
-    title: "Rigorous & Honest",
+    title: "African Clinical Reality",
     num: "03",
-    desc: "We validate unit economics before we build, and we say so plainly when the numbers don't work.",
+    desc: "We don't adapt foreign SaaS models. We engineer native architectures built for low bandwidth, out-of-pocket payments, and local regulatory rails.",
   },
   {
-    title: "Built For Africa",
+    title: "Absorb Lethal Friction",
     num: "04",
-    desc: "Every business model starts from local infrastructure, regulatory, and payment realities.",
+    desc: "By providing pre-cleared regulatory pathways and institutional networks, we absorb operational friction so founders focus on product and patients.",
   },
 ];
 
@@ -421,12 +421,12 @@ export default function AboutPage() {
               <div className="grid sm:grid-cols-2 gap-6">
                 <GlassPanel
                   title="Mission"
-                  body="We are committed to catalysing innovation in healthcare by providing startups with the resources and expertise they need to succeed — turning clinical insight and entrepreneurial ambition into sustainable companies that save lives."
+                  body="To absorb the lethal friction of building in African healthcare by co-founding ventures that are pre-wired for continental scale."
                   index={0}
                 />
                 <GlassPanel
                   title="Vision"
-                  body="A thriving ecosystem of healthcare entrepreneurs equipped to tackle the continent's most pressing clinical challenges and improve patient outcomes across Sub-Saharan Africa and beyond."
+                  body="A fully interrelated digital health ecosystem that leapfrogs Africa’s physical infrastructure deficits."
                   index={1}
                 />
               </div>

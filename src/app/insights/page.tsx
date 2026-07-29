@@ -122,9 +122,8 @@ export default function InsightsPage() {
 
       <main className="flex-1">
         <PageHero
-          eyebrow="Studio Insights"
-          title="Healthtech perspectives & market intelligence."
-          description="Analysis, operational blueprints, and market insights curated by the Synerge Health studio team."
+          eyebrow="Synerge Insights"
+          title="News, Research & Studio Updates"
         />
 
         <section className="py-20 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">

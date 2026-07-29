@@ -30,15 +30,8 @@ export function FounderComparisonMatrix() {
     <section className="py-36 bg-[#060B09] border-t border-white/[0.08] relative overflow-hidden">
       <div className="container mx-auto px-8 sm:px-12 md:px-16 relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-4">
+        <div className="max-w-3xl mb-12">
           <p className="label-mono">Strategic Evaluation</p>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#F8FAFC] leading-[1.08]">
-            Solo HealthTech Founder vs. <br className="hidden sm:inline" />
-            <span className="text-[#2BE0B0]">Synerge Studio Co-Building.</span>
-          </h2>
-          <p className="text-base text-[#C2D1CB] leading-[1.8] max-w-2xl">
-            See how co-building alongside an operational venture studio accelerates your speed-to-market, eliminates regulatory friction, and extends runway.
-          </p>
         </div>
 
         {/* Comparison Matrix Table */}

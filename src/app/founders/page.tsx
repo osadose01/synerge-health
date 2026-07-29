@@ -37,22 +37,15 @@ export default function FoundersPage() {
       <main className="flex-1">
         <PageHero
           eyebrow="Founder Programme"
-          title="Bring the insight. We'll help you build the company."
           description="The Synerge Health founder programme pairs early-stage healthtech innovators with studio capital, embedded operators, and an extensive healthcare network."
         />
 
         {/* Programme Journey */}
-        <section className="py-40 bg-[#060B09] border-t border-white/[0.08]">
+        <section className="py-28 md:py-40 bg-[#060B09] border-t border-white/[0.08]">
           <div className="container mx-auto px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
+            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
               <p className="label-mono">Programme Journey</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F8FAFC] leading-[1.1] mb-16">
-                  What the first
-                  <br />
-                  6 months look like.
-                </h2>
-
                 <div className="space-y-0 border border-white/[0.12] rounded-2xl overflow-hidden bg-[#0D1815]">
                   {[
                     { step: "01", phase: "Intake", desc: "Problem deep-dive & founder alignment. We spend time understanding your insight, market, and motivation before anything else." },
@@ -85,16 +78,11 @@ export default function FoundersPage() {
         <FounderComparisonMatrix />
 
         {/* FAQs */}
-        <section className="py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
+        <section className="py-28 md:py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
           <div className="container mx-auto px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
+            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
               <p className="label-mono">FAQs</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-16">
-                  Frequently asked
-                  <br />
-                  questions.
-                </h2>
                 <div className="border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden bg-[#060B09]">
                   {FAQS.map((faq, idx) => (
                     <AccordionItem key={faq.q} question={faq.q} answer={faq.a} defaultOpen={idx === 0} />
@@ -106,19 +94,11 @@ export default function FoundersPage() {
         </section>
 
         {/* Application Form */}
-        <section id="apply" className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)] scroll-mt-24">
+        <section id="apply" className="py-28 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)] scroll-mt-24">
           <div className="container mx-auto px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
+            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
               <p className="label-mono">Apply</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-4">
-                  Apply to the
-                  <br />
-                  Founder Programme.
-                </h2>
-                <p className="text-[#8FA39A] text-base leading-[1.75] mb-12 max-w-lg">
-                  Tell us about the healthcare problem you are passionate about solving. Every application is reviewed by our leadership team.
-                </p>
                 <ApplyForm />
               </div>
             </div>

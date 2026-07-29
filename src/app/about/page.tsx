@@ -40,20 +40,10 @@ function AboutHero() {
               About Synerge Health
             </motion.p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display font-bold text-[clamp(2.3rem,5vw,5.5rem)] leading-[1.05] tracking-tight text-[#F8FAFC]"
-            >
-              We build the companies that will{" "}
-              <span className="text-[#2BE0B0]">define African healthcare.</span>
-            </motion.h1>
-
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               className="max-w-xl text-base text-[#C2D1CB] leading-[1.75]"
             >
               A venture studio catalysing innovation in healthcare — giving founders the resources,
@@ -101,26 +91,6 @@ function AboutHero() {
                   <circle r="12" fill="url(#orb-core)" />
                 </g>
               </svg>
-            </div>
-
-            {/* Clean Legend */}
-            <div className="flex flex-wrap justify-center items-center gap-4 mt-6 pt-6 border-t border-white/[0.08] w-full">
-              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
-                <span className="w-2 h-2 rounded-full bg-[#2BE0B0]" />
-                <span>Founder</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
-                <span className="w-2 h-2 rounded-full bg-[#3FA9E0]" />
-                <span>Studio</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
-                <span className="w-2 h-2 rounded-full bg-[#E3A83B]" />
-                <span>Capital</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-xs font-mono text-[#C2D1CB]">
-                <span className="w-2 h-2 rounded-full bg-[#79C6E8]" />
-                <span>Market</span>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -438,16 +408,11 @@ export default function AboutPage() {
         <CoreValues />
 
         {/* Leadership */}
-        <section className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
+        <section className="py-28 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
           <div className="container mx-auto px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
-              <div className="space-y-4">
+            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
+              <div>
                 <p className="label-mono">Leadership</p>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1]">
-                  The team behind
-                  <br />
-                  <span className="text-[#2BE0B0]">the studio.</span>
-                </h2>
               </div>
               <div className="space-y-8">
                 <div className="grid sm:grid-cols-2 gap-6">

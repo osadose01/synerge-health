@@ -13,8 +13,7 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#060B09",
-          borderRadius: "8px",
+          background: "transparent",
         }}
       >
         <svg width="24" height="24" viewBox="0 0 200 200" fill="none">

@@ -123,7 +123,6 @@ export default function InsightsPage() {
       <main className="flex-1">
         <PageHero
           eyebrow="Synerge Insights"
-          title="News, Research & Studio Updates"
         />
 
         <section className="py-20 md:py-32 bg-[#060B09] border-t border-white/[0.08]">
@@ -135,14 +134,18 @@ export default function InsightsPage() {
                   <article
                     key={article.slug}
                     onClick={() => setSelectedArticle(article)}
-                    className="group border-r border-b border-white/[0.08] p-7 flex flex-col justify-between min-h-[220px] bg-[#0D1815] hover:bg-[#13231F] transition-all duration-300 cursor-pointer relative overflow-hidden"
+                    className="group border-r border-b border-white/[0.08] p-7 flex flex-col justify-between min-h-[230px] bg-[#0D1815] hover:bg-[#13231F] transition-all duration-300 cursor-pointer relative overflow-hidden"
                   >
-                    {/* Top Row: Source Tag + Arrow Icon */}
+                    {/* Top Row: Category Tag + Circular Arrow Button */}
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-[#A5B8B0] group-hover:text-[#2BE0B0] transition-colors">
                         {article.category}
                       </span>
-                      <ArrowUpRight className="w-4 h-4 text-[#A5B8B0] group-hover:text-[#2BE0B0] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+                      
+                      {/* Circular Arrow Button Badge */}
+                      <div className="w-9 h-9 rounded-full border border-[rgba(43,224,176,0.2)] bg-[#060B09] flex items-center justify-center text-[#8FA39A] group-hover:border-[#2BE0B0] group-hover:text-[#2BE0B0] group-hover:scale-105 transition-all shrink-0">
+                        <ArrowUpRight className="w-4.5 h-4.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
                     </div>
 
                     {/* Bottom: Article Headline */}

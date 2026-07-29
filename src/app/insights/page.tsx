@@ -126,58 +126,37 @@ export default function InsightsPage() {
           title="News, Research & Studio Updates"
         />
 
-        <section className="py-20 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
+        <section className="py-20 md:py-32 bg-[#060B09] border-t border-white/[0.08]">
           <div className="container mx-auto px-6 sm:px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
-              <div>
-                <p className="label-mono mb-4">Latest Articles</p>
-                <p className="text-sm text-[#8FA39A] leading-relaxed max-w-xs">
-                  Click any article or arrow icon to open and read the full research paper directly in our interactive reader.
-                </p>
-              </div>
-
-              <div className="space-y-0 border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden divide-y divide-[rgba(43,224,176,0.08)] bg-[#0D1815]">
+            <div className="w-full">
+              {/* 4-Column Bordered Newsroom Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/[0.08]">
                 {ARTICLES.map((article) => (
                   <article
                     key={article.slug}
                     onClick={() => setSelectedArticle(article)}
-                    className="group p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start hover:bg-[rgba(43,224,176,0.04)] transition-all duration-300 cursor-pointer"
+                    className="group border-r border-b border-white/[0.08] p-7 flex flex-col justify-between min-h-[220px] bg-[#0D1815] hover:bg-[#13231F] transition-all duration-300 cursor-pointer relative overflow-hidden"
                   >
-                    <div className="flex-1 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <span className="text-[11px] font-mono uppercase tracking-widest text-[#2BE0B0]">
-                          {article.category}
-                        </span>
-                        <span className="text-[#8FA39A]">·</span>
-                        <span className="text-[11px] font-mono text-[#8FA39A]">{article.readTime}</span>
-                      </div>
-
-                      <h3 className="font-display font-semibold text-lg sm:text-xl text-[#F2F6F4] leading-snug group-hover:text-[#2BE0B0] transition-colors">
-                        {article.title}
-                      </h3>
-
-                      <p className="text-sm text-[#8FA39A] leading-[1.75]">{article.snippet}</p>
-
-                      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-medium text-[#F2F6F4]">{article.author}</span>
-                          <span className="text-[#8FA39A]">·</span>
-                          <span className="text-xs text-[#8FA39A]">{article.date}</span>
-                        </div>
-
-                        <span className="font-mono text-xs text-[#2BE0B0] flex items-center gap-1 group-hover:underline">
-                          Read Full Post
-                          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </span>
-                      </div>
+                    {/* Top Row: Source Tag + Arrow Icon */}
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-[#A5B8B0] group-hover:text-[#2BE0B0] transition-colors">
+                        {article.category}
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 text-[#A5B8B0] group-hover:text-[#2BE0B0] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                     </div>
 
-                    <button
-                      aria-label={`Read full post: ${article.title}`}
-                      className="w-10 h-10 rounded-full border border-[rgba(43,224,176,0.2)] bg-[#060B09] flex items-center justify-center text-[#8FA39A] group-hover:border-[#2BE0B0] group-hover:text-[#2BE0B0] group-hover:scale-105 transition-all shrink-0 mt-1 self-end sm:self-start"
-                    >
-                      <ArrowUpRight className="w-5 h-5" />
-                    </button>
+                    {/* Bottom: Article Headline */}
+                    <div className="mt-8 space-y-2">
+                      <h3 className="font-display font-semibold text-base sm:text-lg text-[#F8FAFC] group-hover:text-[#2BE0B0] transition-colors leading-[1.35] line-clamp-3">
+                        {article.title}
+                      </h3>
+                      <p className="font-mono text-[11px] text-[#8FA39A] pt-1">
+                        {article.date}
+                      </p>
+                    </div>
+
+                    {/* Hover subtle glow beam */}
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2BE0B0] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </article>
                 ))}
               </div>

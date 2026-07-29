@@ -29,70 +29,25 @@ function AboutHero() {
       <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-[#2BE0B0] opacity-[0.04] blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-6 sm:px-8 md:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          <div className="lg:col-span-6 space-y-6">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="label-mono"
-            >
-              About Synerge Health
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="max-w-xl text-base text-[#C2D1CB] leading-[1.75]"
-            >
-              A venture studio catalysing innovation in healthcare — giving founders the resources,
-              operational build support, and capital they need to scale from first insight to continental impact.
-            </motion.p>
-          </div>
-
-          {/* Clean 100% Lightweight Vector Orbital Diagram (Zero WebGL GPU Overhead) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="lg:col-span-6 flex flex-col items-center justify-center p-8 sm:p-12 rounded-3xl border border-white/[0.1] bg-[#0A120F] shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+        <div className="max-w-3xl space-y-6">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="label-mono"
           >
-            <div className="w-full max-w-[280px] sm:max-w-[320px] aspect-square flex items-center justify-center relative">
-              <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
-                <defs>
-                  <linearGradient id="orb-r1" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#5FF5CC" />
-                    <stop offset="100%" stopColor="#12664D" />
-                  </linearGradient>
-                  <linearGradient id="orb-r2" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#7FCBF2" />
-                    <stop offset="100%" stopColor="#1B5C7A" />
-                  </linearGradient>
-                  <linearGradient id="orb-r3" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#F2C877" />
-                    <stop offset="100%" stopColor="#8A5A16" />
-                  </linearGradient>
-                  <linearGradient id="orb-r4" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#A9E4F5" />
-                    <stop offset="100%" stopColor="#2E6E86" />
-                  </linearGradient>
-                  <radialGradient id="orb-core">
-                    <stop offset="0%" stopColor="#FFFFFF" />
-                    <stop offset="60%" stopColor="#2BE0B0" />
-                    <stop offset="100%" stopColor="#0E4B43" />
-                  </radialGradient>
-                </defs>
-                <g transform="translate(100,100)" strokeLinecap="round">
-                  <ellipse rx="72" ry="40" transform="rotate(15)" stroke="url(#orb-r1)" strokeWidth="6" />
-                  <ellipse rx="72" ry="40" transform="rotate(60)" stroke="url(#orb-r2)" strokeWidth="6" />
-                  <ellipse rx="72" ry="40" transform="rotate(105)" stroke="url(#orb-r3)" strokeWidth="6" />
-                  <ellipse rx="72" ry="40" transform="rotate(150)" stroke="url(#orb-r4)" strokeWidth="6" />
-                  <circle r="12" fill="url(#orb-core)" />
-                </g>
-              </svg>
-            </div>
-          </motion.div>
+            About Synerge Health
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-lg sm:text-xl text-[#C2D1CB] leading-[1.75]"
+          >
+            A venture studio catalysing innovation in healthcare — giving founders the resources,
+            operational build support, and capital they need to scale from first insight to continental impact.
+          </motion.p>
         </div>
       </div>
     </section>
@@ -409,29 +364,27 @@ export default function AboutPage() {
 
         {/* Leadership */}
         <section className="py-28 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
-          <div className="container mx-auto px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
-              <div>
-                <p className="label-mono">Leadership</p>
-              </div>
-              <div className="space-y-8">
-                <div className="grid sm:grid-cols-2 gap-6">
-                  {TEAM.map((member, i) => (
-                    <LeaderCard key={member.name} member={member} index={i} />
-                  ))}
-                </div>
+          <div className="container mx-auto px-6 sm:px-8 md:px-16">
+            <div className="space-y-12">
+              <p className="label-mono">Leadership</p>
 
-                <div className="mt-4">
-                  <MagneticButton>
-                    <Link
-                      href="/founders#apply"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_30px_rgba(227,168,59,0.4)] transition-all duration-300"
-                    >
-                      <TextScramble text="JOIN THE STUDIO" />
-                      <ArrowUpRight className="w-4 h-4" />
-                    </Link>
-                  </MagneticButton>
-                </div>
+              {/* 4-Column Horizontal Leadership Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {TEAM.map((member, i) => (
+                  <LeaderCard key={member.name} member={member} index={i} />
+                ))}
+              </div>
+
+              <div className="flex justify-center pt-6">
+                <MagneticButton>
+                  <Link
+                    href="/founders#apply"
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase cursor-none hover:shadow-[0_0_30px_rgba(227,168,59,0.4)] transition-all duration-300"
+                  >
+                    <TextScramble text="JOIN THE STUDIO" />
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </MagneticButton>
               </div>
             </div>
           </div>

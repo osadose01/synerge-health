@@ -18,9 +18,8 @@ export default function PortfolioPage() {
 
       <main className="flex-1">
         <PageHero
-          eyebrow="Portfolio & Cohorts"
-          title="Building our inaugural cohort."
-          description="Synerge Health is currently selecting and co-founding its launch portfolio of digital health ventures across Sub-Saharan Africa."
+          eyebrow="Portfolio"
+          description="Synerge Health continuously co-founds and operates digital health ventures designed around African clinical and market realities."
         />
 
         {/* Cohort Status */}
@@ -29,12 +28,6 @@ export default function PortfolioPage() {
             <div className="grid md:grid-cols-[1fr_1.6fr] gap-10 md:gap-24 items-start">
               <p className="label-mono">Current Status</p>
               <div>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F2F6F4] leading-[1.1] mb-16">
-                  Cohort One —
-                  <br />
-                  <span className="text-[#2BE0B0]">Applications Open.</span>
-                </h2>
-
                 <div className="grid sm:grid-cols-3 gap-0 border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden bg-[#0D1815]">
                   {[
                     {

@@ -146,6 +146,7 @@ export default function InsightsPage() {
       <main className="flex-1">
         <PageHero
           eyebrow="Synerge Insights"
+          description="Market intelligence, clinical field notes, and venture building research from the Synerge Health team."
         />
 
         <section className="py-20 md:py-32 bg-[#060B09] border-t border-white/[0.08]">

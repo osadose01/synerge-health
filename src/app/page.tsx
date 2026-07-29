@@ -152,12 +152,8 @@ function StudioModel() {
     <section className="py-36 bg-[#060B09] border-t border-white/[0.08] relative overflow-hidden">
       <div className="container mx-auto px-6 sm:px-8 md:px-16 relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-4">
+        <div className="max-w-3xl mb-12">
           <p className="label-mono">The Synerge Model</p>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#F8FAFC] leading-[1.08]">
-            We don&rsquo;t advise. <br className="hidden sm:inline" />
-            <span className="text-[#2BE0B0]">We build inside.</span>
-          </h2>
         </div>
 
         {/* 3-Pillar Cards Grid */}
@@ -335,14 +331,9 @@ export default function Home() {
         {/* ── FOCUS AREAS (node graph) ──────────────────────────────────── */}
         <section className="py-40 bg-[#0D1815] border-t border-white/[0.08]">
           <div className="container mx-auto px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
-              <div className="space-y-4">
+            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
+              <div>
                 <p className="label-mono">Focus Areas</p>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-[#F8FAFC] leading-[1.1]">
-                  Sub-sectors
-                  <br />
-                  <span className="text-[#2BE0B0]">we back.</span>
-                </h2>
               </div>
 
               <div className="flex flex-col items-center">

@@ -1,7 +1,7 @@
 
 interface PageHeroProps {
   eyebrow: string;
-  title: string;
+  title?: string;
   description?: string;
 }
 
@@ -13,9 +13,11 @@ export function PageHero({ eyebrow, title, description }: PageHeroProps) {
 
       <div className="relative z-10 container mx-auto px-8 md:px-16">
         <p className="label-mono mb-8">{eyebrow}</p>
-        <h1 className="font-display font-bold text-[clamp(2.2rem,5.5vw,5.5rem)] text-[#F2F6F4] leading-[1.06] tracking-tight max-w-4xl">
-          {title}
-        </h1>
+        {title && (
+          <h1 className="font-display font-bold text-[clamp(2.2rem,5.5vw,5.5rem)] text-[#F2F6F4] leading-[1.06] tracking-tight max-w-4xl">
+            {title}
+          </h1>
+        )}
         {description && (
           <p className="mt-8 text-base text-[#8FA39A] leading-[1.75] max-w-2xl">
             {description}

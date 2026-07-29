@@ -240,16 +240,16 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#060B09_100%)] pointer-events-none" />
 
           <div className="relative z-10 container mx-auto px-6 sm:px-8 md:px-16">
-            {/* Asymmetric 2-Column Grid: Left Vital Line + Right Refined H1 Headline */}
+            {/* Asymmetric 2-Column Grid: Long Vital Line (7 cols) + Extreme Right Refined H1 Headline (5 cols) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
-              {/* Left Column: Full-Length Vital ECG Line extending almost to touch the writeup */}
-              <div className="lg:col-span-5 w-full flex items-center pr-2">
+              {/* Left Column: Long Vital ECG Line extending to touch the writeup */}
+              <div className="lg:col-span-7 w-full flex items-center pr-2">
                 <VitalLine mode="ecg" delay={1.2} activeResonance={heroResonance} />
               </div>
 
-              {/* Right Column: Refined Font Size H1 Headline pushed right */}
-              <div className="lg:col-span-7">
-                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.08] tracking-tight text-[#F8FAFC]">
+              {/* Right Column: Refined H1 Headline on extreme right */}
+              <div className="lg:col-span-5 flex justify-start lg:justify-end">
+                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-5xl leading-[1.08] tracking-tight text-[#F8FAFC]">
                   <WordReveal text="Building Africa's" delay={0.2} />
                   <br />
                   <WordReveal
@@ -263,43 +263,36 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Sub + CTAs */}
-            <div className="pt-10 border-t border-white/[0.12] flex flex-col md:flex-row md:items-end gap-10 md:gap-24">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.4 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0"
+            {/* Split-Axis Framing CTAs (Far Left & Far Right) */}
+            <div className="pt-10 border-t border-white/[0.12] flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div
+                onMouseEnter={() => setHeroResonance(true)}
+                onMouseLeave={() => setHeroResonance(false)}
               >
-                <div
-                  onMouseEnter={() => setHeroResonance(true)}
-                  onMouseLeave={() => setHeroResonance(false)}
-                >
-                  <MagneticButton>
-                    <Link
-                      href="/founders#apply"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase hover:shadow-[0_0_30px_rgba(227,168,59,0.5)] transition-all duration-300"
-                    >
-                      <TextScramble text="APPLY AS A FOUNDER" />
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </MagneticButton>
-                </div>
+                <MagneticButton>
+                  <Link
+                    href="/founders#apply"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase hover:shadow-[0_0_35px_rgba(227,168,59,0.5)] transition-all duration-300"
+                  >
+                    <TextScramble text="APPLY AS A FOUNDER" />
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </MagneticButton>
+              </div>
 
-                <div
-                  onMouseEnter={() => setHeroResonance(true)}
-                  onMouseLeave={() => setHeroResonance(false)}
-                >
-                  <MagneticButton>
-                    <Link
-                      href="/investors"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/[0.18] text-[#C2D1CB] font-mono text-xs tracking-[0.1em] uppercase hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
-                    >
-                      INVEST WITH US
-                    </Link>
-                  </MagneticButton>
-                </div>
-              </motion.div>
+              <div
+                onMouseEnter={() => setHeroResonance(true)}
+                onMouseLeave={() => setHeroResonance(false)}
+              >
+                <MagneticButton>
+                  <Link
+                    href="/investors"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/[0.18] text-[#C2D1CB] font-mono text-xs tracking-[0.1em] uppercase hover:border-[#2BE0B0] hover:text-[#2BE0B0] transition-all duration-300"
+                  >
+                    INVEST WITH US
+                  </Link>
+                </MagneticButton>
+              </div>
             </div>
           </div>
         </section>

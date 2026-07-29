@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageHero } from "@/components/layout/PageHero";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { TextScramble } from "@/components/ui/TextScramble";
 import { useReducedMotion } from "@/lib/useReducedMotion";
@@ -14,44 +15,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
-}
-
-// ── PageHero (about-specific) ────────────────────────────────────────────
-function AboutHero() {
-  const ref = useRef<HTMLElement>(null);
-
-  return (
-    <section
-      ref={ref}
-      className="relative pt-40 pb-24 border-b border-white/[0.08] overflow-hidden"
-    >
-      {/* Subtle ambient lighting */}
-      <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-[#2BE0B0] opacity-[0.04] blur-[120px] pointer-events-none" />
-
-      <div className="relative z-10 container mx-auto px-6 sm:px-8 md:px-16">
-        <div className="max-w-3xl space-y-6">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="label-mono"
-          >
-            About Synerge Health
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg sm:text-xl text-[#C2D1CB] leading-[1.75]"
-          >
-            A venture studio catalysing innovation in healthcare — giving founders the resources,
-            operational build support, and capital they need to scale from first insight to continental impact.
-          </motion.p>
-        </div>
-      </div>
-    </section>
-  );
 }
 
 // ── Parallax glass panels (Mission / Vision) ────────────────────────────
@@ -336,7 +299,10 @@ export default function AboutPage() {
       <Header />
 
       <main className="flex-1">
-        <AboutHero />
+        <PageHero
+          eyebrow="About Synerge Health"
+          description="A venture studio catalysing innovation in healthcare — giving founders the resources, operational build support, and capital they need to scale from first insight to continental impact."
+        />
 
         {/* Mission & Vision — glass panels */}
         <section className="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">

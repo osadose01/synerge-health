@@ -19,7 +19,7 @@ export function PageHero({ eyebrow, title, description }: PageHeroProps) {
           </h1>
         )}
         {description && (
-          <p className="mt-8 text-base text-[#8FA39A] leading-[1.75] max-w-2xl">
+          <p className="mt-8 text-base md:text-lg text-[#C2D1CB] leading-[1.75] max-w-2xl">
             {description}
           </p>
         )}

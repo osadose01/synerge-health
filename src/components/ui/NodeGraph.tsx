@@ -288,27 +288,6 @@ export function NodeGraph() {
               </div>
             </motion.div>
           )}
-          {!activeNode && (
-            <motion.div
-              key="hint"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="mt-8 flex flex-col items-center gap-2"
-            >
-              <p className="font-mono text-[11px] tracking-[0.15em] uppercase text-[#4A6358]">
-                hover or tap a node to explore cross-sector synergy loops
-              </p>
-              <div className="flex items-center gap-3 text-[10px] font-mono text-[#8FA39A]">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#2BE0B0]" /> Core Vertical
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#E3A83B]" /> Synergy Loop
-                </span>
-              </div>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
 

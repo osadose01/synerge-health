@@ -147,9 +147,6 @@ function StudioModel() {
             We don&rsquo;t advise. <br className="hidden sm:inline" />
             <span className="text-[#2BE0B0]">We build inside.</span>
           </h2>
-          <p className="text-base text-[#C2D1CB] leading-[1.8] max-w-2xl">
-            An interlocking venture creation engine — combining clinical strategy, embedded operational execution, and seed capital from inception to continental scale.
-          </p>
         </div>
 
         {/* 3-Pillar Interlocking Pipeline (01 -> 02 -> 03) */}
@@ -267,21 +264,11 @@ export default function Home() {
 
             {/* Sub + CTAs */}
             <div className="mt-12 pt-10 border-t border-white/[0.12] flex flex-col md:flex-row md:items-end gap-10 md:gap-24">
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="max-w-md text-base text-[#C2D1CB] leading-[1.7]"
-              >
-                We co-found, fund, and operate healthtech startups from first insight to market
-                scale — pairing African clinical expertise with global venture-building discipline.
-              </motion.p>
-
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.4 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 md:ml-auto shrink-0"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0"
               >
                 <div
                   onMouseEnter={() => setHeroResonance(true)}
@@ -362,9 +349,6 @@ export default function Home() {
                   <br />
                   <span className="text-[#2BE0B0]">we back.</span>
                 </h2>
-                <p className="text-sm text-[#C2D1CB] leading-[1.8] max-w-xs">
-                  Eight verticals where clinical need and technology convergence create the highest-impact opportunities.
-                </p>
               </div>
 
               <div className="flex flex-col items-center">

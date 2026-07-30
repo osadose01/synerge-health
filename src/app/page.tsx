@@ -297,16 +297,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── SYNERGE VIEW (TV Monitor Display) ─────────────────────────── */}
+        {/* ── SYNERGE VIEW (Expanded TV Monitor Display) ─────────────────── */}
         <section className="py-28 md:py-40 bg-[#0D1815] border-t border-white/[0.08]">
           <div className="container mx-auto px-6 sm:px-8 md:px-16">
-            <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
-              <div>
-                <p className="label-mono">Synerge View</p>
-              </div>
+            <div className="space-y-8">
+              <p className="label-mono">Synerge View</p>
 
-              {/* TV Monitor Screen Display Frame */}
-              <div className="rounded-3xl border border-[#2BE0B0]/30 bg-[#0A120F] overflow-hidden shadow-[0_0_60px_rgba(43,224,176,0.12)] relative group">
+              {/* TV Monitor Screen Display Frame - Expanded Full Width */}
+              <div className="w-full rounded-3xl border border-[#2BE0B0]/30 bg-[#0A120F] overflow-hidden shadow-[0_0_60px_rgba(43,224,176,0.12)] relative group">
                 {/* Screen Header Bar */}
                 <div className="px-6 py-4 bg-[#060B09] border-b border-white/[0.1] flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -326,27 +324,28 @@ export default function Home() {
                 </div>
 
                 {/* TV Screen Content Area */}
-                <div className="p-8 sm:p-12 space-y-8 relative">
+                <div className="p-8 sm:p-12 md:p-16 space-y-10 relative">
                   {/* Subtle CRT background grid scanline accent */}
                   <div className="absolute inset-0 bg-[radial-gradient(#2BE0B0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.04] pointer-events-none" />
 
-                  <p className="font-display text-2xl md:text-3xl font-semibold text-[#F8FAFC] leading-[1.4] relative z-10">
-                    In African healthcare,{" "}
-                    <span className="text-[#E3A83B]">isolated apps die.</span>{" "}
-                    <br className="hidden sm:inline" />
+                  {/* Clean 2-Row Headline */}
+                  <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#F8FAFC] leading-[1.25] tracking-tight relative z-10">
+                    In African healthcare, <span className="text-[#E3A83B]">isolated apps die.</span>
+                    <br />
                     <span className="text-[#2BE0B0]">Interrelated systems scale.</span>
-                  </p>
+                  </h2>
 
-                  <p className="text-[#C2D1CB] text-base leading-[1.8] relative z-10">
-                    The gap in African healthcare isn&rsquo;t a lack of brilliant clinical talent. The gap is the lethal friction of building alone in a highly fragmented market. Standalone products cannot survive without institutional distribution.
-                  </p>
-                  
-                  <p className="text-[#C2D1CB] text-base leading-[1.8] relative z-10">
-                    Synerge Health absorbs that friction through a dual approach. First, we co-found in the trenches with visionary operators. Second, we build an interrelated ecosystem where every venture powers the next—creating the structural synergy needed to reach continental scale.
-                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-[#C2D1CB] text-base leading-[1.8] relative z-10 pt-4 border-t border-white/[0.08]">
+                    <p>
+                      The gap in African healthcare isn&rsquo;t a lack of brilliant clinical talent. The gap is the lethal friction of building alone in a highly fragmented market. Standalone products cannot survive without institutional distribution.
+                    </p>
+                    <p>
+                      Synerge Health absorbs that friction through a dual approach. First, we co-found in the trenches with visionary operators. Second, we build an interrelated ecosystem where every venture powers the next—creating the structural synergy needed to reach continental scale.
+                    </p>
+                  </div>
 
                   {/* Monitor Bottom Vital Line Accent */}
-                  <div className="pt-6 border-t border-white/[0.08] relative z-10">
+                  <div className="pt-4 relative z-10">
                     <VitalLine mode="ecg" delay={0.4} />
                   </div>
                 </div>

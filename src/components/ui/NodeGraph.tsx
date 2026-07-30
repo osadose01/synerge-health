@@ -97,7 +97,18 @@ function polarToXY(angleDeg: number, r: number) {
 
 export function NodeGraph() {
   const [active, setActive] = useState<string | null>(null);
+  const [mobileIndex, setMobileIndex] = useState(0);
+
   const activeNode = FOCUS_AREAS.find((n) => n.id === active);
+  const currentMobileNode = FOCUS_AREAS[mobileIndex];
+
+  const handleNextMobile = () => {
+    setMobileIndex((prev) => (prev + 1) % FOCUS_AREAS.length);
+  };
+
+  const handlePrevMobile = () => {
+    setMobileIndex((prev) => (prev - 1 + FOCUS_AREAS.length) % FOCUS_AREAS.length);
+  };
 
   return (
     <div className="relative w-full flex flex-col items-center">
@@ -291,47 +302,86 @@ export function NodeGraph() {
         </AnimatePresence>
       </div>
 
-      {/* ── Mobile Horizontal Snap Carousel (shown < md) ───────────────── */}
-      <div className="mt-6 md:hidden w-full max-w-full overflow-hidden space-y-4">
-        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-2 px-1 max-w-full">
-          {FOCUS_AREAS.map((node) => (
-            <div
-              key={node.id}
-              className="snap-center shrink-0 w-[78vw] max-w-[280px] rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-5 space-y-3 shadow-lg flex flex-col justify-between"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#2BE0B0] font-bold">
-                    {node.label}
-                  </span>
-                  <span className="font-mono text-[9px] uppercase px-2 py-0.5 rounded bg-[#2BE0B0]/10 text-[#2BE0B0]">
-                    Focus Area
-                  </span>
-                </div>
-                <p className="text-xs text-[#F2F6F4] leading-[1.7]">{node.desc}</p>
-              </div>
-
-              {/* Mobile Synergy Loop badge */}
-              <div className="pt-4 border-t border-[rgba(43,224,176,0.12)] space-y-2">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B]" />
-                  <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
-                    {node.synergyLabel}
-                  </span>
-                </div>
-                <p className="text-[11px] text-[#8FA39A] leading-[1.6]">
-                  {node.synergyDesc}
-                </p>
-              </div>
-            </div>
-          ))}
+      {/* ── Mobile Interactive Sector Selector (shown < md) ─────────────── */}
+      <div className="mt-6 md:hidden w-full max-w-full space-y-4">
+        {/* Horizontal Chips Bar */}
+        <div className="flex overflow-x-auto scrollbar-none gap-2 pb-2 px-1 max-w-full">
+          {FOCUS_AREAS.map((node, idx) => {
+            const isSelected = mobileIndex === idx;
+            return (
+              <button
+                key={node.id}
+                onClick={() => setMobileIndex(idx)}
+                className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-medium tracking-wider whitespace-nowrap transition-all duration-300 border ${
+                  isSelected
+                    ? "bg-[#2BE0B0]/20 border-[#2BE0B0] text-[#2BE0B0] shadow-[0_0_12px_rgba(43,224,176,0.3)]"
+                    : "bg-[#0D1815] border-white/10 text-[#C2D1CB] hover:border-white/20"
+                }`}
+              >
+                {node.label}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Swipe hint */}
-        <div className="flex items-center justify-center gap-2 pt-1">
-          <span className="font-mono text-[10px] tracking-widest text-[#8FA39A] uppercase">
-            ← Swipe to explore sectors →
-          </span>
+        {/* Selected Sector Card */}
+        <div className="rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-6 space-y-4 shadow-xl">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#2BE0B0] font-bold">
+                {currentMobileNode.label}
+              </span>
+              <span className="font-mono text-[10px] tracking-widest text-[#8FA39A]">
+                {mobileIndex + 1} / {FOCUS_AREAS.length}
+              </span>
+            </div>
+            <p className="text-xs text-[#F2F6F4] leading-[1.7]">
+              {currentMobileNode.desc}
+            </p>
+          </div>
+
+          {/* Mobile Synergy Loop badge */}
+          <div className="pt-4 border-t border-[rgba(43,224,176,0.12)] space-y-2">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B]" />
+              <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
+                {currentMobileNode.synergyLabel}
+              </span>
+            </div>
+            <p className="text-[11px] text-[#8FA39A] leading-[1.6]">
+              {currentMobileNode.synergyDesc}
+            </p>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="pt-3 flex items-center justify-between gap-4 border-t border-white/[0.06]">
+            <button
+              onClick={handlePrevMobile}
+              className="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1"
+            >
+              ← Prev
+            </button>
+
+            <div className="flex items-center gap-1">
+              {FOCUS_AREAS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setMobileIndex(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    mobileIndex === i ? "w-5 bg-[#2BE0B0]" : "w-1.5 bg-white/20"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={handleNextMobile}
+              className="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1"
+            >
+              Next →
+            </button>
+          </div>
         </div>
       </div>
     </div>

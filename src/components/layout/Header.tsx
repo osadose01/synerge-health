@@ -65,10 +65,10 @@ export function Header() {
         {/* CTA + Hamburger */}
         <div className="flex items-center gap-4">
           <Link
-            href="/founders#apply"
+            href="/contact"
             className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full border border-[#E3A83B] text-[#E3A83B] font-mono text-[11px] tracking-[0.15em] uppercase hover:bg-[#E3A83B] hover:text-[#060B09] transition-all duration-300"
           >
-            <TextScramble text="APPLY NOW" />
+            <TextScramble text="CONTACT US" />
           </Link>
 
           <button
@@ -115,11 +115,11 @@ export function Header() {
                 transition={{ delay: NAV_LINKS.length * 0.06 }}
               >
                 <Link
-                  href="/founders#apply"
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="inline-flex items-center px-6 py-3 rounded-full border border-[#E3A83B] text-[#E3A83B] font-mono text-[11px] tracking-[0.18em] uppercase hover:bg-[#E3A83B] hover:text-[#060B09] transition-all duration-300"
                 >
-                  APPLY NOW
+                  CONTACT US
                 </Link>
               </motion.div>
             </div>

@@ -97,18 +97,7 @@ function polarToXY(angleDeg: number, r: number) {
 
 export function NodeGraph() {
   const [active, setActive] = useState<string | null>(null);
-  const [mobileIndex, setMobileIndex] = useState(0);
-
   const activeNode = FOCUS_AREAS.find((n) => n.id === active);
-  const currentMobileNode = FOCUS_AREAS[mobileIndex];
-
-  const handleNextMobile = () => {
-    setMobileIndex((prev) => (prev + 1) % FOCUS_AREAS.length);
-  };
-
-  const handlePrevMobile = () => {
-    setMobileIndex((prev) => (prev - 1 + FOCUS_AREAS.length) % FOCUS_AREAS.length);
-  };
 
   return (
     <div className="relative w-full flex flex-col items-center">
@@ -247,7 +236,7 @@ export function NodeGraph() {
           })}
         </div>
 
-        {/* ── Node label overlay with Synergy Loop breakdown ─────────── */}
+        {/* ── Node label overlay (Desktop) ─────────── */}
         <AnimatePresence mode="wait">
           {activeNode && (
             <motion.div
@@ -258,131 +247,40 @@ export function NodeGraph() {
               transition={{ duration: 0.2 }}
               className="mt-8 max-w-md w-full mx-auto rounded-2xl border border-white/[0.15] bg-[#0D1815] p-6 text-left shadow-[0_10px_30px_rgba(6,11,9,0.5)]"
             >
-              <div className="flex items-center justify-between gap-3 mb-2">
-                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#2BE0B0] font-bold">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <h3 className="font-display font-semibold text-base text-[#F8FAFC]">
                   {activeNode.label}
-                </span>
-                <span className="font-mono text-[9px] tracking-widest uppercase px-2 py-0.5 rounded bg-white/[0.06] text-[#2BE0B0]">
-                  Active Node
+                </h3>
+                <span className="font-mono text-[9px] tracking-widest uppercase px-2 py-0.5 rounded bg-[#2BE0B0]/10 text-[#2BE0B0] border border-[#2BE0B0]/20">
+                  Sub-Sector
                 </span>
               </div>
-              <p className="text-sm text-[#F8FAFC] leading-relaxed mb-4">
+              <p className="text-sm text-[#C2D1CB] leading-relaxed">
                 {activeNode.desc}
               </p>
-
-              {/* Cross-sector synergy box */}
-              <div className="pt-4 border-t border-white/[0.1] space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B]" />
-                  <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
-                    {activeNode.synergyLabel}
-                  </span>
-                </div>
-                <p className="text-xs text-[#C2D1CB] leading-[1.7]">
-                  {activeNode.synergyDesc}
-                </p>
-                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  <span className="text-[10px] text-[#647A70] font-mono mr-1">Synergy Partners:</span>
-                  {activeNode.partners.map((pId) => {
-                    const pNode = FOCUS_AREAS.find((n) => n.id === pId);
-                    return (
-                      <button
-                        key={pId}
-                        onClick={() => setActive(pId)}
-                        className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase bg-[rgba(227,168,59,0.12)] text-[#E3A83B] border border-[rgba(227,168,59,0.3)] hover:bg-[#E3A83B] hover:text-[#060B09] transition-colors"
-                      >
-                        {pNode?.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* ── Mobile Interactive Sector Selector (shown < md) ─────────────── */}
-      <div className="mt-6 md:hidden w-full max-w-full space-y-4">
-        {/* Horizontal Chips Bar */}
-        <div className="flex overflow-x-auto scrollbar-none gap-2 pb-2 px-1 max-w-full">
-          {FOCUS_AREAS.map((node, idx) => {
-            const isSelected = mobileIndex === idx;
-            return (
-              <button
-                key={node.id}
-                onClick={() => setMobileIndex(idx)}
-                className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-medium tracking-wider whitespace-nowrap transition-all duration-300 border ${
-                  isSelected
-                    ? "bg-[#2BE0B0]/20 border-[#2BE0B0] text-[#2BE0B0] shadow-[0_0_12px_rgba(43,224,176,0.3)]"
-                    : "bg-[#0D1815] border-white/10 text-[#C2D1CB] hover:border-white/20"
-                }`}
-              >
-                {node.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Selected Sector Card */}
-        <div className="rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-4 sm:p-6 space-y-4 shadow-xl">
-          <div className="space-y-2">
+      {/* ── Mobile card grid (shown < md) ──────────────────────────────── */}
+      <div className="mt-8 md:hidden w-full grid grid-cols-1 gap-5">
+        {FOCUS_AREAS.map((node) => (
+          <div
+            key={node.id}
+            className="rounded-xl border-t-2 border-t-[#2BE0B0] border-x border-b border-white/[0.08] bg-[#0D1815] p-6 space-y-3 shadow-lg"
+          >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#2BE0B0] font-bold">
-                {currentMobileNode.label}
-              </span>
-              <span className="font-mono text-[10px] tracking-widest text-[#8FA39A]">
-                {mobileIndex + 1} / {FOCUS_AREAS.length}
-              </span>
-            </div>
-            <p className="text-xs text-[#F2F6F4] leading-[1.7]">
-              {currentMobileNode.desc}
-            </p>
-          </div>
-
-          {/* Mobile Synergy Loop badge */}
-          <div className="pt-3 border-t border-[rgba(43,224,176,0.12)] space-y-2">
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B] shrink-0" />
-              <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
-                {currentMobileNode.synergyLabel}
+              <h3 className="font-display font-bold text-base text-[#F8FAFC]">
+                {node.label}
+              </h3>
+              <span className="font-mono text-[10px] tracking-wider uppercase text-[#2BE0B0] bg-[#2BE0B0]/10 px-2 py-0.5 rounded border border-[#2BE0B0]/20 font-semibold">
+                Focus Area
               </span>
             </div>
-            <p className="text-[11px] text-[#8FA39A] leading-[1.6]">
-              {currentMobileNode.synergyDesc}
-            </p>
+            <p className="text-sm text-[#C2D1CB] leading-[1.7]">{node.desc}</p>
           </div>
-
-          {/* Navigation Controls */}
-          <div className="pt-3 flex items-center justify-between gap-2 border-t border-white/[0.06]">
-            <button
-              onClick={handlePrevMobile}
-              className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/10 text-[11px] font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1 shrink-0"
-            >
-              ← Prev
-            </button>
-
-            <div className="flex items-center gap-1 overflow-hidden px-1">
-              {FOCUS_AREAS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setMobileIndex(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    mobileIndex === i ? "w-4 sm:w-5 bg-[#2BE0B0]" : "w-1.5 bg-white/20"
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={handleNextMobile}
-              className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/10 text-[11px] font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1 shrink-0"
-            >
-              Next →
-            </button>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

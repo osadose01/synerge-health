@@ -328,8 +328,8 @@ export default function Home() {
         <StudioModel />
 
         {/* ── FOCUS AREAS (node graph) ──────────────────────────────────── */}
-        <section className="py-40 bg-[#0D1815] border-t border-white/[0.08]">
-          <div className="container mx-auto px-8 md:px-16">
+        <section className="py-28 md:py-40 bg-[#0D1815] border-t border-white/[0.08]">
+          <div className="container mx-auto px-4 sm:px-8 md:px-16">
             <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
               <div>
                 <p className="label-mono">Focus Areas</p>

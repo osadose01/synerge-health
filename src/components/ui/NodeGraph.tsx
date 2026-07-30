@@ -325,7 +325,7 @@ export function NodeGraph() {
         </div>
 
         {/* Selected Sector Card */}
-        <div className="rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-6 space-y-4 shadow-xl">
+        <div className="rounded-2xl border border-[rgba(43,224,176,0.2)] bg-[#0D1815] p-4 sm:p-6 space-y-4 shadow-xl">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#2BE0B0] font-bold">
@@ -341,9 +341,9 @@ export function NodeGraph() {
           </div>
 
           {/* Mobile Synergy Loop badge */}
-          <div className="pt-4 border-t border-[rgba(43,224,176,0.12)] space-y-2">
+          <div className="pt-3 border-t border-[rgba(43,224,176,0.12)] space-y-2">
             <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#E3A83B] shrink-0" />
               <span className="font-mono text-[10px] tracking-wider uppercase text-[#E3A83B] font-bold">
                 {currentMobileNode.synergyLabel}
               </span>
@@ -354,21 +354,21 @@ export function NodeGraph() {
           </div>
 
           {/* Navigation Controls */}
-          <div className="pt-3 flex items-center justify-between gap-4 border-t border-white/[0.06]">
+          <div className="pt-3 flex items-center justify-between gap-2 border-t border-white/[0.06]">
             <button
               onClick={handlePrevMobile}
-              className="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1"
+              className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/10 text-[11px] font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1 shrink-0"
             >
               ← Prev
             </button>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 overflow-hidden px-1">
               {FOCUS_AREAS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setMobileIndex(i)}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    mobileIndex === i ? "w-5 bg-[#2BE0B0]" : "w-1.5 bg-white/20"
+                    mobileIndex === i ? "w-4 sm:w-5 bg-[#2BE0B0]" : "w-1.5 bg-white/20"
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
@@ -377,7 +377,7 @@ export function NodeGraph() {
 
             <button
               onClick={handleNextMobile}
-              className="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1"
+              className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/10 text-[11px] font-mono text-[#C2D1CB] hover:text-[#2BE0B0] hover:border-[#2BE0B0] transition-colors flex items-center gap-1 shrink-0"
             >
               Next →
             </button>

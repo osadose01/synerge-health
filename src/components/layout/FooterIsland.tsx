@@ -133,9 +133,6 @@ export function FooterIsland() {
           <div className="flex items-center gap-6">
             <a href="/privacy" className="hover:text-[#8FA39A] transition-colors">Privacy Policy</a>
             <a href="/terms" className="hover:text-[#8FA39A] transition-colors">Terms of Service</a>
-            <span className="font-mono text-[10px] text-[#2BE0B0] border border-[rgba(43,224,176,0.2)] px-2 py-0.5 rounded">
-              v1.0 ASTRO-EDGE
-            </span>
           </div>
         </div>
 

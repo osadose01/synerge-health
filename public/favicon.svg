@@ -1,0 +1,32 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="synerge-r1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5FF5CC" />
+      <stop offset="100%" stop-color="#12664D" />
+    </linearGradient>
+    <linearGradient id="synerge-r2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7FCBF2" />
+      <stop offset="100%" stop-color="#1B5C7A" />
+    </linearGradient>
+    <linearGradient id="synerge-r3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F2C877" />
+      <stop offset="100%" stop-color="#8A5A16" />
+    </linearGradient>
+    <linearGradient id="synerge-r4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A9E4F5" />
+      <stop offset="100%" stop-color="#2E6E86" />
+    </linearGradient>
+    <radialGradient id="synerge-core">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="50%" stop-color="#2BE0B0" />
+      <stop offset="100%" stop-color="#0E4B43" />
+    </radialGradient>
+  </defs>
+  <g transform="translate(100,100)" stroke-linecap="round">
+    <ellipse rx="72" ry="40" transform="rotate(15)" stroke="url(#synerge-r1)" stroke-width="12" />
+    <ellipse rx="72" ry="40" transform="rotate(60)" stroke="url(#synerge-r2)" stroke-width="12" />
+    <ellipse rx="72" ry="40" transform="rotate(105)" stroke="url(#synerge-r3)" stroke-width="12" />
+    <ellipse rx="72" ry="40" transform="rotate(150)" stroke="url(#synerge-r4)" stroke-width="12" />
+    <circle r="14" fill="url(#synerge-core)" />
+  </g>
+</svg>

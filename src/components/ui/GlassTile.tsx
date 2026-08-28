@@ -66,9 +66,9 @@ export function GlassTile({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
       className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0D1815] p-8 scanline-sweep group hover:border-white/[0.2] transition-all duration-300"
     >
       {/* Dynamic corner accent */}

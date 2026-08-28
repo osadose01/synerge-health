@@ -66,8 +66,8 @@ export function VitalLine({
           initial={{ pathLength: 0, opacity: 0 }}
           animate={inView ? { pathLength: 1, opacity: 1 } : {}}
           transition={{
-            pathLength: { duration: 2.4, delay, ease: [0.16, 1, 0.3, 1] },
-            opacity: { duration: 0.3, delay },
+            pathLength: { duration: 1.2, delay: 0, ease: [0.16, 1, 0.3, 1] },
+            opacity: { duration: 0.2, delay: 0 },
           }}
         />
         {/* Glow duplicate */}
@@ -82,7 +82,7 @@ export function VitalLine({
           initial={{ pathLength: 0 }}
           animate={inView ? { pathLength: 1 } : {}}
           transition={{
-            pathLength: { duration: 2.4, delay, ease: [0.16, 1, 0.3, 1] },
+            pathLength: { duration: 1.2, delay: 0, ease: [0.16, 1, 0.3, 1] },
           }}
         />
       </svg>

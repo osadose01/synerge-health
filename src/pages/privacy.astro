@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { PageHero } from '@/components/layout/PageHero';
+---
+
+<BaseLayout
+  title="Privacy Policy — Synerge Health"
+  description="Data governance and privacy standards at Synerge Health."
+  currentPath="/privacy"
+>
+  <main class="flex-1">
+    <PageHero
+      eyebrow="Legal & Governance"
+      title="Privacy Policy"
+      description="Last updated: August 2026. How we protect your data across our studio operations and digital platforms."
+    />
+
+    <section class="py-24 bg-[#060B09]">
+      <div class="container mx-auto px-6 md:px-12 max-w-3xl space-y-8 text-sm text-[#C2D1CB] leading-relaxed">
+        <h2 class="font-display font-bold text-2xl text-[#F8FAFC]">1. Information We Collect</h2>
+        <p>
+          Synerge Health collects information provided directly through founder applications, investor inquiries, newsletter subscriptions, and general contact forms. This includes contact details, pitch materials, and organizational affiliations.
+        </p>
+
+        <h2 class="font-display font-bold text-2xl text-[#F8FAFC]">2. How We Use Information</h2>
+        <p>
+          Information submitted is strictly utilized for evaluating venture incubation opportunities, conducting due diligence, coordinating LP communications, and sending requested research dispatches.
+        </p>
+
+        <h2 class="font-display font-bold text-2xl text-[#F8FAFC]">3. Data Protection & Security</h2>
+        <p>
+          We adhere to international data privacy frameworks including the Nigeria Data Protection Act (NDPA), South Africa POPIA, and GDPR where applicable.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

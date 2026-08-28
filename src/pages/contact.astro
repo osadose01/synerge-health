@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { PageHero } from '@/components/layout/PageHero';
+import { ContactForm } from '@/components/forms/ContactForm';
+---
+
+<BaseLayout
+  title="Contact Us — Synerge Health"
+  description="Get in touch with the Synerge Health venture studio team."
+  currentPath="/contact"
+>
+  <main class="flex-1">
+    <PageHero
+      eyebrow="Contact Us"
+      title="Let's start a conversation."
+      description="Have a question about our founder programme, partner network, or investment syndicate? We'd love to hear from you."
+    />
+
+    <section class="py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
+      <div class="container mx-auto px-8 md:px-16">
+        <div class="grid md:grid-cols-[1fr_1.6fr] gap-24 items-start">
+          <div class="space-y-12">
+            <p class="label-mono">Get in touch</p>
+
+            <div class="space-y-8">
+              <div class="space-y-1.5">
+                <p class="text-[11px] font-mono uppercase tracking-widest text-[#8FA39A]">Email</p>
+                <a
+                  href="mailto:hello@synergehealth.com"
+                  class="text-sm font-medium text-[#F2F6F4] hover:text-[#2BE0B0] transition-colors"
+                >
+                  hello@synergehealth.com
+                </a>
+              </div>
+
+              <div class="space-y-1.5">
+                <p class="text-[11px] font-mono uppercase tracking-widest text-[#8FA39A]">Hub Locations</p>
+                <p class="text-sm text-[#F2F6F4]">Lagos, Nigeria &amp; London, UK</p>
+              </div>
+
+              <div class="space-y-1.5">
+                <p class="text-[11px] font-mono uppercase tracking-widest text-[#8FA39A]">Media &amp; Press</p>
+                <a
+                  href="mailto:press@synergehealth.com"
+                  class="text-sm font-medium text-[#F2F6F4] hover:text-[#2BE0B0] transition-colors"
+                >
+                  press@synergehealth.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-[#F2F6F4] leading-[1.1] mb-10">
+              Send us a message
+            </h2>
+            <ContactForm client:load />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

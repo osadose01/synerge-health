@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ArrowLeft } from 'lucide-react';
+---
+
+<BaseLayout
+  title="404 — Page Not Found | Synerge Health"
+  description="The requested page could not be found."
+>
+  <main class="flex-1 flex items-center justify-center py-40">
+    <div class="container mx-auto px-6 text-center space-y-6">
+      <p class="label-mono">Error 404</p>
+      <h1 class="font-display font-bold text-4xl sm:text-6xl text-[#F8FAFC]">
+        Signal Lost in Transit
+      </h1>
+      <p class="text-sm text-[#8FA39A] max-w-md mx-auto">
+        The clinical rail or venture document you are seeking has moved or does not exist.
+      </p>
+      <div class="pt-4">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#2BE0B0] text-[#2BE0B0] font-mono text-xs uppercase tracking-widest hover:bg-[#2BE0B0] hover:text-[#060B09] transition-all"
+        >
+          <ArrowLeft className="w-4 h-4" /> Return to Base
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { AboutPageContent } from '@/components/pages/AboutPageContent';
+---
+
+<BaseLayout
+  title="About Us — Synerge Health"
+  description="We engineer healthcare infrastructure for Africa. Learn about our mission, thesis, and venture studio model."
+  currentPath="/about"
+>
+  <AboutPageContent client:load />
+</BaseLayout>

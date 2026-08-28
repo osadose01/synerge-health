@@ -3,26 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "build:cf": "opennextjs-cloudflare build",
-    "dev": "next dev",
-    "start": "next start",
-    "lint": "eslint",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "build": "astro build",
+    "dev": "astro dev",
+    "start": "astro preview",
+    "preview": "astro preview",
+    "astro:check": "astro check",
+    "deploy": "astro build && wrangler pages deploy dist"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.13",
+    "@astrojs/react": "^4.4.2",
     "@hookform/resolvers": "^5.5.7",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@studio-freight/lenis": "^1.0.42",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^5.18.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
     "gsap": "^3.15.0",
     "lucide-react": "^1.27.0",
-    "next": "^15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.83.0",
@@ -32,15 +32,12 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "^1.20.2",
-    "@tailwindcss/postcss": "^4",
+    "@astrojs/check": "^0.9.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "^15.1.7",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "wrangler": "^4.114.0"
+    "wrangler": "^3.114.17"
   }
 }

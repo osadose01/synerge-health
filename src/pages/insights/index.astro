@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { InsightsPageContent } from '@/components/pages/InsightsPageContent';
+---
+
+<BaseLayout
+  title="Synerge Insights — Research & Intelligence"
+  description="Market intelligence, clinical field notes, and venture building research from the Synerge Health team."
+  currentPath="/insights"
+>
+  <InsightsPageContent client:load />
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import '@/styles/global.css';
+import { HeaderIsland } from '@/components/layout/HeaderIsland';
+import { FooterIsland } from '@/components/layout/FooterIsland';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  currentPath?: string;
+}
+
+const {
+  title = "Synerge Health — Africa's Digital Health Venture Studio",
+  description = "Co-founding, funding, and scaling next-generation healthcare technology across Africa through institutional clinical rails and studio execution.",
+  image = "/og-image.png",
+  currentPath = Astro.url.pathname,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://synergehealth.com");
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+  </head>
+  <body class="min-h-screen bg-[#060B09] text-[#F8FAFC] flex flex-col font-sans antialiased selection:bg-[#2BE0B0]/20 selection:text-[#2BE0B0]">
+    <!-- Ambient institutional background grid and vignette -->
+    <div class="fixed inset-0 bg-dot-grid opacity-30 pointer-events-none z-0"></div>
+
+    <HeaderIsland client:load currentPath={currentPath} />
+
+    <div class="relative z-10 flex-1 flex flex-col">
+      <slot />
+    </div>
+
+    <FooterIsland client:idle />
+  </body>
+</html>

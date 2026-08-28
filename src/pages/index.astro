@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { HomePageContent } from '@/components/pages/HomePageContent';
+---
+
+<BaseLayout
+  title="Synerge Health — Africa's Digital Health Venture Studio"
+  description="Building Africa's next generation of digital health. Co-founding, funding, and scaling interconnected health technology ventures."
+  currentPath="/"
+>
+  <HomePageContent client:load />
+</BaseLayout>

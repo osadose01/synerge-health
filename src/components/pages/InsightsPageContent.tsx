@@ -1,13 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { PageHero } from "@/components/layout/PageHero";
-import { ArrowUpRight, X, BookOpen } from "lucide-react";
+import { ArrowUpRight, X, BookOpen, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ARTICLES, type Article } from "@/data/articles";
 
 export function InsightsPageContent() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const categories = useMemo(() => {
+    const set = new Set<string>(["All"]);
+    ARTICLES.forEach((a) => set.add(a.category));
+    return Array.from(set);
+  }, []);
+
+  const filteredArticles = useMemo(() => {
+    return ARTICLES.filter((article) => {
+      const matchesCat = activeCategory === "All" || article.category === activeCategory;
+      const q = searchQuery.toLowerCase().trim();
+      const matchesQuery =
+        !q ||
+        article.title.toLowerCase().includes(q) ||
+        article.author.toLowerCase().includes(q) ||
+        article.snippet.toLowerCase().includes(q) ||
+        article.category.toLowerCase().includes(q);
+      return matchesCat && matchesQuery;
+    });
+  }, [activeCategory, searchQuery]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -33,36 +55,88 @@ export function InsightsPageContent() {
         description="Market intelligence, clinical field notes, and venture building research from the Synerge Health team."
       />
 
-      <section className="py-20 md:py-32 bg-[#060B09] border-t border-white/[0.08]">
+      <section className="py-16 md:py-24 bg-[#060B09] border-t border-white/[0.08]">
         <div className="container mx-auto px-6 sm:px-8 md:px-16">
-          <div className="w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/[0.08]">
-              {ARTICLES.map((article) => (
-                <article
-                  key={article.slug}
-                  onClick={() => setSelectedArticle(article)}
-                  className="group border-r border-b border-white/[0.08] p-7 flex flex-col justify-between min-h-[230px] bg-[#0D1815] hover:bg-[#13231F] transition-all duration-300 cursor-pointer relative overflow-hidden"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-[#A5B8B0] group-hover:text-[#2BE0B0] transition-colors">
-                      {article.category}
-                    </span>
-                    <div className="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#2BE0B0] group-hover:bg-[#2BE0B0]/10 transition-all duration-300">
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#8FA39A] group-hover:text-[#2BE0B0] transition-colors" />
-                    </div>
-                  </div>
-
-                  <h3 className="font-display font-semibold text-lg text-[#F2F6F4] group-hover:text-[#2BE0B0] transition-colors leading-[1.35] my-4">
-                    {article.title}
-                  </h3>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-white/[0.06] text-xs text-[#8FA39A]">
-                    <span>{article.author}</span>
-                    <span className="font-mono text-[10px]">{article.readTime}</span>
-                  </div>
-                </article>
-              ))}
+          
+          {/* Filter & Search Bar */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 pb-8 border-b border-white/[0.08]">
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                      isActive
+                        ? "bg-[#2BE0B0] text-[#060B09] font-bold shadow-[0_0_20px_rgba(43,224,176,0.3)]"
+                        : "bg-[#0D1815] text-[#8FA39A] border border-white/[0.08] hover:border-[#2BE0B0]/40 hover:text-[#F8FAFC]"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
             </div>
+
+            {/* Instant Search Input */}
+            <div className="relative w-full md:w-72">
+              <Search className="w-4 h-4 text-[#8FA39A] absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search research & thesis..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#0D1815] border border-white/[0.1] rounded-full pl-10 pr-4 py-2 text-xs text-[#F8FAFC] placeholder-[#647A70] focus:outline-none focus:border-[#2BE0B0] transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8FA39A] hover:text-[#F8FAFC]"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Grid of Articles */}
+          <div className="w-full">
+            {filteredArticles.length === 0 ? (
+              <div className="py-20 text-center space-y-3">
+                <p className="label-mono">No matching dispatches found</p>
+                <p className="text-xs text-[#8FA39A]">Try adjusting your search query or selecting &quot;All&quot; categories.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/[0.08]">
+                {filteredArticles.map((article) => (
+                  <article
+                    key={article.slug}
+                    onClick={() => setSelectedArticle(article)}
+                    className="group border-r border-b border-white/[0.08] p-7 flex flex-col justify-between min-h-[240px] bg-[#0D1815] hover:bg-[#13231F] transition-all duration-300 cursor-pointer relative overflow-hidden"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-[#A5B8B0] group-hover:text-[#2BE0B0] transition-colors">
+                        {article.category}
+                      </span>
+                      <div className="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#2BE0B0] group-hover:bg-[#2BE0B0]/10 transition-all duration-300">
+                        <ArrowUpRight className="w-3.5 h-3.5 text-[#8FA39A] group-hover:text-[#2BE0B0] transition-colors" />
+                      </div>
+                    </div>
+
+                    <h3 className="font-display font-semibold text-base sm:text-lg text-[#F2F6F4] group-hover:text-[#2BE0B0] transition-colors leading-[1.35] my-4">
+                      {article.title}
+                    </h3>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-white/[0.06] text-xs text-[#8FA39A]">
+                      <span>{article.author}</span>
+                      <span className="font-mono text-[10px]">{article.readTime}</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>

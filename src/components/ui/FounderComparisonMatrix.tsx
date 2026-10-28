@@ -1,27 +1,27 @@
 "use client";
 
-import { CheckCircle2, XCircle } from "lucide-react";
+import { Circle } from "lucide-react";
 
 const COMPARISON_ROWS = [
   {
-    metric: "Time to Market Validation",
-    solo: "14–18 Months of trial and error",
-    studio: "3–6 Months with pre-built clinical rails",
+    metric: "Problem validation",
+    solo: "Founder-led customer and market discovery",
+    studio: "Collaboration on research and testing",
   },
   {
     metric: "Regulatory & Compliance",
-    solo: "Isolated legal navigation across fragmented markets",
-    studio: "Shared regulatory compliance & African health policy access",
+    solo: "Identify and engage relevant specialists",
+    studio: "Map questions and coordinate appropriate expertise",
   },
   {
     metric: "Team & Execution",
-    solo: "High burn rate hiring GTM & admin infrastructure from scratch",
-    studio: "Embedded engineering, GTM, and operational co-founders",
+    solo: "Build capabilities independently or with chosen partners",
+    studio: "Support with product and company-building needs",
   },
   {
     metric: "Hospital & Payer Access",
-    solo: "Cold outreach to hospitals, insurers, and clinical trial sites",
-    studio: "Warm introductions across our hospital & philanthropic network",
+    solo: "Develop relationships with relevant providers and partners",
+    studio: "Hospital and payer partnership planning",
   },
 ];
 
@@ -31,7 +31,10 @@ export function FounderComparisonMatrix() {
       <div className="container mx-auto px-8 sm:px-12 md:px-16 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <p className="label-mono">Strategic Evaluation</p>
+          <p className="label-mono mb-4">Ways to build</p>
+          <h2 className="font-display font-bold text-2xl sm:text-3xl text-[#F8FAFC]">
+            Studio partnership areas
+          </h2>
         </div>
 
         {/* Comparison Matrix Table */}
@@ -40,17 +43,17 @@ export function FounderComparisonMatrix() {
           <div className="grid grid-cols-1 md:grid-cols-12 border-b border-white/[0.12] bg-[#0D1613]">
             <div className="md:col-span-4 p-6 md:p-8 flex items-center">
               <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#F8FAFC] font-bold">
-                Strategic Evaluation
+                Area
               </span>
             </div>
             <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] flex items-center">
               <span className="font-mono text-xs tracking-wider uppercase text-[#A5B8B0]">
-                Solo HealthTech Founder
+                Independent founder-led
               </span>
             </div>
             <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] bg-white/[0.03] flex items-center">
               <span className="font-mono text-xs tracking-wider uppercase text-[#2BE0B0] font-bold">
-                Synerge Studio Co-Building
+                Studio collaboration
               </span>
             </div>
           </div>
@@ -71,7 +74,7 @@ export function FounderComparisonMatrix() {
 
                 {/* Solo Founder column */}
                 <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] flex items-start gap-3">
-                  <XCircle className="w-4 h-4 text-[#A5B8B0] shrink-0 mt-0.5 opacity-70" />
+                  <Circle aria-hidden="true" className="w-3 h-3 text-[#A5B8B0] shrink-0 mt-1 opacity-70" />
                   <span className="text-sm text-[#C2D1CB] leading-relaxed">
                     {row.solo}
                   </span>
@@ -79,7 +82,7 @@ export function FounderComparisonMatrix() {
 
                 {/* Synerge Studio column */}
                 <div className="md:col-span-4 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/[0.08] bg-white/[0.02] flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#2BE0B0] shrink-0 mt-0.5" />
+                  <Circle aria-hidden="true" className="w-3 h-3 text-[#2BE0B0] shrink-0 mt-1" />
                   <span className="text-sm text-[#F8FAFC] font-medium leading-relaxed">
                     {row.studio}
                   </span>

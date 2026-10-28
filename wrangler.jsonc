@@ -1,13 +1,51 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "synerge-health",
-	"main": "dist/_worker.js/index.js",
+	"account_id": "3b96c9dc46ab9cfc19d23069cd0a6ab6",
 	"compatibility_date": "2026-07-28",
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
 	"assets": {
 		"directory": "dist",
 		"binding": "ASSETS"
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "FORM_DB",
+			"database_name": "synerge-health-forms",
+			"database_id": "f6cd5ff2-3891-4bc6-9488-27cc014a66ff",
+			"migrations_dir": "migrations"
+		}
+	],
+	"ratelimits": [
+		{
+			"name": "FORM_RATE_LIMITER",
+			"namespace_id": "1001",
+			"simple": {
+				"limit": 10,
+				"period": 60
+			}
+		}
+	],
+	"vars": {
+		"FORM_FROM_EMAIL": "Synerge Health <hello@synergehealth.com>",
+		"FORM_APPLICATION_TO": "careers@synergehealth.com",
+		"FORM_CONTACT_TO": "hello@synergehealth.com",
+		"FORM_INVESTOR_TO": "investors@synergehealth.com",
+		"FORM_NEWSLETTER_TO": "hello@synergehealth.com",
+		"PUBLIC_SITE_URL": "https://synergehealth.com",
+		"TURNSTILE_SITE_KEY": "0x4AAAAAAFqP79x5wMwCdAp1"
+	},
+	"routes": [
+		{
+			"pattern": "synergehealth.com",
+			"zone_name": "synergehealth.com",
+			"custom_domain": true
+		}
+	]
 }

@@ -6,24 +6,24 @@ import { ArrowRight } from "lucide-react";
 const STUDIO_PILLARS = [
   {
     num: "01",
-    title: "Strategic Guidance",
-    subtitle: "Clinical-to-Market Blueprint",
-    body: "Business models, go-to-market plans, pricing strategy, and regulatory pathways custom-built for African healthcare markets.",
-    synergyOutput: "Feeds validated clinical strategy into execution engine ->",
+    title: "Venture exploration",
+    subtitle: "Problem & market context",
+    body: "Explore customer needs, care workflows, market assumptions, and relevant regulatory questions.",
+    synergyOutput: "Understand the problem and context →",
   },
   {
     num: "02",
-    title: "Operational Support",
-    subtitle: "Embedded Venture Builders",
-    body: "Hands-on execution — hiring top talent, legal setup, and finance infrastructure — so founders focus on product and patient impact.",
-    synergyOutput: "Deploys operational rails to unlock institutional capital ->",
+    title: "Product & operations",
+    subtitle: "Company building",
+    body: "Collaborate on product development, team needs, and operating plans.",
+    synergyOutput: "Build and test an appropriate approach →",
   },
   {
     num: "03",
-    title: "Capital & Networks",
-    subtitle: "Seed Funding & Distribution",
-    body: "Seed funding paired with warm introductions across our venture capital, hospital, and philanthropic partner network.",
-    synergyOutput: "Completes the growth loop with continental distribution.",
+    title: "Partnerships & capital",
+    subtitle: "Routes to market",
+    body: "Develop partnership plans and prepare financing materials for investor conversations.",
+    synergyOutput: "Plan next steps",
   },
 ];
 
@@ -36,11 +36,11 @@ export function SynergyComparison() {
         {/* ── SECTION HEADER ────────────────────────────────────────────── */}
         <div className="max-w-3xl mb-20 space-y-4">
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-[#F8FAFC] leading-[1.08]">
-            Why an interlocking studio model <br className="hidden sm:inline" />
-            <span className="text-[#2BE0B0]">outperforms solo founding.</span>
+            The studio brings <br className="hidden sm:inline" />
+            <span className="text-[#2BE0B0]">complementary support.</span>
           </h2>
           <p className="text-base text-[#C2D1CB] leading-[1.8] max-w-2xl">
-            In African healthcare, isolated startups struggle against structural friction. By interlocking strategy, operational execution, and capital, Synerge Health creates an institutional velocity multiplier.
+            Synerge partners with founders on strategy, product development, and execution. Each engagement has a scope agreed with the founding team.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export function SynergyComparison() {
         <div>
           <div className="flex items-center justify-between mb-8">
             <h3 className="font-mono text-xs tracking-[0.2em] uppercase text-[#F8FAFC]">
-              The Studio Co-Founding Model
+              Studio support areas
             </h3>
           </div>
 

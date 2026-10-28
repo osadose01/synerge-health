@@ -1,0 +1,52 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const id = Astro.url.searchParams.get("id") ?? "";
+const token = Astro.url.searchParams.get("token") ?? "";
+const status = Astro.url.searchParams.get("status");
+const hasToken = id.length > 0 && token.length > 0;
+---
+
+<BaseLayout
+  title="Newsletter Unsubscribe — Synerge Health"
+  description="Manage your Synerge Health Dispatch subscription."
+  currentPath="/unsubscribe"
+  noIndex={true}
+>
+  <main class="flex-1 flex items-center justify-center py-40">
+    <section class="container mx-auto px-6 text-center space-y-6 max-w-xl">
+      <p class="label-mono">Synerge Dispatch</p>
+      {status === "success" ? (
+        <>
+          <h1 class="font-display font-bold text-4xl sm:text-5xl text-[#F8FAFC]">You&rsquo;re unsubscribed.</h1>
+          <p class="text-sm text-[#C2D1CB]">Your email has been removed from the dispatch list.</p>
+        </>
+      ) : status === "error" ? (
+        <>
+          <h1 class="font-display font-bold text-4xl sm:text-5xl text-[#F8FAFC]">Please try again.</h1>
+          <p class="text-sm text-[#C2D1CB]">We could not update your subscription. Contact hello@synergehealth.com for help.</p>
+        </>
+      ) : hasToken ? (
+        <>
+          <h1 class="font-display font-bold text-4xl sm:text-5xl text-[#F8FAFC]">Unsubscribe from Dispatch?</h1>
+          <p class="text-sm text-[#C2D1CB]">Confirm below to remove this email address from the newsletter.</p>
+          <form method="POST" action="/api/unsubscribe">
+            <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="token" value={token} />
+            <button
+              type="submit"
+              class="px-8 py-4 rounded-full bg-[#E3A83B] text-[#060B09] font-mono font-bold text-xs tracking-[0.1em] uppercase"
+            >
+              Confirm unsubscribe
+            </button>
+          </form>
+        </>
+      ) : (
+        <>
+          <h1 class="font-display font-bold text-4xl sm:text-5xl text-[#F8FAFC]">Unsubscribe link unavailable.</h1>
+          <p class="text-sm text-[#C2D1CB]">Use the unsubscribe link in a Synerge Dispatch email or contact hello@synergehealth.com.</p>
+        </>
+      )}
+    </section>
+  </main>
+</BaseLayout>

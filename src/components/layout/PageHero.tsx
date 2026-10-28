@@ -9,7 +9,7 @@ export function PageHero({ eyebrow, title, description }: PageHeroProps) {
   return (
     <section className="relative pt-40 pb-24 border-b border-[rgba(43,224,176,0.06)] overflow-hidden">
       {/* Subtle atmospheric glow */}
-      <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-[#2BE0B0] opacity-[0.025] blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[50vw] h-[50vh] bg-[#2BE0B0] opacity-[0.025] blur-[48px] sm:blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-8 md:px-16">
         <p className="label-mono mb-8">{eyebrow}</p>

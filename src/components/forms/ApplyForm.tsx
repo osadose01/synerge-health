@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type SubmitEvent } from "react";
 import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { getFormErrorMessage } from "@/lib/formResponses";
 
 const inputCls =
-  "w-full bg-[#0D1815] border border-[rgba(43,224,176,0.15)] rounded-xl px-4 py-3 text-sm text-[#F2F6F4] placeholder:text-[#8FA39A] focus:outline-none focus:border-[#2BE0B0] focus:bg-[rgba(43,224,176,0.05)] transition-colors";
+  "w-full bg-[#0D1815] border border-[rgba(43,224,176,0.15)] rounded-xl px-4 py-3 text-sm text-[#F2F6F4] focus:border-[#2BE0B0] focus:bg-[rgba(43,224,176,0.05)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5FF5CC] transition-colors";
 
 export function ApplyForm() {
   const [formData, setFormData] = useState({
@@ -15,11 +16,12 @@ export function ApplyForm() {
     problem: "",
     solution: "",
     pitchDeck: "",
+    website_url: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
@@ -34,8 +36,7 @@ export function ApplyForm() {
       if (res.ok) {
         setStatus("success");
       } else {
-        const data = await res.json();
-        setErrorMsg(data.error || "Failed to submit application.");
+        setErrorMsg(await getFormErrorMessage(res, "Failed to submit application."));
         setStatus("error");
       }
     } catch {
@@ -46,13 +47,13 @@ export function ApplyForm() {
 
   if (status === "success") {
     return (
-      <div className="py-16 text-center space-y-4">
+      <div className="py-16 text-center space-y-4" role="status" aria-live="polite">
         <div className="w-14 h-14 rounded-full bg-[rgba(43,224,176,0.1)] border border-[#2BE0B0] flex items-center justify-center mx-auto text-[#2BE0B0]">
           <CheckCircle2 className="w-7 h-7" />
         </div>
         <h3 className="font-display font-bold text-2xl text-[#F2F6F4]">Application Received</h3>
         <p className="text-sm text-[#8FA39A] max-w-md mx-auto leading-relaxed">
-          Thank you for applying to the Synerge Health Founder Programme. Our selection committee evaluates applications on a rolling basis and will reach out within two weeks.
+          Thank you for applying to the Synerge Health Founder Programme. Our team will review your submission.
         </p>
       </div>
     );
@@ -60,6 +61,21 @@ export function ApplyForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
+        <label htmlFor="a-website">Website</label>
+        <input
+          id="a-website"
+          name="website_url"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.website_url}
+          onChange={(e) => setFormData({ ...formData, website_url: e.target.value })}
+        />
+      </div>
+      <p className="text-xs text-[#8FA39A] leading-relaxed">
+        Please do not include patient-identifying information, medical records, or other sensitive personal information.
+      </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="space-y-2">
           <label htmlFor="a-name" className="text-[11px] font-mono uppercase tracking-widest text-[#8FA39A]">
@@ -69,7 +85,7 @@ export function ApplyForm() {
             id="a-name"
             type="text"
             required
-            placeholder="Jane Doe"
+            maxLength={120}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className={inputCls}
@@ -83,7 +99,7 @@ export function ApplyForm() {
             id="a-email"
             type="email"
             required
-            placeholder="jane@startup.com"
+            maxLength={254}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className={inputCls}
@@ -99,7 +115,7 @@ export function ApplyForm() {
           <input
             id="a-startup"
             type="text"
-            placeholder="Afrimed Analytics"
+            maxLength={160}
             value={formData.startup}
             onChange={(e) => setFormData({ ...formData, startup: e.target.value })}
             className={inputCls}
@@ -132,7 +148,7 @@ export function ApplyForm() {
           id="a-problem"
           required
           rows={4}
-          placeholder="Describe the clinical or market gap, who it affects, and why current solutions fail..."
+          maxLength={4000}
           value={formData.problem}
           onChange={(e) => setFormData({ ...formData, problem: e.target.value })}
           className={inputCls}
@@ -146,7 +162,7 @@ export function ApplyForm() {
         <textarea
           id="a-solution"
           rows={4}
-          placeholder="What are you building or planning to build?"
+          maxLength={4000}
           value={formData.solution}
           onChange={(e) => setFormData({ ...formData, solution: e.target.value })}
           className={inputCls}
@@ -160,7 +176,7 @@ export function ApplyForm() {
         <input
           id="a-deck"
           type="url"
-          placeholder="https://docsend.com/..."
+          maxLength={500}
           value={formData.pitchDeck}
           onChange={(e) => setFormData({ ...formData, pitchDeck: e.target.value })}
           className={inputCls}
@@ -168,24 +184,24 @@ export function ApplyForm() {
       </div>
 
       {status === "error" && (
-        <div className="flex items-center gap-2 text-sm text-red-400 bg-red-950/40 border border-red-500/30 p-4 rounded-xl">
+        <div role="alert" className="flex items-start gap-2 text-sm text-red-400 bg-red-950/40 border border-red-500/30 p-4 rounded-xl">
           <AlertCircle className="w-4 h-4 shrink-0" />
-          <span>{errorMsg}</span>
+          <span className="whitespace-pre-line">{errorMsg}</span>
         </div>
       )}
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-4 bg-[#E3A83B] hover:bg-[#E3A83B]/90 text-[#060B09] font-mono font-bold tracking-[0.1em] uppercase rounded-xl text-xs transition-all flex items-center justify-center gap-2 cursor-none hover:shadow-[0_0_30px_rgba(227,168,59,0.4)]"
+        className="w-full py-4 bg-[#E3A83B] hover:bg-[#E3A83B]/90 text-[#060B09] font-mono font-bold tracking-[0.1em] uppercase rounded-xl text-xs transition-all flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(227,168,59,0.4)]"
       >
         {status === "loading" ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            Submitting Application...
+            Submitting...
           </>
         ) : (
-          "SUBMIT APPLICATION"
+          "SUBMIT"
         )}
       </button>
     </form>

@@ -2,24 +2,28 @@
   "name": "synerge-health",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "build": "astro build && cp .assetsignore dist/.assetsignore 2>/dev/null || true",
+    "build": "astro build && cp .assetsignore dist/.assetsignore",
     "dev": "astro dev",
     "start": "astro preview",
     "preview": "astro preview",
     "astro:check": "astro check",
-    "deploy": "astro build && wrangler pages deploy dist"
+    "test": "tsx --test src/lib/server/form-submissions.test.ts src/lib/formResponses.test.ts src/lib/securityHeaders.test.ts",
+    "deploy": "npm run build && wrangler deploy --config dist/server/wrangler.json && wrangler deploy --config wrangler.scheduled.jsonc"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.13",
-    "@astrojs/react": "^4.4.2",
+    "@astrojs/cloudflare": "^14.3.4",
+    "@astrojs/react": "^7.0.1",
     "@astrojs/sitemap": "^3.7.3",
     "@hookform/resolvers": "^5.5.7",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^5.18.2",
+    "astro": "^7.3.8",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
     "gsap": "^3.15.0",
@@ -34,11 +38,13 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20261014.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5",
-    "wrangler": "^3.114.17"
+    "wrangler": "^4.151.0"
   }
 }

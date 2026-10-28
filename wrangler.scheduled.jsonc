@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "synerge-health-forms-scheduler",
+  "account_id": "3b96c9dc46ab9cfc19d23069cd0a6ab6",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-07-28",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
+  "d1_databases": [
+    {
+      "binding": "FORM_DB",
+      "database_name": "synerge-health-forms",
+      "database_id": "f6cd5ff2-3891-4bc6-9488-27cc014a66ff",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "FORM_FROM_EMAIL": "Synerge Health <hello@synergehealth.com>"
+  },
+  "secrets": {
+    "required": ["RESEND_API_KEY"]
+  }
+}

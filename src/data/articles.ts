@@ -1,3 +1,9 @@
+export interface ArticleSection {
+  heading: string;
+  paragraphs: string[];
+  checklist?: string[];
+}
+
 export interface Article {
   slug: string;
   title: string;
@@ -8,101 +14,210 @@ export interface Article {
   readTime: string;
   snippet: string;
   quote: string;
-  paragraphs: string[];
+  sections: ArticleSection[];
   takeaways: string[];
+  references?: { label: string; url: string }[];
 }
 
 export const ARTICLES: Article[] = [
   {
-    slug: "leapfrogging-legacy-infrastructure",
-    title: "Leapfrogging Legacy Infrastructure: Why African Healthtech is Built Different",
-    date: "July 20, 2026",
-    author: "Ed Osadolor",
-    role: "Chief Executive Officer & Studio Founder",
-    category: "Venture Thesis",
-    readTime: "5 min read",
+    slug: "designing-digital-health-for-diverse-infrastructure",
+    title: "Planning a Healthtech Pilot in Nigeria: A Site-Readiness Checklist",
+    date: "14 October 2026",
+    author: "Editorial Team",
+    role: "Editorial Team",
+    category: "Venture Building",
+    readTime: "3 min read",
     snippet:
-      "Sub-Saharan Africa carries 24% of global disease burden. Here is how mobile-first clinical platforms are leapfrogging brick-and-mortar hospitals.",
+      "A practical way to assess workflows, connectivity, power, staffing, and support at each proposed pilot site.",
     quote:
-      "When you lack legacy hospital systems built in the 1980s, you don't build faster electronic health records—you build decentralized, patient-centered care networks from day one.",
-    paragraphs: [
-      "While Western digital health ecosystems spend billions attempting to integrate fragmented, legacy electronic medical record (EMR) architectures, African healthtech founders operate on a fundamentally different canvas. In Sub-Saharan Africa, where healthcare infrastructure represents less than 2% of global clinical assets despite carrying over 22% of the world's disease burden, digital platforms do not merely supplement hospitals—they often serve as the primary point of care.",
-      "This structural reality forces a discipline of simplicity and accessibility. Asynchronous clinical consultations delivered over lightweight web interfaces and messaging protocols consistently achieve 10x lower patient acquisition costs compared to traditional clinic walk-ins. By designing around intermittent data connectivity and mobile money payment rails, these ventures remove the friction that traditionally excludes rural and peri-urban populations.",
-      "At Synerge Health, our co-founding model centers on this leapfrog advantage. We pair African clinicians who understand local patient behaviors with venture-building operators to construct platforms that scale regionally without waiting for brick-and-mortar hospital expansion."
+      "Start with the facility and workflow where your product will be used—not an assumption about what every Nigerian site is like.",
+    sections: [
+      {
+        heading: "Choose one workflow and one pilot setting",
+        paragraphs: [
+          "Pick a specific facility, user, and task. Decide whether the pilot is meant to support appointment follow-up, dispensing, referrals, results review, or another defined workflow. Observe how that work happens today and ask staff where time is lost, information is repeated, or tasks are missed.",
+          "Record who uses the product, who makes the decision to adopt it, and who pays. These roles may belong to different people, so interview each group rather than treating “the clinic” as one customer."
+        ]
+      },
+      {
+        heading: "Check conditions at each site",
+        paragraphs: [
+          "Conditions vary by facility and location. Validate them through site visits and conversations instead of assuming one national pattern. Use a short readiness sheet for every pilot location."
+        ],
+        checklist: [
+          "Power availability, charging options, and what staff do during an outage",
+          "Mobile-data coverage, device access, and whether devices are shared",
+          "Staff roles, shift handovers, language needs, and digital confidence",
+          "Existing paper forms, registers, referrals, and reporting requirements",
+          "Who can train users and respond when the product fails"
+        ]
+      },
+      {
+        heading: "Plan for failure and recovery",
+        paragraphs: [
+          "Specify what happens when power, connectivity, a device, or an external service is unavailable. If the product supports offline work, define what can be stored locally, how it is protected, when it syncs, and how conflicting records are handled. Agree a manual fallback and a safe clinical escalation route before the first user session."
+        ]
+      },
+      {
+        heading: "Agree on measures before launch",
+        paragraphs: [
+          "Choose a small set of measures tied to the workflow, such as task-completion time, successful follow-up, or missing-record rates. Define the baseline, the collection method, the person responsible, and the review date. Track safety issues and failed use alongside adoption; logins alone do not show that a product helps."
+        ]
+      }
     ],
     takeaways: [
-      "Mobile-first clinical interfaces bypass legacy hospital bottlenecks entirely.",
-      "Asynchronous triage over low-bandwidth channels reduces patient acquisition costs by up to 90%.",
-      "Studio co-founding embeds regulatory and distribution expertise into the architecture from inception."
+      "Observe the workflow at the actual pilot site before designing around it.",
+      "Document power, connectivity, staffing, support, and fallback plans for each location.",
+      "Set baseline and safety measures before the pilot begins."
     ]
   },
   {
-    slug: "unit-economics-in-digital-pharmacy",
-    title: "Unit Economics in Digital Pharmacy: Lessons from 100+ Distribution Pilots",
-    date: "June 14, 2026",
-    author: "Sama Edi",
-    role: "Chief Financial Officer",
+    slug: "digital-pharmacy-designing-for-fragmented-supply-chains",
+    title: "Building Pharmacy Software in Nigeria: Map the Stock Journey First",
+    date: "14 October 2026",
+    author: "Editorial Team",
+    role: "Editorial Team",
     category: "Operations",
-    readTime: "7 min read",
+    readTime: "3 min read",
     snippet:
-      "Distribution in fragmented African pharmaceutical markets requires localized supply-chain tech rather than Western e-commerce blueprints.",
+      "A field checklist for pharmacy software covering procurement, receiving, stock records, expiry, reconciliation, and supplier checks.",
     quote:
-      "Profitability in African pharmaceutical distribution is won or lost in the last mile of working capital and cold-chain integrity.",
-    paragraphs: [
-      "Over 70% of medicines dispensed across Sub-Saharan Africa reach patients through independent community pharmacies and patent medicine vendors (PMVs). Yet these critical frontline distributors face chronic stockouts, predatory wholesale markup tiers, and the constant threat of counterfeit drug infiltration. Attempting to solve this with conventional Western e-commerce delivery models quickly collapses under unit economics.",
-      "Through more than 100 studio distribution pilots, we have identified that sustainable pharmacy tech requires two integrated pillars: predictive inventory replenishment and embedded working capital financing. When a community pharmacy can order verified formulary stock with 24-hour fulfillment and automated 14-day credit terms, stockouts drop by 65% while pharmacy gross margins expand.",
-      "Our financial modeling across portfolio ventures demonstrates that combining B2B supply-chain software with quality-verified procurement turns inventory four times faster than legacy wholesalers, establishing a defensible, cash-flow-positive distribution footprint."
+      "A stock dashboard is useful only when its records match how medicines are ordered, received, stored, dispensed, and reconciled.",
+    sections: [
+      {
+        heading: "Trace one medicine from order to sale",
+        paragraphs: [
+          "At a pilot pharmacy, follow a single product through the whole stock journey: who requests it, who approves the order, which supplier is used, how delivery is checked, where it is stored, and how a sale or return is recorded. Ask staff to show the steps during a normal shift, including the paper notes or spreadsheets they still rely on."
+        ],
+        checklist: [
+          "How staff identify products and record quantities",
+          "What batch, expiry, supplier, and location details are needed for the workflow",
+          "How discrepancies, returns, damaged goods, and recalls are handled",
+          "When the system is updated and who reconciles it with physical stock"
+        ]
+      },
+      {
+        heading: "Separate the problems before combining features",
+        paragraphs: [
+          "Inventory management, wholesale procurement, marketplace ordering, delivery, and credit are different workflows. Learn which one causes the most friction for the pharmacy before building them into a single product. Do not assume a credit feature will solve a stock problem if supply reliability or ordering practices are the real constraint."
+        ]
+      },
+      {
+        heading: "Run a small, measurable pilot",
+        paragraphs: [
+          "Agree how staff will compare system records with physical counts and how often. Useful measures may include time spent reconciling stock, stockout days for selected products, near-expiry losses, order fulfilment time, and errors corrected. Define each measure before launch and review it with pharmacy staff; results from one site should not be presented as representative of all Nigerian pharmacies."
+        ]
+      },
+      {
+        heading: "Check responsibilities and current requirements",
+        paragraphs: [
+          "Clarify who verifies suppliers, product registration, premises, and professional responsibilities in the proposed workflow. The Pharmacy Council of Nigeria and NAFDAC are useful official starting points, but requirements depend on the product and activity. Confirm current guidance with the relevant authorities and qualified advisers before launch."
+        ]
+      }
     ],
     takeaways: [
-      "Independent community pharmacies and PMVs control 70%+ of medicine dispensing.",
-      "Embedded working capital financing is essential to eliminate stockouts and counterfeit risks.",
-      "Tech-enabled B2B procurement accelerates inventory turns 4x over traditional wholesalers."
+      "Map the complete stock journey at the pharmacy before choosing features.",
+      "Keep inventory, procurement, delivery, and credit problems distinct until validated.",
+      "Measure the pilot with pharmacy staff and report its location and period."
+    ],
+    references: [
+      { label: "Pharmacy Council of Nigeria", url: "https://pcn.gov.ng/" },
+      { label: "National Agency for Food and Drug Administration and Control", url: "https://nafdac.gov.ng/" }
     ]
   },
   {
     slug: "ai-in-african-clinical-diagnostics",
-    title: "AI in African Clinical Diagnostics: Regulatory Pathways & Data Privacy",
-    date: "May 28, 2026",
-    author: "Chen Zui",
-    role: "Head of Clinical AI & Regulatory",
+    title: "Clinical AI in Nigeria: A Pre-Deployment Checklist",
+    date: "14 October 2026",
+    author: "Editorial Team",
+    role: "Editorial Team",
     category: "Technology & AI",
-    readTime: "6 min read",
+    readTime: "3 min read",
     snippet:
-      "Navigating regional data protection frameworks (NDPR, POPIA) while deploying medical imaging models in rural clinics.",
+      "Practical checks for intended use, local validation, clinical workflow, data governance, and oversight before a clinical AI pilot.",
     quote:
-      "Diagnostic algorithms are only as ethical and accurate as the populations they are trained on—data sovereignty is foundational to clinical trust.",
-    paragraphs: [
-      "Sub-Saharan Africa faces a severe shortage of diagnostic imaging specialists, averaging fewer than 0.5 radiologists per 100,000 people in major markets. Edge-deployed artificial intelligence models capable of interpreting X-ray, ultrasound, and retinal scans represent a transformative opportunity to democratize early diagnosis in rural and underserved clinics.",
-      "However, importing algorithmic models trained exclusively on North American or European patient datasets introduces significant diagnostic bias. Furthermore, deploying clinical AI across African jurisdictions requires rigorous compliance with evolving regional data protection laws, including Nigeria's NDPR, South Africa's POPIA, and Kenya's Data Protection Act.",
-      "Synerge Health works directly with healthtech founders to establish on-continent data localization pipelines and edge-inferencing protocols. By ensuring that patient data never leaves the regulatory jurisdiction while training models on diverse African clinical cohorts, our ventures achieve both superior diagnostic precision and regulatory acceleration."
+      "A model’s benchmark is not a substitute for evidence from the setting and people it is intended to serve.",
+    sections: [
+      {
+        heading: "Define the intended use",
+        paragraphs: [
+          "Write down the exact task: what information the system receives, what output it produces, who sees it, and what action may follow. State who the tool is for and who it is not for. A tool that organizes information for a clinician should not be described as diagnosing patients unless that intended use and performance have been properly established."
+        ]
+      },
+      {
+        heading: "Plan validation for the target setting",
+        paragraphs: [
+          "Before a pilot, agree with clinical collaborators on an appropriate reference standard, evaluation method, and thresholds for acceptable performance. Check whether the evaluation data reflect the intended population, devices, language, and workflow. Review errors by relevant patient and site groups, not only as one overall score.",
+          "Document data origin and permissions. Do not assume that data collected in one hospital or country can automatically be reused for another purpose or setting."
+        ]
+      },
+      {
+        heading: "Design the human workflow and safeguards",
+        paragraphs: [
+          "Identify the clinician or staff member responsible for reviewing an output, how they can reject it, and what happens when the model is uncertain or unavailable. Define escalation, incident reporting, and ongoing monitoring before real-world use. Make sure the system supports clinical judgment rather than silently replacing it."
+        ]
+      },
+      {
+        heading: "Check privacy and regulatory questions early",
+        paragraphs: [
+          "Minimize the data collected, restrict access, set retention and deletion rules, and document security responsibilities. Review current Nigerian data-protection guidance with the Nigeria Data Protection Commission and get qualified advice on whether product-specific medical-device or other regulatory requirements apply. This checklist is not legal or clinical advice."
+        ]
+      }
     ],
     takeaways: [
-      "Edge-deployed AI models bridge the acute shortage of radiologists in rural healthcare settings.",
-      "Training algorithms on local clinical datasets eliminates Western demographic bias.",
-      "On-continent data sovereignty pipelines accelerate regulatory approvals under NDPR and POPIA."
+      "Specify intended use, users, limits, and the action a model output may trigger.",
+      "Validate with an appropriate reference standard and the intended population and workflow.",
+      "Plan human oversight, privacy, incident handling, and regulatory review before deployment."
+    ],
+    references: [
+      { label: "Nigeria Data Protection Commission", url: "https://ndpc.gov.ng/" },
+      { label: "National Agency for Food and Drug Administration and Control", url: "https://nafdac.gov.ng/" }
     ]
   },
   {
-    slug: "scaling-hospital-integrated-fintech",
-    title: "Scaling Hospital-Integrated Financing: Unlocking Patient Access Across 15+ Markets",
-    date: "May 10, 2026",
-    author: "Dr. Amaechi Ndem",
-    role: "Head of Venture Strategy & Health Economics",
+    slug: "evaluating-patient-financing-in-hospital-workflows",
+    title: "Patient Financing in Nigeria: Test Affordability Before You Scale",
+    date: "14 October 2026",
+    author: "Editorial Team",
+    role: "Editorial Team",
     category: "Venture Building",
-    readTime: "5 min read",
+    readTime: "3 min read",
     snippet:
-      "How embedded point-of-care micro-financing rails eliminate out-of-pocket medical insolvency across African hospital networks.",
+      "A practical framework for testing patient-financing ideas around real care costs, repayment risk, provider workflows, and patient choice.",
     quote:
-      "Over 80% of African healthcare expenses are paid cash out-of-pocket at the point of care—financial rails are fundamentally clinical care rails.",
-    paragraphs: [
-      "Across Sub-Saharan Africa, over 80% of personal health expenditures are paid entirely out-of-pocket at the moment of emergency or hospital admission. When unexpected medical crises strike, families are forced into catastrophic out-of-pocket payments or deferred treatment.",
-      "By embedding point-of-care micro-financing and employer-backed digital health insurance directly into hospital admission workflows, Synerge Health ventures turn unpredictable emergency expenses into manageable, automated repayment structures.",
-      "Our hospital-integrated financial infrastructure yields a 40% reduction in patient admission delays while increasing hospital bill collection rates by over 90%, proving that health economics and clinical access scale hand in hand."
+      "A financing option is not a success if it helps someone start care but leaves them unable to manage repayment.",
+    sections: [
+      {
+        heading: "Map the cost and payment path",
+        paragraphs: [
+          "Choose one service and one care setting. Ask patients and providers what is paid, by whom, and when, and which options the participating facility accepts—cash, bank transfer, card or POS, insurance, or another arrangement. Depending on the service, the total journey may include consultation, tests, medicines, follow-up, or travel; verify which costs matter locally instead of assuming the bill tells the whole story.",
+          "Find out what coverage, employer support, instalment arrangements, or other payment options people already use. Do not assume the same option is available to every patient or facility."
+        ]
+      },
+      {
+        heading: "Test the full repayment burden",
+        paragraphs: [
+          "Show people the total amount due, fees, repayment dates, and consequences of late or missed payments in plain language. Test realistic scenarios with patients, including changing income or unexpected costs. Ask whether they understand the terms and feel able to decline without affecting their care."
+        ]
+      },
+      {
+        heading: "Protect clinical choice",
+        paragraphs: [
+          "Keep clinical recommendations separate from credit eligibility and sales targets. Define a clear route for questions, complaints, hardship, and disputes. Work with qualified legal and financial advisers on the product’s terms and applicable requirements before offering it."
+        ]
+      },
+      {
+        heading: "Measure access and harm, not just uptake",
+        paragraphs: [
+          "Review who was offered financing, who accepted, who completed care, and who struggled with repayment. Track provider cash flow separately from patient outcomes, and include complaints or signs of financial stress. Report results with the site, period, participant group, and method; high uptake alone does not prove that a product is affordable or beneficial."
+        ]
+      }
     ],
     takeaways: [
-      "Out-of-pocket cash payments account for 80%+ of healthcare expenditures across Sub-Saharan Africa.",
-      "Point-of-care embedded financing reduces hospital admission delays by over 40%.",
-      "Automated bill settlement improves hospital revenue collection rates above 90%."
+      "Map the full cost and payment journey with patients and providers in the intended setting.",
+      "Test total repayment and missed-payment scenarios in language people understand.",
+      "Measure access, provider operations, and patient financial stress separately."
     ]
   }
 ];

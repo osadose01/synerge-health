@@ -19,6 +19,7 @@
 
 # misc
 .DS_Store
+.venv/
 *.pem
 *.tsbuildinfo
 
@@ -36,3 +37,6 @@ yarn-error.log*
 # wrangler files
 .wrangler
 !.dev.vars.example
+
+# Next.js build cache
+.next/

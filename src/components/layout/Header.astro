@@ -1,0 +1,138 @@
+---
+import BrandMark from "./BrandMark.astro";
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+const navLinks = [
+  { name: "About", href: "/about" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "Founders", href: "/founders" },
+  { name: "Investors", href: "/investors" },
+  { name: "Insights", href: "/insights" },
+];
+const isActive = (href: string) =>
+  currentPath === href || (href !== "/" && currentPath.startsWith(href));
+---
+
+<header class="site-header fixed top-0 inset-x-0 z-50 bg-transparent py-6">
+  <div class="container mx-auto px-6 sm:px-8 md:px-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group" aria-label="Synerge Health home">
+      <span class="inline-flex items-center gap-3 select-none transition-opacity duration-300 group-hover:opacity-75">
+        <BrandMark />
+        <span class="font-display font-bold tracking-wider text-[#F8FAFC] leading-none text-lg sm:text-xl md:text-2xl">
+          SYNERGE <span class="text-[#2BE0B0]">HEALTH</span>
+        </span>
+      </span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
+      {navLinks.map(({ name, href }) => (
+        <a
+          href={href}
+          class:list={[
+            "font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-200",
+            isActive(href) ? "text-[#2BE0B0]" : "text-[#C2D1CB] hover:text-[#F8FAFC]",
+          ]}
+          aria-current={isActive(href) ? "page" : undefined}
+        >
+          {name}
+        </a>
+      ))}
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-4">
+      <a
+        href="/founders#apply"
+        class="inline-flex items-center px-5 py-2.5 rounded-full border border-[#2BE0B0] text-[#2BE0B0] font-mono text-xs tracking-widest uppercase hover:bg-[#2BE0B0] hover:text-[#060B09] transition-all duration-300 shadow-[0_0_15px_rgba(43,224,176,0.15)]"
+      >
+        APPLY NOW
+      </a>
+    </div>
+
+    <button
+      id="mobile-menu-toggle"
+      type="button"
+      class="lg:hidden p-2 text-[#C2D1CB] hover:text-[#2BE0B0] transition-colors"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+    >
+      <svg id="mobile-menu-open-icon" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="mobile-menu-close-icon" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="m18 6-12 12M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-navigation" hidden class="lg:hidden bg-[#060B09] border-b border-[rgba(43,224,176,0.12)] px-6 py-8 space-y-6">
+    <nav aria-label="Mobile navigation" class="flex flex-col space-y-4">
+      {navLinks.map(({ name, href }) => (
+        <a
+          href={href}
+          aria-current={isActive(href) ? "page" : undefined}
+          class="font-mono text-sm uppercase tracking-widest text-[#C2D1CB] hover:text-[#2BE0B0] py-2 border-b border-white/[0.05]"
+        >
+          {name}
+        </a>
+      ))}
+    </nav>
+    <a
+      href="/founders#apply"
+      class="block text-center w-full py-3 rounded-full bg-[#2BE0B0] text-[#060B09] font-mono text-xs font-bold tracking-widest uppercase"
+    >
+      APPLY AS A FOUNDER
+    </a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector(".site-header");
+  const toggle = document.querySelector<HTMLButtonElement>("#mobile-menu-toggle");
+  const drawer = document.querySelector<HTMLDivElement>("#mobile-navigation");
+  const openIcon = document.querySelector("#mobile-menu-open-icon");
+  const closeIcon = document.querySelector("#mobile-menu-close-icon");
+
+  if (header && toggle && drawer && openIcon && closeIcon) {
+    const setMenuOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      drawer.hidden = !open;
+      openIcon.classList.toggle("hidden", open);
+      closeIcon.classList.toggle("hidden", !open);
+    };
+
+    toggle.addEventListener("click", () => {
+      setMenuOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    drawer.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setMenuOpen(false);
+        toggle.focus();
+      }
+    });
+
+    let ticking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          header.classList.toggle("nav-glass", window.scrollY > 20);
+          header.classList.toggle("py-4", window.scrollY > 20);
+          header.classList.toggle("py-6", window.scrollY <= 20);
+          ticking = false;
+        });
+      },
+      { passive: true },
+    );
+  }
+</script>

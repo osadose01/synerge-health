@@ -9,12 +9,12 @@ const SERVICES = [
     num: "01",
     title: "Strategic Guidance",
     summary:
-      "Tailored business models and clinical pathways built for the real constraints of African healthcare markets.",
+      "Explore business models and clinical workflows in the context of the markets and care settings a venture serves.",
     details: [
-      "Market opportunity validation & sizing",
-      "Regulatory pathway mapping & compliance",
-      "Unit economics & pricing architecture",
-      "Clinical workflow integration strategies",
+      "Customer discovery and market research",
+      "Identify regulatory questions and coordinate with qualified advisers",
+      "Business model, unit economics, and pricing hypotheses",
+      "Research into clinical workflows",
     ],
   },
   {
@@ -22,25 +22,25 @@ const SERVICES = [
     num: "02",
     title: "Operational Support",
     summary:
-      "Embedded operating partners who execute hiring, tech architecture, legal, and finance — so founders can focus on product and patients.",
+      "Practical support with product, team, technology, and operating needs.",
     details: [
-      "Technical architecture & HIPAA/NDPR security",
-      "Executive recruitment & talent pipeline",
-      "Legal entity structuring & IP protection",
-      "Financial planning & accounting infrastructure",
+      "Technical architecture and security planning",
+      "Define roles and support talent searches",
+      "Coordinate with qualified legal and intellectual-property advisers",
+      "Financial planning and operating processes",
     ],
   },
   {
     id: "funding",
     num: "03",
-    title: "Venture Funding",
+    title: "Financing & partnerships",
     summary:
-      "Institutional seed capital paired with warm introductions to international syndicates and DFI networks.",
+      "Support to explore financing options, prepare for investor conversations, and identify relevant partnerships.",
     details: [
-      "Initial seed & pre-seed capital cheques",
-      "Follow-on syndicate introductions",
-      "Data room preparation & pitch coaching",
-      "Cap table & investor relations management",
+      "Financing strategy and investor readiness",
+      "Investor outreach and partnership development",
+      "Pitch materials and data-room preparation",
+      "Coordination with qualified advisers on financing terms",
     ],
   },
 ];
@@ -48,18 +48,19 @@ const SERVICES = [
 
 <BaseLayout
   title="Studio Services — Synerge Health"
-  description="Explore Synerge Health's 3 core service pillars: Strategic Guidance, Operational Support, and Venture Funding."
+  description="Explore Synerge Health's work with founders on healthcare venture building."
   currentPath="/services"
 >
   <main class="flex-1">
     <PageHero
       eyebrow="Studio Services"
-      title="Everything needed to build clinical-grade health ventures."
-      description="We remove the friction of scaling healthcare startups across Africa through dedicated studio support."
+      title="Practical support for healthcare venture building."
+      description="Synerge Health works with founders on market research, product and operations, and partnership planning. We agree the scope with each founding team."
     />
 
     <section class="py-24 md:py-36 bg-[#060B09]">
       <div class="container mx-auto px-6 md:px-12">
+        <h2 class="sr-only">Areas of studio support</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {SERVICES.map((srv) => (
             <div class="p-8 rounded-2xl border border-[rgba(43,224,176,0.12)] bg-[#0D1815] flex flex-col justify-between space-y-8 group hover:border-[#2BE0B0]/40 transition-colors">
@@ -81,7 +82,7 @@ const SERVICES = [
                 href="/founders#apply"
                 class="inline-flex items-center gap-1.5 font-mono text-xs text-[#2BE0B0] hover:underline"
               >
-                Access this pillar <ArrowUpRight className="w-3.5 h-3.5" />
+                Discuss this area <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
           ))}

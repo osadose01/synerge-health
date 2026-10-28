@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { SynergyLogo } from "@/components/ui/SynergyLogo";
@@ -18,6 +18,7 @@ export function HeaderIsland({ currentPath = "/" }: { currentPath?: string }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pathname, setPathname] = useState(currentPath);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -27,6 +28,18 @@ export function HeaderIsland({ currentPath = "/" }: { currentPath?: string }) {
       return () => window.removeEventListener("scroll", handleScroll);
     }
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   return (
     <header
@@ -55,6 +68,7 @@ export function HeaderIsland({ currentPath = "/" }: { currentPath?: string }) {
                     ? "text-[#2BE0B0]"
                     : "text-[#C2D1CB] hover:text-[#F8FAFC]"
                 )}
+                aria-current={isActive ? "page" : undefined}
               >
                 {link.name}
               </a>
@@ -74,38 +88,44 @@ export function HeaderIsland({ currentPath = "/" }: { currentPath?: string }) {
 
         {/* Mobile Toggle */}
         <button
+          ref={menuButtonRef}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-2 text-[#C2D1CB] hover:text-[#2BE0B0] transition-colors"
-          aria-label="Toggle menu"
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#060B09]/95 backdrop-blur-2xl border-b border-[rgba(43,224,176,0.12)] px-6 py-8 space-y-6 animate-in fade-in slide-in-from-top duration-300">
-          <nav className="flex flex-col space-y-4">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="font-mono text-sm uppercase tracking-widest text-[#C2D1CB] hover:text-[#2BE0B0] py-2 border-b border-white/[0.05]"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="/founders#apply"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-center w-full py-3 rounded-full bg-[#2BE0B0] text-[#060B09] font-mono text-xs font-bold tracking-widest uppercase"
-          >
-            APPLY AS A FOUNDER
-          </a>
-        </div>
-      )}
+      <div
+        id="mobile-navigation"
+        hidden={!mobileMenuOpen}
+        className="lg:hidden bg-[#060B09]/95 backdrop-blur-2xl border-b border-[rgba(43,224,176,0.12)] px-6 py-8 space-y-6 animate-in fade-in slide-in-from-top duration-300"
+      >
+        <nav aria-label="Mobile navigation" className="flex flex-col space-y-4">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              aria-current={pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href)) ? "page" : undefined}
+              className="font-mono text-sm uppercase tracking-widest text-[#C2D1CB] hover:text-[#2BE0B0] py-2 border-b border-white/[0.05]"
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+        <a
+          href="/founders#apply"
+          onClick={() => setMobileMenuOpen(false)}
+          className="block text-center w-full py-3 rounded-full bg-[#2BE0B0] text-[#060B09] font-mono text-xs font-bold tracking-widest uppercase"
+        >
+          APPLY AS A FOUNDER
+        </a>
+      </div>
     </header>
   );
 }

@@ -1,77 +1,45 @@
-# Synerge Health — Post-Launch Tasks & Action Checklist
+# Launch checklist
 
-This document contains step-by-step instructions for setting up free custom business emails, enabling real-time form delivery to your inbox, deploying to Cloudflare Pages, and connecting your custom domain.
+This checklist describes production tasks; do not treat an item as complete until it has been verified in the relevant Cloudflare or Resend account.
 
----
+## Cloudflare Worker and D1
 
-## 1. Set Up Free Business Emails (`hello@synergehealth.com`)
+- [x] Authenticate Wrangler to the Cloudflare account that contains the production `synerge-health` Worker.
+- [ ] After verifying it is unused, clean up the empty `synerge-health-forms` D1 created in the previous CLI account; only its initial schema migration was applied. The current account shows only the production database, whose schema was rechecked read-only on 2026-10-15. The previous account/database remains inaccessible (`wrangler d1 list` returned Authentication error 10000); do not delete it until that account and its records can be checked.
+- [x] Create the `synerge-health-forms` D1 database in the production account and configure its ID in both Wrangler files.
+- [x] Apply `0001_form_submissions.sql` to the production database and verify the expected tables.
 
-Use **Cloudflare Email Routing** to forward all incoming business emails to your personal inbox for free.
+  ```bash
+  npx wrangler d1 migrations apply synerge-health-forms --remote
+  ```
 
-### Setup Steps:
-1. Go to your [Cloudflare Dashboard](https://dash.cloudflare.com) → Select **synergehealth.com**.
-2. Navigation menu: Click **Email** → **Email Routing**.
-3. Click **Enable Email Routing** *(Cloudflare will automatically add the required MX and TXT DNS records for you)*.
-4. Click **Destination Addresses** → **Add Destination Address** → Enter your personal email (e.g. `yourname@gmail.com`). Verify it via the email sent to you.
-5. Click **Routing Rules** → **Create Custom Address**:
-   - **Custom Address:** `hello` `@synergehealth.com` → **Action:** Forward to `yourname@gmail.com`
-   - **Custom Address:** `press` `@synergehealth.com` → **Action:** Forward to `yourname@gmail.com`
-   - **Custom Address:** `investors` `@synergehealth.com` → **Action:** Forward to `yourname@gmail.com`
+- [x] Check the previously exposed key against active keys in the `synergehealth` Resend workspace on 2026-10-15. It does not match either active key.
+- [ ] Confirm the exposed key's revocation if it may belong to another Resend workspace or account; the dashboard does not show deleted-key history. Leave the older general-purpose key untouched until its integration owner is known.
+- [x] Create a send-only API key restricted to `synergehealth.com` and store it as `RESEND_API_KEY` on the scheduled Worker. Never put the key in `wrangler.jsonc`, source control, chat, or command arguments.
 
----
+- [x] Create and verify `synergehealth.com` as a Resend sending domain; the Resend dashboard reports it as verified.
+- [x] Deploy the scheduled Worker and enable its five-minute cron after configuring the Resend secret.
 
-## 2. Enable Real-Time Form Submissions to Your Inbox (Web3Forms)
+- [x] Confirm the notification recipients in `wrangler.jsonc`: applications to `careers@synergehealth.com`, investor enquiries to `investors@synergehealth.com`, and contact/newsletter notifications to `hello@synergehealth.com`.
+- [x] Confirm `PUBLIC_SITE_URL` matches the production domain and review the configured five-minute scheduled trigger.
+- [x] Deploy both Workers with `npm run deploy`; this also activates Workers Logs with full sampling.
+- [x] Create and enable a Cloudflare Custom Alert for permanent delivery failures using `logs.workersLogs`, alert when the 15-minute count is greater than zero, and route it to the Cloudflare account email. Trigger the alert test action; the account inbox receipt still needs confirmation.
+- [x] Test all forms, newsletter signup, unsubscribe, and email delivery using non-sensitive test data.
+  - Contact, application, and investor notifications reached `sent`. Newsletter notification and welcome messages were accepted using Resend's designated `delivered@resend.dev` test address; the unsubscribe endpoint returned success. All synthetic D1 records were removed.
 
-All 4 forms (Founder Application, Investor Enquiry, Contact, Newsletter) are pre-configured to send submissions via **Web3Forms** (100% free, unlimited submissions).
+## Domain email
 
-### Setup Steps:
-1. Go to **[web3forms.com](https://web3forms.com)**.
-2. Enter `hello@synergehealth.com` (or your personal email).
-3. Web3Forms will instantly email you a free **Access Key**.
-4. Add the key to your Cloudflare Pages environment variables:
-   - Go to Cloudflare Dashboard → **Workers & Pages** → **synerge-health** project.
-   - Go to **Settings** → **Environment Variables** → **Add variable**.
-   - **Variable name:** `WEB3FORMS_ACCESS_KEY`
-   - **Value:** *(Paste your Web3Forms key)*
-   - Click **Save**.
+- [ ] Configure Cloudflare Email Routing if inbound forwarding is needed. Email Routing is enabled, but no routes for the public aliases were found. Destination inboxes were not provided, so no routes or DNS were changed; confirm destinations and compatibility with any existing mail provider first.
+- [ ] Set up each required address (`hello@`, `careers@`, and `investors@`) as an email-routing destination or use an actual mailbox provider.
+- [ ] Test inbound forwarding separately from outbound Resend delivery. Email Routing does not send the website's notification emails.
 
----
+## Content, privacy, and operations
 
-## 3. Deploy Project to Cloudflare Pages
-
-### Setup Steps:
-1. Push your latest code to your GitHub repository:
-   ```bash
-   git add .
-   git commit -m "feat: editorial redesign & Web3Forms integration"
-   git push origin main
-   ```
-2. In Cloudflare Dashboard → Go to **Workers & Pages** → **Create Application** → **Pages** → **Connect to Git**.
-3. Select the repository.
-4. Configure build settings:
-   - **Framework Preset:** `Next.js`
-   - **Root Directory:** `web`
-   - **Build Command:** `npm run build`
-   - **Build Output Directory:** `.next`
-5. Click **Save and Deploy**.
-
----
-
-## 4. Connect Custom Domain (`synergehealth.com`)
-
-1. In Cloudflare Pages project → Go to **Custom Domains**.
-2. Click **Set up a custom domain**.
-3. Enter `synergehealth.com` (and `www.synergehealth.com`).
-4. Click **Continue** → Cloudflare will bind the domain automatically since DNS is hosted on Cloudflare.
-
----
-
-## Quick Reference Summary
-
-| Task | Platform / Tool | Cost | Status |
-|---|---|---|---|
-| Website Hosting | Cloudflare Pages | Free | ✅ Completed |
-| Custom Business Email | Cloudflare Email Routing | Free | ✅ Completed (`hello`, `press`, `careers`, `privacy`) |
-| Form Delivery to Email | Web3Forms API | Free | ✅ Completed |
-| Domain DNS / SSL | Cloudflare | Free | ✅ Completed (`synergehealth.com`) |
-
+- [ ] Confirm all public contact addresses and programme descriptions are current with the site owner. Public email addresses and Worker recipients are consistent, but mailbox ownership and current programme terms are not independently verified.
+- [ ] Have qualified counsel verify the named operator, applicable Nigerian and other relevant laws, and actual data-processing arrangements in the Privacy Policy and Terms of Service before launch.
+- [x] Keep portfolio-company identities private unless disclosure is explicitly approved. Verified on 2026-10-15 that the public portfolio page does not name portfolio companies.
+- [ ] Do not publish performance, funding, regulatory, clinical, or investment-return claims without substantiation and approval.
+- [ ] Do not collect patient-identifying information through the public website forms. The forms have no dedicated patient-data fields and warn users not to submit sensitive information, but open-text fields can still accept it; review this risk and the safeguards with qualified counsel.
+- [x] Verify retention cleanup in production by confirming the scheduled Worker removed expired synthetic submission and outbox rows.
+- [x] Verify newsletter unsubscribe in production using a synthetic subscriber; the valid token returned success and the subscriber/outbox records were removed.
+- [ ] Monitor Worker logs and Resend delivery status after launch; investigate persistent delivery failures.

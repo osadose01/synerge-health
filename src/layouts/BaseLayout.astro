@@ -1,23 +1,37 @@
 ---
 import '@/styles/global.css';
-import { HeaderIsland } from '@/components/layout/HeaderIsland';
-import { FooterIsland } from '@/components/layout/FooterIsland';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
 
 export interface Props {
   title?: string;
   description?: string;
   image?: string;
   currentPath?: string;
+  ogType?: "website" | "article";
+  noIndex?: boolean;
 }
 
 const {
-  title = "Synerge Health — Africa's Digital Health Venture Studio",
-  description = "Co-founding, funding, and scaling next-generation healthcare technology across Africa through institutional clinical rails and studio execution.",
-  image = "/og-image.png",
+  title = "Synerge Health — Africa's Healthtech Venture Studio",
+  description = "A venture studio working with founders to build healthcare technology for African markets.",
+  image = "/og-image.jpg",
   currentPath = Astro.url.pathname,
+  ogType = "website",
+  noIndex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://synergehealth.com");
+const socialImageURL = new URL(image, Astro.site || "https://synergehealth.com");
+const organizationStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Synerge Health",
+  url: "https://synergehealth.com",
+  logo: "https://synergehealth.com/brand/logo-icon.png",
+  description: "A healthtech venture studio working with founders to build healthcare ventures for African markets.",
+  sameAs: ["https://linkedin.com/company/synergehealth", "https://x.com/synergehealth"],
+};
 ---
 
 <!doctype html>
@@ -25,47 +39,52 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://synergeh
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#060B09" />
+    <meta name="application-name" content="Synerge Health" />
+    <meta name="apple-mobile-web-app-title" content="Synerge Health" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Synerge Health" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:alt" content="Synerge Health — Africa's healthtech venture studio" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
+    <meta property="twitter:image" content={socialImageURL} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationStructuredData).replace(/</g, '\\u003c')} />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   </head>
   <body class="min-h-screen bg-[#060B09] text-[#F8FAFC] flex flex-col font-sans antialiased selection:bg-[#2BE0B0]/20 selection:text-[#2BE0B0]">
     <!-- Ambient institutional background grid and vignette -->
-    <div class="fixed inset-0 bg-dot-grid opacity-30 pointer-events-none z-0"></div>
+    <div class="fixed inset-0 hidden sm:block bg-dot-grid opacity-30 pointer-events-none z-0"></div>
 
-    <HeaderIsland client:load currentPath={currentPath} />
+    <Header currentPath={currentPath} />
 
     <div class="relative z-10 flex-1 flex flex-col">
       <slot />
     </div>
 
-    <FooterIsland client:idle />
+    <Footer />
   </body>
 </html>

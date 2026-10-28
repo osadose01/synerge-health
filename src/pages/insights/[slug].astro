@@ -1,0 +1,107 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ARTICLES, type Article } from '@/data/articles';
+
+export interface Props {
+  article: Article;
+}
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return ARTICLES.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const publishedDate = new Date(`${article.date} UTC`).toISOString().slice(0, 10);
+const articleStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: article.title,
+  description: article.snippet,
+  datePublished: publishedDate,
+  author: {
+    "@type": "Organization",
+    name: article.author,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Synerge Health",
+  },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site ?? "https://synergehealth.com"),
+};
+---
+
+<BaseLayout
+  title={`${article.title} — Synerge Insights`}
+  description={article.snippet}
+  currentPath={Astro.url.pathname}
+  ogType="article"
+>
+  <main class="flex-1">
+      <article class="container mx-auto px-6 sm:px-8 md:px-16 max-w-4xl pt-40 pb-24">
+        <a href="/insights" class="font-mono text-xs uppercase tracking-wider text-[#2BE0B0] hover:underline">
+          Back to insights
+        </a>
+        <header class="mt-10 pb-8 border-b border-white/[0.08] space-y-6">
+          <p class="label-mono">{article.category}</p>
+          <h1 class="font-display font-bold text-3xl sm:text-5xl text-[#F8FAFC] leading-tight">{article.title}</h1>
+          <p class="text-sm text-[#C2D1CB] leading-relaxed">{article.snippet}</p>
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#8FA39A]">
+            <span>{article.role}.</span>
+            <time datetime={publishedDate}>Published {article.date}</time>
+            <span>{article.readTime}</span>
+          </div>
+        </header>
+
+        <div class="pt-8 space-y-7 text-sm sm:text-base text-[#C2D1CB] leading-[1.9]">
+          <p class="text-[#E3A83B] border-l-2 border-[#E3A83B] pl-5 py-1 italic">{article.quote}</p>
+          {article.sections.map((section) => (
+            <section class="space-y-4">
+              <h2 class="font-display font-semibold text-xl sm:text-2xl text-[#F8FAFC] leading-snug">{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              {section.checklist && (
+                <ul class="space-y-2 pl-1">
+                  {section.checklist.map((item) => (
+                    <li class="flex items-start gap-3">
+                      <span class="text-[#2BE0B0]" aria-hidden="true">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+          <section class="p-6 sm:p-8 rounded-2xl bg-[#0D1815] border border-[rgba(43,224,176,0.15)] space-y-4">
+            <h2 class="font-mono text-xs text-[#2BE0B0] font-semibold uppercase tracking-wider">Key takeaways</h2>
+            <ul class="space-y-3 text-sm text-[#C2D1CB]">
+              {article.takeaways.map((takeaway) => <li class="flex items-start gap-3"><span class="text-[#2BE0B0]" aria-hidden="true">•</span><span>{takeaway}</span></li>)}
+            </ul>
+          </section>
+          {article.references && article.references.length > 0 && (
+            <section class="space-y-4 border-t border-white/[0.08] pt-7">
+              <h2 class="font-mono text-xs text-[#2BE0B0] font-semibold uppercase tracking-wider">Official starting points</h2>
+              <ul class="space-y-3 text-sm">
+                {article.references.map((reference) => (
+                  <li>
+                    <a
+                      href={reference.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-[#2BE0B0] underline decoration-white/20 underline-offset-4 hover:decoration-[#2BE0B0]"
+                    >
+                      {reference.label}<span class="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+      </article>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(articleStructuredData).replace(/</g, '\\u003c')} />
+  </main>
+</BaseLayout>

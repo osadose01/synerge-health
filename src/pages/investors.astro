@@ -5,47 +5,47 @@ import { InvestorForm } from '@/components/forms/InvestorForm';
 
 const THESIS_ITEMS = [
   {
-    title: "Pre-Cleared Compliance",
-    desc: "We navigate complex multi-country regulatory pathways—pre-clearing approvals with national health ministries, pharmacy boards, and data protection frameworks (NDPR/POPIA) before seed capital is deployed.",
+    title: "Regulatory planning",
+    desc: "We help founders identify the regulatory questions relevant to their product and seek qualified, jurisdiction-specific guidance.",
   },
   {
-    title: "Interrelated Ecosystem",
-    desc: "Standalone health apps stall at national borders. Our ventures plug directly into established African hospital networks, insurance pools, and informal pharmacy supply chains across regional trade blocs.",
+    title: "Market context",
+    desc: "Product and distribution decisions should account for local care workflows, infrastructure, purchasing, and partner needs.",
   },
   {
-    title: "Out-of-Pocket Realities",
-    desc: "Built from day one for out-of-pocket cash payments, mobile money rails, and intermittent bandwidth—guaranteeing cash-flow positivity without relying on Western SaaS assumptions.",
+    title: "Sustainable operations",
+    desc: "We examine how a venture can deliver value to patients and providers while developing a viable operating model.",
   },
   {
-    title: "In-The-Trenches Execution",
-    desc: "We pair African clinicians with battle-tested venture builders inside the studio, retaining active operational oversight to protect capital efficiency, patient safety, and scale.",
+    title: "Founder collaboration",
+    desc: "We work with founders to test assumptions, build products, and plan responsible routes to market.",
   },
 ];
 
-const STATS = [
-  { value: "$1M", label: "Initial Venture Fund" },
-  { value: "3×", label: "Target 5-Year ROI" },
-  { value: "100%", label: "HealthTech Focus" },
+const APPROACH_AREAS = [
+  { title: "Healthtech focus", description: "Our areas span care delivery (virtual care and specialty platforms), health-system infrastructure (records, insurance, supply, and logistics), and clinical intelligence (AI, diagnostics, genomics, and analytics)." },
+  { title: "Venture building", description: "Hands-on collaboration with founders from problem exploration through company development." },
+  { title: "African markets", description: "We consider local care workflows, regulation, infrastructure, and partnerships in each market." },
 ];
 ---
 
 <BaseLayout
   title="Investors & Partners — Synerge Health"
-  description="Invest alongside Synerge Health in high-growth African digital health startups."
+  description="Learn about Synerge Health's approach to building healthcare ventures and connect with the team."
   currentPath="/investors"
 >
   <main class="flex-1">
     <PageHero
       eyebrow="Investors & Partners"
-      title="Deploying smart capital into African healthcare infrastructure."
-      description="We partner with institutional VCs, DFIs, family offices, and healthcare corporates to syndicate capital into studio-built ventures."
+      title="Partner with founders building healthtech for African markets."
+      description="Synerge invests in ventures and supports founders to raise from external investors."
     />
 
     <!-- Investment Thesis -->
     <section class="py-28 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
       <div class="container mx-auto px-6 sm:px-8 md:px-16">
         <div class="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
-          <p class="label-mono">Why Invest</p>
+          <h2 class="label-mono">Our approach</h2>
           <div>
             <div class="grid sm:grid-cols-2 gap-0 border border-[rgba(43,224,176,0.12)] rounded-2xl overflow-hidden bg-[#0D1815]">
               {THESIS_ITEMS.map((item, i) => (
@@ -64,15 +64,15 @@ const STATS = [
       </div>
     </section>
 
-    <!-- Fund Highlights -->
+    <!-- Studio approach -->
     <section class="py-28 md:py-40 bg-[#0D1815] border-t border-[rgba(43,224,176,0.06)]">
       <div class="container mx-auto px-6 sm:px-8 md:px-16">
         <div class="grid sm:grid-cols-3 gap-6">
-          {STATS.map((stat) => (
-            <div class="p-8 rounded-2xl border border-[rgba(43,224,176,0.12)] bg-[#060B09] text-center space-y-2">
-              <span class="font-display font-bold text-4xl text-[#2BE0B0]">{stat.value}</span>
-              <p class="font-mono text-xs uppercase tracking-wider text-[#8FA39A]">{stat.label}</p>
-            </div>
+          {APPROACH_AREAS.map((area) => (
+            <article class="p-8 rounded-2xl border border-[rgba(43,224,176,0.12)] bg-[#060B09] space-y-3">
+              <h2 class="font-display font-semibold text-lg text-[#F2F6F4]">{area.title}</h2>
+              <p class="text-sm text-[#8FA39A] leading-relaxed">{area.description}</p>
+            </article>
           ))}
         </div>
       </div>
@@ -82,12 +82,12 @@ const STATS = [
     <section class="py-28 md:py-40 bg-[#060B09] border-t border-[rgba(43,224,176,0.06)]">
       <div class="container mx-auto px-6 sm:px-8 md:px-16">
         <div class="max-w-2xl mx-auto text-center mb-16 space-y-4">
-          <p class="label-mono">Limited Partner Access</p>
+          <p class="label-mono">Investor enquiries</p>
           <h2 class="font-display font-bold text-3xl md:text-5xl text-[#F8FAFC]">
-            Request LP Data Room
+            Start a conversation
           </h2>
           <p class="text-sm text-[#C2D1CB]">
-            Connect with our investment committee to review fund structure and coinvestment pipelines.
+            Tell us about your organisation, investment interests, and typical ticket size. We will follow up if there is a relevant opportunity.
           </p>
         </div>
 

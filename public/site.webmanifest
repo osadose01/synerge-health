@@ -1,0 +1,14 @@
+{
+  "name": "Synerge Health",
+  "short_name": "Synerge Health",
+  "description": "A healthtech venture studio working with founders to build healthcare ventures for African markets.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#060B09",
+  "theme_color": "#060B09",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

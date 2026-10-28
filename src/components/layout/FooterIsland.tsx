@@ -1,26 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type SubmitEvent } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { SynergyLogo } from "@/components/ui/SynergyLogo";
+import { getFormErrorMessage } from "@/lib/formResponses";
 
 export function FooterIsland() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
     setStatus("loading");
+    setErrorMessage("");
+    setSuccessMessage("");
     try {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      if (res.ok) { setStatus("success"); setEmail(""); }
-      else setStatus("error");
-    } catch { setStatus("error"); }
+      if (res.ok) {
+        setStatus("success");
+        setSuccessMessage(res.status === 200 ? "This email is already subscribed." : "You’re subscribed.");
+        setEmail("");
+      }
+      else {
+        setStatus("error");
+        setErrorMessage(await getFormErrorMessage(res, "Subscription failed. Please try again."));
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage("Network error. Please try again.");
+    }
   };
 
   return (
@@ -37,7 +52,7 @@ export function FooterIsland() {
             </a>
 
             <p className="text-sm text-[#8FA39A] leading-[1.75] max-w-sm">
-              Africa&rsquo;s digital health venture studio — co-founding, funding, and scaling companies from first insight to continental impact.
+              A venture studio working with founders to build healthcare technology for African markets.
             </p>
 
             {/* Social */}
@@ -64,6 +79,27 @@ export function FooterIsland() {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
+              <span
+                role="img"
+                aria-label="Instagram"
+                title="Instagram profile link to be added"
+                className="w-9 h-9 rounded-full border border-[rgba(43,224,176,0.15)] bg-[#0D1815] flex items-center justify-center text-[#8FA39A]"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="w-3.5 h-3.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none" />
+                </svg>
+              </span>
             </div>
           </div>
 
@@ -74,7 +110,8 @@ export function FooterIsland() {
               <li><a href="/portfolio" className="hover:text-[#F8FAFC] transition-colors">Portfolio Companies</a></li>
               <li><a href="/founders" className="hover:text-[#F8FAFC] transition-colors">Venture Studio Model</a></li>
               <li><a href="/founders#apply" className="hover:text-[#F8FAFC] transition-colors">Apply as Founder</a></li>
-              <li><a href="/investors" className="hover:text-[#F8FAFC] transition-colors">LP Portal</a></li>
+              <li><a href="/insights" className="hover:text-[#F8FAFC] transition-colors">Synerge Insights</a></li>
+              <li><a href="/investors" className="hover:text-[#F8FAFC] transition-colors">Investor Enquiries</a></li>
             </ul>
           </div>
 
@@ -83,7 +120,8 @@ export function FooterIsland() {
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#2BE0B0]">Studio</p>
             <ul className="space-y-2.5 text-sm text-[#8FA39A]">
               <li><a href="/about" className="hover:text-[#F8FAFC] transition-colors">About Us</a></li>
-              <li><a href="/insights" className="hover:text-[#F8FAFC] transition-colors">Synerge Insights</a></li>
+              <li><a href="/services" className="hover:text-[#F8FAFC] transition-colors">Studio Services</a></li>
+              <li><a href="/events" className="hover:text-[#F8FAFC] transition-colors">Events</a></li>
               <li><a href="/careers" className="hover:text-[#F8FAFC] transition-colors">Careers</a></li>
               <li><a href="/contact" className="hover:text-[#F8FAFC] transition-colors">Contact</a></li>
             </ul>
@@ -93,16 +131,19 @@ export function FooterIsland() {
           <div className="space-y-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#2BE0B0]">Dispatch</p>
             <p className="text-xs text-[#8FA39A] leading-relaxed">
-              Quarterly intelligence on African healthtech ecosystems, studio updates, and regulatory shifts.
+              Healthcare tech, venture building, and studio news.
             </p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <div className="relative">
+                <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                 <input
+                  id="newsletter-email"
                   type="email"
-                  placeholder="name@organization.com"
+                  required
+                  maxLength={254}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-[#0D1815] border border-[rgba(43,224,176,0.15)] rounded-full px-4 py-2.5 text-xs text-[#F8FAFC] placeholder-[#647A70] focus:outline-none focus:border-[#2BE0B0] pr-10"
+                  className="w-full bg-[#0D1815] border border-[rgba(43,224,176,0.15)] rounded-full px-4 py-2.5 text-xs text-[#F8FAFC] focus:border-[#2BE0B0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5FF5CC] pr-10"
                 />
                 <button
                   type="submit"
@@ -114,22 +155,23 @@ export function FooterIsland() {
                 </button>
               </div>
               {status === "success" && (
-                <div className="flex items-center gap-1.5 text-xs text-[#2BE0B0]">
+                <div role="status" aria-live="polite" className="flex items-center gap-1.5 text-xs text-[#2BE0B0]">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Subscribed to dispatch.</span>
+                  <span>{successMessage}</span>
                 </div>
               )}
               {status === "error" && (
-                <p className="text-xs text-red-400">Subscription failed. Please try again.</p>
+                <p role="alert" className="text-xs text-red-400">{errorMessage}</p>
               )}
+              <p className="text-[11px] text-[#8FA39A]">Subscribe to Dispatch.</p>
             </form>
           </div>
 
         </div>
 
         {/* Bottom row */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#647A70]">
-          <p>© {new Date().getFullYear()} Synerge Health Ventures. All rights reserved.</p>
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8FA39A]">
+          <p>© {new Date().getFullYear()} Synerge Health. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a href="/privacy" className="hover:text-[#8FA39A] transition-colors">Privacy Policy</a>
             <a href="/terms" className="hover:text-[#8FA39A] transition-colors">Terms of Service</a>

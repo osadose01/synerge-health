@@ -1,0 +1,25 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 38 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 200 200"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class="shrink-0"
+  aria-hidden="true"
+>
+  <g transform="translate(100,100)" stroke-linecap="round">
+    <ellipse rx="72" ry="40" transform="rotate(15)" stroke="#5FF5CC" stroke-width="9" />
+    <ellipse rx="72" ry="40" transform="rotate(60)" stroke="#7FCBF2" stroke-width="9" />
+    <ellipse rx="72" ry="40" transform="rotate(105)" stroke="#F2C877" stroke-width="9" />
+    <ellipse rx="72" ry="40" transform="rotate(150)" stroke="#A9E4F5" stroke-width="9" />
+    <circle r="11" fill="#2BE0B0" />
+  </g>
+</svg>

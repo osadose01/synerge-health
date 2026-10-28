@@ -1,5 +1,3 @@
-import React from "react";
-
 interface SynergyLogoProps {
   size?: "sm" | "md" | "lg" | "xl" | number;
   showWordmark?: boolean;
@@ -18,12 +16,12 @@ export function SynergyLogo({
     typeof size === "number"
       ? size
       : size === "sm"
-      ? 28
-      : size === "md"
-      ? 38
-      : size === "lg"
-      ? 56
-      : 80;
+        ? 28
+        : size === "md"
+          ? 38
+          : size === "lg"
+            ? 56
+            : 80;
 
   // Stroke width responsive tuning for high legibility
   const strokeWidth =
@@ -42,7 +40,9 @@ export function SynergyLogo({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="shrink-0"
-        aria-label="Synerge Health Orbital Logo"
+        aria-hidden={showWordmark}
+        role={showWordmark ? undefined : "img"}
+        aria-label={showWordmark ? undefined : "Synerge Health Orbital Logo"}
       >
         <defs>
           <linearGradient id="synerge-r1" x1="0" y1="0" x2="1" y2="1">

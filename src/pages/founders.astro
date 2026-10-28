@@ -8,49 +8,49 @@ import { FounderComparisonMatrix } from '@/components/ui/FounderComparisonMatrix
 const FAQS = [
   {
     q: "How much equity does Synerge Health take?",
-    a: "Equity terms are negotiated per company based on stage, seed capital injected, and studio operator involvement. Terms are transparently agreed before any term sheet is signed.",
+    a: "There is no published standard equity rate. Any equity, funding, or studio support terms are agreed in writing with the founder before an engagement begins. Submitting an application does not commit either party.",
   },
   {
     q: "Do I need a co-founder or an existing MVP?",
-    a: "No. We accept solo founders and pre-product applicants. What matters most is a validated clinical or market insight and your ability to execute.",
+    a: "No. We accept applications from solo founders and pre-product teams. We look for a clear understanding of a clinical or market need and the ability to test and develop a solution.",
   },
   {
     q: "Where do founders need to be based?",
-    a: "We prioritize founders building for Sub-Saharan African markets. You do not need to relocate, but active in-market presence during pilot launch is expected.",
+    a: "We prioritise founders building for Sub-Saharan African markets. You do not need to relocate. During a pilot, a founder or team member works actively with local users and partners. We agree the working arrangement with each venture.",
   },
   {
     q: "How long does the application process take?",
-    a: "Our selection committee reviews applications on a 2-week rolling window. Successful applicants are invited to a 30-minute founder interview.",
+    a: "Our team reviews each application and contacts applicants when we need more information or are ready to discuss next steps.",
   },
 ];
 
 const JOURNEY = [
-  { step: "01", phase: "Intake", desc: "Problem deep-dive & founder alignment. We spend time understanding your insight, market, and motivation before anything else." },
-  { step: "02", phase: "Validation", desc: "Unit economics & customer discovery. Six weeks of structured experimentation to stress-test assumptions." },
-  { step: "03", phase: "Term Sheet", desc: "Seed investment & equity finalised. Transparent terms, agreed together, no surprises." },
-  { step: "04", phase: "Build", desc: "MVP development with studio engineers embedded alongside your team." },
-  { step: "05", phase: "Launch", desc: "First provider pilots & go-to-market. We open our hospital and clinic network for your first commercial pilots." },
-  { step: "06", phase: "Scale", desc: "Follow-on funding & regional growth. We help you raise the next round and expand beyond your first market." },
+  { step: "01", phase: "Intake", desc: "Discuss the problem, founder goals, market context, and how the studio can help." },
+  { step: "02", phase: "Validation", desc: "Test customer needs, clinical context, and business assumptions with relevant users and partners." },
+  { step: "03", phase: "Proposal", desc: "Set the scope, responsibilities, and commercial terms together." },
+  { step: "04", phase: "Build", desc: "Build and test the product with relevant users and partners." },
+  { step: "05", phase: "Launch", desc: "Plan a responsible route to market, including any required clinical, regulatory, and operational readiness." },
+  { step: "06", phase: "Growth", desc: "Review progress and consider appropriate partnership, financing, or market-expansion options." },
 ];
 ---
 
 <BaseLayout
   title="Founder Studio Programme — Synerge Health"
-  description="Bring your healthtech insight. Synerge Health provides capital, operators, and regulatory support to build your company."
+  description="Share a healthcare venture idea for consideration and learn about Synerge Health's approach to working with founders."
   currentPath="/founders"
 >
   <main class="flex-1">
     <PageHero
       eyebrow="Founder Programme"
-      title="We build alongside founders from Day Zero."
-      description="The Synerge Health founder programme pairs early-stage healthtech innovators with studio capital, embedded operators, and an extensive healthcare network."
+      title="Build healthtech ventures for African markets."
+      description="Share your idea with the studio. We work with founders on validation, product development, operations, and partnership planning."
     />
 
     <!-- Programme Journey -->
     <section class="py-28 md:py-40 bg-[#060B09] border-t border-white/[0.08]">
       <div class="container mx-auto px-8 md:px-16">
         <div class="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
-          <p class="label-mono">Programme Journey</p>
+          <h2 class="label-mono">Programme Journey</h2>
           <div>
             <div class="space-y-0 border border-white/[0.12] rounded-2xl overflow-hidden bg-[#0D1815]">
               {JOURNEY.map((item, i) => (
@@ -71,18 +71,18 @@ const JOURNEY = [
     </section>
 
     <!-- Studio Model Comparison Matrix Island -->
-    <FounderComparisonMatrix client:visible />
+    <FounderComparisonMatrix />
 
     <!-- Application Form Section Island -->
     <section id="apply" class="py-28 md:py-40 bg-[#0D1815] border-t border-white/[0.08]">
       <div class="container mx-auto px-8 md:px-16">
         <div class="max-w-2xl mx-auto text-center mb-16 space-y-4">
-          <p class="label-mono">Cohort 01 Applications</p>
+          <p class="label-mono">Founder applications</p>
           <h2 class="font-display font-bold text-3xl md:text-5xl text-[#F8FAFC]">
             Apply as a Founder
           </h2>
           <p class="text-sm text-[#C2D1CB] leading-relaxed">
-            Tell us about the clinical or health system problem you are obsessed with solving.
+            Tell us about a healthcare problem you understand deeply and want to solve.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ const JOURNEY = [
     <section class="py-28 md:py-40 bg-[#060B09] border-t border-white/[0.08]">
       <div class="container mx-auto px-8 md:px-16">
         <div class="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-24 items-start">
-          <p class="label-mono">Frequently Asked</p>
+          <h2 class="label-mono">Frequently Asked</h2>
           <div class="space-y-4">
             {FAQS.map((faq) => (
               <AccordionItem client:visible question={faq.q} answer={faq.a} />

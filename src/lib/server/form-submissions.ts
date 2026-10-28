@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { z } from "zod";
+import { renderWelcomeEmailHtml, stripHtmlToPlainText } from "./emailTemplates";
 
 type Environment = CloudflareEnv;
 type DeliveryEnvironment = Pick<CloudflareEnv, "FORM_DB" | "RESEND_API_KEY" | "FORM_FROM_EMAIL">;
@@ -327,6 +328,10 @@ export async function subscribeToNewsletter(request: Request, env: Environment) 
   const unsubscribeUrl = new URL("/unsubscribe", env.PUBLIC_SITE_URL);
   unsubscribeUrl.searchParams.set("id", id);
   unsubscribeUrl.searchParams.set("token", token);
+  const welcomeHtml = renderWelcomeEmailHtml({
+    siteUrl: env.PUBLIC_SITE_URL,
+    unsubscribeUrl: unsubscribeUrl.toString(),
+  });
 
   try {
     const results = await env.FORM_DB.batch([
@@ -354,8 +359,8 @@ export async function subscribeToNewsletter(request: Request, env: Environment) 
          SELECT ?, id, email, ?, ?, ?, ? FROM newsletter_subscribers WHERE id = ?`,
       ).bind(
         welcomeId,
-        "[Synerge Health] You are subscribed",
-        `You are subscribed to Synerge Health Dispatch.\n\nTo unsubscribe, visit:\n${unsubscribeUrl.toString()}`,
+        "[Synerge Health] Welcome to Dispatch",
+        welcomeHtml,
         now,
         now,
         id,
@@ -432,12 +437,17 @@ async function deliverPendingEmails(env: DeliveryEnvironment) {
 
     try {
       const resend = new Resend(env.RESEND_API_KEY);
+      const isHtml =
+        claimed.body_text?.trim().startsWith("<!doctype") ||
+        claimed.body_text?.trim().startsWith("<html");
+
       const { error } = await resend.emails.send({
         from: env.FORM_FROM_EMAIL,
         to: claimed.recipient,
         replyTo: claimed.reply_to ?? undefined,
         subject: claimed.subject,
-        text: claimed.body_text,
+        text: isHtml ? stripHtmlToPlainText(claimed.body_text) : claimed.body_text,
+        html: isHtml ? claimed.body_text : undefined,
       });
       if (error) throw new Error("resend_rejected");
 

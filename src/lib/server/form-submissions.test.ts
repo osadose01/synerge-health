@@ -196,6 +196,25 @@ test("newsletter rejects missing turnstile token when TURNSTILE_SECRET_KEY is co
   assert.equal(getBatchCalls(), 0);
 });
 
+test("newsletter subscription queues branded HTML email with logo and unsubscribe link", async () => {
+  const { env, statements } = makeEnvironment();
+  const response = await subscribeToNewsletter(
+    jsonRequest({ email: "reader@example.com" }, "/api/newsletter"),
+    env,
+  );
+
+  assert.equal(response.status, 202);
+  const welcomeStatement = statements.find((s) =>
+    s.values.includes("[Synerge Health] Welcome to Dispatch"),
+  );
+  assert.ok(welcomeStatement);
+  const emailHtml = welcomeStatement.values.find(
+    (v) => typeof v === "string" && v.includes("<!doctype html>"),
+  ) as string;
+  assert.ok(emailHtml.includes("https://synergehealth.com/brand/logo-primary.png"));
+  assert.ok(emailHtml.includes("/unsubscribe?id="));
+});
+
 test("exhausted email delivery is marked failed and emits a permanent-failure event", async () => {
   const transitions: Array<{ sql: string; values: unknown[] }> = [];
   const events: unknown[][] = [];
